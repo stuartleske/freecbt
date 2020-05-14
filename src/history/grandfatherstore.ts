@@ -1,5 +1,5 @@
 /*
-			
+
               ,-----.
             W/,-. ,-.\W
             ()>a   a<()
@@ -27,11 +27,6 @@ import { AsyncStorage } from "react-native";
 const FREE_SUBSCRIPTION_KEY = "@Grandfathered:free-subscription";
 
 export async function isGrandfatheredIntoFreeSubscription(): Promise<boolean> {
-  try {
-    const value = await AsyncStorage.getItem(FREE_SUBSCRIPTION_KEY);
-    return !!value;
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
+	// we're free for everyone now!
+	return true;
 }

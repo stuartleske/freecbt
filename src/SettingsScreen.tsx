@@ -32,7 +32,7 @@ import { recordScreenCallOnFocus } from "./navigation";
 import { getSubscriptionExpirationDate } from "./subscriptions/subscriptionstore";
 import { isGrandfatheredIntoFreeSubscription } from "./history/grandfatherstore";
 import OneSignal from "react-native-onesignal";
-import { ONESIGNAL_SECRET } from "react-native-dotenv";
+// import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import * as stats from "./stats";
 import { FadesIn } from "./animations";
 
@@ -161,10 +161,10 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    OneSignal.init(ONESIGNAL_SECRET, {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInFocusDisplayOption: 0,
-    });
+    //OneSignal.init(ONESIGNAL_SECRET, {
+    //  kOSSettingsKeyAutoPrompt: false,
+    //  kOSSettingsKeyInFocusDisplayOption: 0,
+    //});
     await this.refresh();
   }
 
@@ -178,21 +178,26 @@ class SettingScreen extends React.Component<Props, State> {
     if (await isGrandfatheredIntoFreeSubscription()) {
       this.setState({
         isGrandfatheredIntoSubscription: true,
+        // TODO: remove once OneSignal works
+        isReady: true,
       });
     } else {
       const subscriptionExpirationDate = await getSubscriptionExpirationDate();
       this.setState({
         subscriptionExpirationDate,
+        // TODO: remove once OneSignal works
+        isReady: true,
       });
     }
 
     // Check notification status
-    OneSignal.getPermissionSubscriptionState(status => {
-      this.setState({
-        areNotificationsOn: !!status.subscriptionEnabled,
-        isReady: true,
-      });
-    });
+    // TODO: this is failing and blocking page load (probably because my ONESIGNAL_SECRET is bogus)
+    //OneSignal.getPermissionSubscriptionState(status => {
+    //  this.setState({
+    //    areNotificationsOn: !!status.subscriptionEnabled,
+    //    isReady: true,
+    //  });
+    //});
   };
 
   navigateToList = () => {
