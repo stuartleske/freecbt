@@ -8,7 +8,7 @@ import * as stats from "../stats";
 import { countThoughts } from "../thoughtstore";
 
 const PLAY_STORE_URL =
-  "http://play.google.com/store/apps/details?id=tech.econn.quirk";
+  "http://play.google.com/store/apps/details?id=org.erosson.freecbt";
 
 async function shouldShowRatingComponent() {
   // Don't show if we literally can't on this device
@@ -59,7 +59,7 @@ export default class extends React.Component<
       StoreReview.requestReview();
     } else if (Platform.OS === "android") {
       await Linking.openURL(
-        "http://play.google.com/store/apps/details?id=tech.econn.quirk"
+        "http://play.google.com/store/apps/details?id=org.erosson.freecbt"
       );
     }
 

@@ -1,4 +1,4 @@
-app_identifier("tech.econn.quirk") # The bundle identifier of your app
+app_identifier("org.erosson.freecbt") # The bundle identifier of your app
 apple_id("flaqueeau@gmail.com") # Your Apple email address
 
 itc_team_id("117847754") # App Store Connect Team ID

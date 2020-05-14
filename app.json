@@ -1,8 +1,8 @@
 {
   "expo": {
     "icon": "./assets/ios.png",
-    "name": "quirk",
-    "slug": "quirk",
+    "name": "FreeCBT",
+    "slug": "FreeCBT",
     "privacy": "unlisted",
     "platforms": [
       "ios",
@@ -10,7 +10,7 @@
     ],
     "version": "2.2.0",
     "orientation": "portrait",
-    "githubUrl": "https://github.com/Flaque/quirk",
+    "githubUrl": "https://github.com/erosson/freecbt",
     "primaryColor": "#F8A5C2",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,13 +22,13 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "tech.econn.quirk",
+      "bundleIdentifier": "org.erosson.freecbt",
       "icon": "./assets/ios.png",
       "publishBundlePath": "ios/quirk/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/quirk/Supporting/shell-app-manifest.json"
     },
     "android": {
-      "package": "tech.econn.quirk",
+      "package": "org.erosson.freecbt",
       "permissions": [],
       "icon": "./assets/android.png",
       "versionCode": 17,
