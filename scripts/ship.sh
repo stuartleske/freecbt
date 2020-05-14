@@ -6,10 +6,10 @@ set -e # exit if something goes wrong
 yarn
 
 # Publish a production release
-exp publish --release-channel production --non-interactive
+expo publish --release-channel production --non-interactive
 
 # ios
-./$(dirname $0)/ship_ios.sh
+#./$(dirname $0)/ship_ios.sh
 
 # android
 ./$(dirname $0)/ship_android.sh
