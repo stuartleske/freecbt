@@ -46,7 +46,7 @@ FreeCBT is built on React Native and therefore assumes you have [node](https://n
 
 ```sh
 # clone the project and cd into it
-git clone git@github.com:erosson/freecbt.git; cd ./quirk
+git clone git@github.com:erosson/freecbt.git; cd ./freecbt
 
 # install dependencies
 yarn
@@ -64,7 +64,7 @@ Of course!
 
 **If you like the app,** go give it 5 stars! It helps more people find the app.
 
-**If you're a mental health professional,** audit [the descriptions](https://github.com/erosson/quirk/blob/master/src/locals/en.json) of the cognitive distortions. If you have suggestions, let me know and we'll change stuff!
+**If you're a mental health professional,** audit [the descriptions](https://github.com/erosson/freecbt/blob/master/src/locals/en.json) of the cognitive distortions. If you have suggestions, let me know and we'll change stuff!
 
 **If you can draw** and can make digital illustrations of the little blobs, let me know and I'll find a place to stick them in the app!
 
