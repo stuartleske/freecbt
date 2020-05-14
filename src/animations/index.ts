@@ -1,3 +1,4 @@
+import "react-native";
 import posed from "react-native-pose";
 
 export const FadesIn = posed.View({

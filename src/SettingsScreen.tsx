@@ -280,8 +280,9 @@ class SettingScreen extends React.Component<Props, State> {
         fillColor="#EDF0FC"
         textColor={theme.darkBlue}
         onPress={() => {
-          Linking.canOpenURL("https://quirk.fyi/privacy").then(() =>
-            Linking.openURL("https://quirk.fyi/privacy")
+          const url = "https://github.com/erosson/freecbt/blob/master/PRIVACY.md"
+          Linking.canOpenURL(url).then(() =>
+            Linking.openURL(url)
           );
         }}
       />
@@ -293,8 +294,9 @@ class SettingScreen extends React.Component<Props, State> {
         fillColor="#EDF0FC"
         textColor={theme.darkBlue}
         onPress={() => {
-          Linking.canOpenURL("https://quirk.fyi/tos").then(() =>
-            Linking.openURL("https://quirk.fyi/tos")
+          const url = "https://github.com/erosson/freecbt/blob/master/TOS.md"
+          Linking.canOpenURL(url).then(() =>
+            Linking.openURL(url)
           );
         }}
       />
