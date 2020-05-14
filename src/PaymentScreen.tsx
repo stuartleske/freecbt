@@ -139,7 +139,7 @@ class PaymentScreen extends React.Component<
     this.setState({
       isReady: true,
     });
-    SplashScreen.hide();
+    SplashScreen.hideAsync();
   };
 
   storePurchase = async (sub: InAppPurchases.SubscriptionPurchase) => {
@@ -180,7 +180,7 @@ class PaymentScreen extends React.Component<
   purchaseErrorSubscription: EmitterSubscription;
 
   async componentDidMount() {
-    SplashScreen.preventAutoHide();
+    SplashScreen.preventAutoHideAsync();
 
     this.purchaseUpdateSubscription = InAppPurchases.purchaseUpdatedListener(
       (purchase: InAppPurchases.SubscriptionPurchase) => {
@@ -206,7 +206,7 @@ class PaymentScreen extends React.Component<
       if (await isGrandfatheredIntoFreeSubscription()) {
         stats.subscriptionVerified("grandfathered");
         this.redirectToFormScreen();
-        SplashScreen.hide();
+        SplashScreen.hideAsync();
         return;
       }
 
@@ -220,7 +220,7 @@ class PaymentScreen extends React.Component<
       // If we need don't need to pay, just go to the regular app
       if (!(await requiresPayment())) {
         this.redirectToFormScreen();
-        SplashScreen.hide();
+        SplashScreen.hideAsync();
         return;
       }
     } catch (err) {
@@ -229,7 +229,7 @@ class PaymentScreen extends React.Component<
 
       // If we mess something up, just send them through, it's cool.
       this.redirectToFormScreen();
-      SplashScreen.hide();
+      SplashScreen.hideAsync();
     }
 
     await this.showPaymentsScreen();

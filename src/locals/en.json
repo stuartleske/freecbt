@@ -1,12 +1,21 @@
 {
   "onboarding_screen": {
+    "header": "The FreeCBT Guide",
+    "block1": {
+      "header": "FreeCBT is something you have to practice",
+      "body": "It takes work, but learning FreeCBT can help you feel a lot better.",
+    },
+    "block2": {
+      "header": "Use FreeCBT in the moment.",
+      "body": "When you're feeling anxious, angry, or depressed, use FreeCBT.",
+    },
     "auto_thought_ex": "I missed George's party, he must hate me.",
     "challenge_ex": "George knows I couldn't make it every time, I wouldn't hate him if he missed something of mine.\n\nI should treat myself at least as well as I treat others.",
     "alt_thought_ex": "It's true I missed George's party, I can apologize, and he'll probably forgive me.",
     "cog_distortion": { "label": "Mind Reading", "slug": "mind-reading" },
     "intro": {
       "line1": "Welcome to",
-      "emphasis1": "quirk",
+      "emphasis1": "FreeCBT",
       "line2": ", the",
       "emphasis2": "Cognitive Behavioral Therapy (CBT)",
       "line3": "App."
@@ -82,7 +91,14 @@
   "cog_distortion": "Select any distortions that apply.",
   "challenge": "Challenge the thought.",
   "alt_thought": "Write an alternative thought.",
+  "cbt_list": {
+    "header": ".FreeCBT",
+  },
+  "settings": {
+    "header": "FreeCBT*",
+  },
   "cbt_form": {
+    "header": "FreeCBT",
     "edit": "Edit",
     "new": "New",
     "save": "Save",
@@ -91,6 +107,12 @@
     "challenged": "Challenge",
     "changed_placeholder": "It might not be true that...",
     "alt_thought_placeholder": "What could we think instead?"
+  },
+  "explanation_screen": {
+    "header": "FreeCBT."
+  },
+  "finished_screen": {
+    "header": "FreeCBT"
   },
   "all_or_nothing_thinking": "All or Nothing Thinking",
   "all_or_nothing_thinking_explanation": "This distortion happens when we have no room for middle ground. If we think that a small fault in ourselves means we’re fundamentally rotten or otherwise terrible, we’re likely engaging in all or nothing thinking.",

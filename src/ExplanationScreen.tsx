@@ -235,7 +235,7 @@ class ExplanationScreen extends React.Component<Props> {
               justifyContent: "space-between",
             }}
           >
-            <Header allowFontScaling={false}>quirk.</Header>
+            <Header allowFontScaling={false}>{i18n.t("explanation_screen.header")}</Header>
             <View
               style={{
                 display: "flex",

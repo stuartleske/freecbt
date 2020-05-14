@@ -16,8 +16,9 @@ import haptic from "../haptic";
 import * as stats from "../stats";
 import { CBT_FORM_SCREEN } from "../screens";
 import OneSignal from "react-native-onesignal";
-import { ONESIGNAL_SECRET } from "react-native-dotenv";
+// import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import { FadesIn } from "../animations";
+import i18n from "../i18n";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
@@ -51,7 +52,7 @@ const RecordStep = () => (
     <ActionButton
       flex={1}
       width="100%"
-      title={"The Quirk Guide"}
+      title={i18n.t("onboarding_screen.header")}
       fillColor="#EDF0FC"
       textColor={theme.darkBlue}
       onPress={() => {
@@ -96,14 +97,14 @@ const ChallengeStep = () => (
         fontSize: 28,
       }}
     >
-      Quirk is something you have to practice
+      {i18n.t("onboarding_screen.block1.header")}
     </Header>
     <Paragraph
       style={{
         fontSize: 20,
       }}
     >
-      It takes work, but learning Quirk can help you feel a lot better.
+      {i18n.t("onboarding_screen.block1.body")}
     </Paragraph>
   </View>
 );
@@ -131,14 +132,14 @@ const ChangeStep = () => (
         fontSize: 28,
       }}
     >
-      Use Quirk in the moment.
+      {i18n.t("onboarding_screen.block2.header")}
     </Header>
     <Paragraph
       style={{
         fontSize: 20,
       }}
     >
-      When you're feeling anxious, angry, or depressed, use Quirk.
+      {i18n.t("onboarding_screen.block2.body")}
     </Paragraph>
   </View>
 );
@@ -237,26 +238,26 @@ export default class extends React.Component<ScreenProps> {
   }
 
   componentDidMount() {
-    OneSignal.init(ONESIGNAL_SECRET, {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInFocusDisplayOption: 0,
-    });
-
-    OneSignal.getPermissionSubscriptionState(status => {
-      if (!status.hasPrompted && Platform.OS === "ios") {
-        this.setState({
-          showNotificationsPrompt: true,
-        });
-        return;
-      }
-
-      if (!status.subscriptionEnabled && Platform.OS === "android") {
-        this.setState({
-          showNotificationsPrompt: true,
-        });
-        return;
-      }
-    });
+    //OneSignal.init(ONESIGNAL_SECRET, {
+    //  kOSSettingsKeyAutoPrompt: false,
+    //  kOSSettingsKeyInFocusDisplayOption: 0,
+    //});
+//
+    //OneSignal.getPermissionSubscriptionState(status => {
+    //  if (!status.hasPrompted && Platform.OS === "ios") {
+    //    this.setState({
+    //      showNotificationsPrompt: true,
+    //    });
+    //    return;
+    //  }
+//
+    //  if (!status.subscriptionEnabled && Platform.OS === "android") {
+    //    this.setState({
+    //      showNotificationsPrompt: true,
+    //    });
+    //    return;
+    //  }
+    //});
 
     // Triggers a fade in for fancy reasons
     setTimeout(() => {

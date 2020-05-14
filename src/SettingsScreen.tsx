@@ -29,8 +29,6 @@ import {
 } from "./setting";
 import i18n from "./i18n";
 import { recordScreenCallOnFocus } from "./navigation";
-import { getSubscriptionExpirationDate } from "./subscriptions/subscriptionstore";
-import { isGrandfatheredIntoFreeSubscription } from "./history/grandfatherstore";
 import OneSignal from "react-native-onesignal";
 // import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import * as stats from "./stats";
@@ -57,82 +55,6 @@ export async function getHistoryButtonLabel(): Promise<
   return value;
 }
 
-const GrandfatheredInFreeQuirk = () => (
-  <>
-    <Paragraph
-      style={{
-        marginBottom: 4,
-      }}
-    >
-      <B>You've been given Quirk for free! 🙌</B>
-    </Paragraph>
-    <Paragraph
-      style={{
-        marginBottom: 49,
-      }}
-    >
-      This will go away if you uninstall the app. Feel free to reach out by
-      email ({"ejc" + "@" + "quirk.fyi"}) if you get a new phone; we'll work
-      something out. Thanks for being an early supporter! ❤️
-    </Paragraph>
-  </>
-);
-
-const SubscriptionExpirationDate = ({ expirationDate }) => (
-  <>
-    <Row>
-      <Paragraph
-        style={{
-          marginBottom: 9,
-        }}
-      >
-        Thanks for supporting the development of Quirk!
-      </Paragraph>
-    </Row>
-    <Row>
-      <Paragraph
-        style={{
-          marginBottom: 9,
-        }}
-      >
-        You're currently subscribed to the <B>Quirk Monthly Subscription.</B> On{" "}
-        <B>{expirationDate}</B> your subscription will renew and your account
-        will be charged <B>$3.99.</B>
-      </Paragraph>
-    </Row>
-    <Row
-      style={{
-        marginBottom: 9,
-      }}
-    >
-      <ActionButton
-        flex={1}
-        title={"Privacy Policy"}
-        fillColor="#EDF0FC"
-        textColor={theme.darkBlue}
-        onPress={() => {
-          Linking.canOpenURL("https://quirk.fyi/privacy").then(() =>
-            Linking.openURL("https://quirk.fyi/privacy")
-          );
-        }}
-      />
-    </Row>
-    <Row>
-      <ActionButton
-        flex={1}
-        title={"Terms of Service"}
-        fillColor="#EDF0FC"
-        textColor={theme.darkBlue}
-        onPress={() => {
-          Linking.canOpenURL("https://quirk.fyi/tos").then(() =>
-            Linking.openURL("https://quirk.fyi/tos")
-          );
-        }}
-      />
-    </Row>
-  </>
-);
-
 interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
 }
@@ -140,7 +62,6 @@ interface Props {
 interface State {
   isReady: boolean;
   historyButtonLabel?: HistoryButtonLabelSetting;
-  isGrandfatheredIntoSubscription?: boolean;
   subscriptionExpirationDate?: string;
   areNotificationsOn?: boolean;
 }
@@ -154,7 +75,6 @@ class SettingScreen extends React.Component<Props, State> {
     super(props);
     this.state = {
       isReady: false,
-      isGrandfatheredIntoSubscription: false,
       areNotificationsOn: false,
     };
     recordScreenCallOnFocus(this.props.navigation, "settings");
@@ -172,23 +92,9 @@ class SettingScreen extends React.Component<Props, State> {
     const historyButtonLabel = await getHistoryButtonLabel();
     this.setState({
       historyButtonLabel,
+      // TODO: remove once OneSignal works
+      isReady: true,
     });
-
-    // Check subscription status
-    if (await isGrandfatheredIntoFreeSubscription()) {
-      this.setState({
-        isGrandfatheredIntoSubscription: true,
-        // TODO: remove once OneSignal works
-        isReady: true,
-      });
-    } else {
-      const subscriptionExpirationDate = await getSubscriptionExpirationDate();
-      this.setState({
-        subscriptionExpirationDate,
-        // TODO: remove once OneSignal works
-        isReady: true,
-      });
-    }
 
     // Check notification status
     // TODO: this is failing and blocking page load (probably because my ONESIGNAL_SECRET is bogus)
@@ -252,7 +158,7 @@ class SettingScreen extends React.Component<Props, State> {
           >
             <StatusBar barStyle="dark-content" />
             <Row style={{ marginBottom: 18 }}>
-              <Header>quirk*</Header>
+              <Header>{i18n.t("settings.header")}</Header>
               <IconButton
                 featherIconName={"list"}
                 accessibilityLabel={i18n.t("accessibility.list_button")}
@@ -363,22 +269,36 @@ class SettingScreen extends React.Component<Props, State> {
               />
             </Row>
 
-            <Row
-              style={{
-                marginBottom: 18,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <SubHeader>*subscription</SubHeader>
-              {this.state.isGrandfatheredIntoSubscription ? (
-                <GrandfatheredInFreeQuirk />
-              ) : (
-                <SubscriptionExpirationDate
-                  expirationDate={this.state.subscriptionExpirationDate}
-                />
-              )}
-            </Row>
+    <Row
+      style={{
+        marginBottom: 9,
+      }}
+    >
+      <ActionButton
+        flex={1}
+        title={"Privacy Policy"}
+        fillColor="#EDF0FC"
+        textColor={theme.darkBlue}
+        onPress={() => {
+          Linking.canOpenURL("https://quirk.fyi/privacy").then(() =>
+            Linking.openURL("https://quirk.fyi/privacy")
+          );
+        }}
+      />
+    </Row>
+    <Row>
+      <ActionButton
+        flex={1}
+        title={"Terms of Service"}
+        fillColor="#EDF0FC"
+        textColor={theme.darkBlue}
+        onPress={() => {
+          Linking.canOpenURL("https://quirk.fyi/tos").then(() =>
+            Linking.openURL("https://quirk.fyi/tos")
+          );
+        }}
+      />
+    </Row>
           </Container>
         </ScrollView>
       </FadesIn>

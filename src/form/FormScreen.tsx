@@ -232,7 +232,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
               }}
               hasBadge={shouldShowHelpBadge}
             />
-            <Header allowFontScaling={false}>quirk</Header>
+            <Header allowFontScaling={false}>{i18n.t("cbt_form.header")}</Header>
             <IconButton
               accessibilityLabel={i18n.t("accessibility.list_button")}
               featherIconName={"list"}
