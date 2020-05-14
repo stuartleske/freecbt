@@ -3,11 +3,11 @@
     "header": "The FreeCBT Guide",
     "block1": {
       "header": "FreeCBT is something you have to practice",
-      "body": "It takes work, but learning FreeCBT can help you feel a lot better.",
+      "body": "It takes work, but learning FreeCBT can help you feel a lot better."
     },
     "block2": {
       "header": "Use FreeCBT in the moment.",
-      "body": "When you're feeling anxious, angry, or depressed, use FreeCBT.",
+      "body": "When you're feeling anxious, angry, or depressed, use FreeCBT."
     },
     "auto_thought_ex": "I missed George's party, he must hate me.",
     "challenge_ex": "George knows I couldn't make it every time, I wouldn't hate him if he missed something of mine.\n\nI should treat myself at least as well as I treat others.",
@@ -92,10 +92,10 @@
   "challenge": "Challenge the thought.",
   "alt_thought": "Write an alternative thought.",
   "cbt_list": {
-    "header": ".FreeCBT",
+    "header": ".FreeCBT"
   },
   "settings": {
-    "header": "FreeCBT*",
+    "header": "FreeCBT*"
   },
   "cbt_form": {
     "header": "FreeCBT",
