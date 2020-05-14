@@ -49,6 +49,6 @@ export async function resetCode(): Promise<void> {
   try {
     await AsyncStorage.removeItem(KEY);
   } catch (err) {
-    Sentry.captureException;
+    Sentry.captureException(err);
   }
 }

@@ -91,7 +91,7 @@ export default class extends React.Component<
     this.props.navigation.addListener("willFocus", async payload => {
       const isSettingCode = get(payload, "state.params.isSettingCode", false);
       this.setState({
-        isSettingCode: isSettingCode,
+        isSettingCode,
       });
     });
 
@@ -256,7 +256,7 @@ export default class extends React.Component<
             <KeypadSideButton
               icon="help"
               accessibilityLabel="help"
-              onPress={() => {}}
+              onPress={() => null}
             />
             <KeypadButton title="0" onPress={() => this.onEnterCode("0")} />
             <KeypadSideButton

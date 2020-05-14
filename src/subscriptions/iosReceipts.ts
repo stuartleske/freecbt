@@ -67,7 +67,7 @@ export async function getAppleExpirationDateFromReceipt(
   }>;
 
   const latestExpirationDate = pastPayments
-    .map(({ expires_date_ms }) => parseInt(expires_date_ms) / 1000)
+    .map(({ expires_date_ms }) => parseInt(expires_date_ms, 10) / 1000)
     .sort()
     .reverse()[0];
 

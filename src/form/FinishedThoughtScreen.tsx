@@ -65,7 +65,9 @@ export default class extends React.Component<ScreenProps, ScreenState> {
               paddingRight: 24,
             }}
           >
-            <Header allowFontScaling={false}>{i18n.t("finished_screen.header")}</Header>
+            <Header allowFontScaling={false}>
+              {i18n.t("finished_screen.header")}
+            </Header>
             <IconButton
               accessibilityLabel={i18n.t("accessibility.close_button")}
               featherIconName={"x"}

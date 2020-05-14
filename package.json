@@ -5,8 +5,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "lint": "tslint src/**/*.ts src/**/*.tsx",
-    "test": "jest",
-    "ship": "./scripts/ship.sh"
+    "lint:prettier": "prettier -l src/**/*.ts src/**/*.tsx",
+    "test": "yarn lint && yarn lint:prettier && jest",
+    "ship": "yarn test && ./scripts/ship.sh"
   },
   "dependencies": {
     "@assets/images": "file:assets",
@@ -37,7 +38,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-onesignal": "^3.7.3",
     "react-native-pose": "^0.9.0",
-    "react-native-screens": "^2.7.0",
+    "react-native-screens": "~2.2.0",
     "react-native-snap-carousel": "^3.8.0",
     "react-native-store-review": "^0.1.5",
     "react-native-svg": "11.0.1",

@@ -16,7 +16,7 @@ import haptic from "../haptic";
 import * as stats from "../stats";
 import { CBT_FORM_SCREEN } from "../screens";
 import OneSignal from "react-native-onesignal";
-// import { ONESIGNAL_SECRET } from "react-native-dotenv";
+import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import { FadesIn } from "../animations";
 import i18n from "../i18n";
 
@@ -232,32 +232,34 @@ export default class extends React.Component<ScreenProps> {
     isReady: false,
   };
 
+  _carousel = null;
+
   constructor(props) {
     super(props);
     recordScreenCallOnFocus(this.props.navigation, "intro");
   }
 
   componentDidMount() {
-    //OneSignal.init(ONESIGNAL_SECRET, {
-    //  kOSSettingsKeyAutoPrompt: false,
-    //  kOSSettingsKeyInFocusDisplayOption: 0,
-    //});
-//
-    //OneSignal.getPermissionSubscriptionState(status => {
-    //  if (!status.hasPrompted && Platform.OS === "ios") {
-    //    this.setState({
-    //      showNotificationsPrompt: true,
-    //    });
-    //    return;
-    //  }
-//
-    //  if (!status.subscriptionEnabled && Platform.OS === "android") {
-    //    this.setState({
-    //      showNotificationsPrompt: true,
-    //    });
-    //    return;
-    //  }
-    //});
+    // OneSignal.init(ONESIGNAL_SECRET, {
+    //   kOSSettingsKeyAutoPrompt: false,
+    //   kOSSettingsKeyInFocusDisplayOption: 0,
+    // });
+    //
+    // OneSignal.getPermissionSubscriptionState(status => {
+    //   if (!status.hasPrompted && Platform.OS === "ios") {
+    //     this.setState({
+    //       showNotificationsPrompt: true,
+    //     });
+    //     return;
+    //   }
+    //
+    //   if (!status.subscriptionEnabled && Platform.OS === "android") {
+    //     this.setState({
+    //       showNotificationsPrompt: true,
+    //     });
+    //     return;
+    //   }
+    // });
 
     // Triggers a fade in for fancy reasons
     setTimeout(() => {
@@ -274,8 +276,6 @@ export default class extends React.Component<ScreenProps> {
       fromOnboarding: true,
     });
   };
-
-  _carousel = null;
 
   _renderItem = ({ item, index }) => {
     if (item.slug === "record") {

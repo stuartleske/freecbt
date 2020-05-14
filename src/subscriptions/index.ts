@@ -62,14 +62,14 @@ export async function requiresPayment(): Promise<boolean> {
   // recent expiration date so we don't mess up Apple's review
   // process which can use shorter expiration dates. X.X
   if (Platform.OS === "ios") {
-    const expirationDate = await getAppleExpirationDateFromRecentPurchases();
-    if (!expirationDate) {
+    const expirationDate_ = await getAppleExpirationDateFromRecentPurchases();
+    if (!expirationDate_) {
       stats.subscriptionUnverified("never-bought");
       return true;
     }
 
-    const isExpired = dayjs().isAfter(dayjs.unix(expirationDate));
-    if (isExpired) {
+    const isExpired_ = dayjs().isAfter(dayjs.unix(expirationDate));
+    if (isExpired_) {
       stats.subscriptionUnverified("expired");
       return true;
     } else {

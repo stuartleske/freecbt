@@ -46,7 +46,7 @@ export async function getSubscriptionExpirationDate(): Promise<string> {
       return dayjs().format("YYYY-MM-DD");
     }
 
-    return dayjs.unix(parseInt(date)).format();
+    return dayjs.unix(parseInt(date, 10)).format();
   } catch (err) {
     console.error(err);
     return "";
@@ -67,7 +67,7 @@ export async function hasValidSubscription(): Promise<boolean> {
     }
 
     // Is today before our month-long recheck date?
-    return dayjs().unix() < parseInt(date);
+    return dayjs().unix() < parseInt(date, 10);
   } catch (err) {
     console.error(err); // TODO: Catch error
     // If there's an error here, we should attempt to restore the user's purchases

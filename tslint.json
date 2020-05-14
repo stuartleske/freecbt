@@ -49,8 +49,17 @@
     "arrow-parens": false,
     "ordered-imports": false,
     "no-console": {
-      "severity": "warning",
+      "severity": "off",
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-pascal-case",
+        "allow-leading-underscore",
+        "allow-trailing-underscore"
+      ]
     },
     "no-namespace": [true, "allow-declarations"]
   },

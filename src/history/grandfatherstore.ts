@@ -27,6 +27,6 @@ import { AsyncStorage } from "react-native";
 const FREE_SUBSCRIPTION_KEY = "@Grandfathered:free-subscription";
 
 export async function isGrandfatheredIntoFreeSubscription(): Promise<boolean> {
-	// we're free for everyone now!
-	return true;
+  // we're free for everyone now!
+  return true;
 }
