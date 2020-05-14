@@ -240,26 +240,26 @@ export default class extends React.Component<ScreenProps> {
   }
 
   componentDidMount() {
-    // OneSignal.init(ONESIGNAL_SECRET, {
-    //   kOSSettingsKeyAutoPrompt: false,
-    //   kOSSettingsKeyInFocusDisplayOption: 0,
-    // });
-    //
-    // OneSignal.getPermissionSubscriptionState(status => {
-    //   if (!status.hasPrompted && Platform.OS === "ios") {
-    //     this.setState({
-    //       showNotificationsPrompt: true,
-    //     });
-    //     return;
-    //   }
-    //
-    //   if (!status.subscriptionEnabled && Platform.OS === "android") {
-    //     this.setState({
-    //       showNotificationsPrompt: true,
-    //     });
-    //     return;
-    //   }
-    // });
+    OneSignal.init(ONESIGNAL_SECRET, {
+      kOSSettingsKeyAutoPrompt: false,
+      kOSSettingsKeyInFocusDisplayOption: 0,
+    });
+
+    OneSignal.getPermissionSubscriptionState(status => {
+      if (!status.hasPrompted && Platform.OS === "ios") {
+        this.setState({
+          showNotificationsPrompt: true,
+        });
+        return;
+      }
+
+      if (!status.subscriptionEnabled && Platform.OS === "android") {
+        this.setState({
+          showNotificationsPrompt: true,
+        });
+        return;
+      }
+    });
 
     // Triggers a fade in for fancy reasons
     setTimeout(() => {

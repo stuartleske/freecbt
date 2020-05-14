@@ -96,13 +96,12 @@ class SettingScreen extends React.Component<Props, State> {
     });
 
     // Check notification status
-    // OneSignal.getPermissionSubscriptionState(status => {
-    //   console.log('onesignal')
-    //   this.setState({
-    //     areNotificationsOn: !!status.subscriptionEnabled,
-    //     isReady: true,
-    //   });
-    // });
+    OneSignal.getPermissionSubscriptionState(status => {
+      this.setState({
+        areNotificationsOn: !!status.subscriptionEnabled,
+        isReady: true,
+      });
+    });
   };
 
   navigateToList = () => {
