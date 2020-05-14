@@ -30,8 +30,8 @@ import isInDev from "./isInDev";
 import dayjs from "dayjs";
 
 Segment.initialize({
-  androidWriteKey: "ZivFALGI9FH1L4WiAEY3o5PDtKwvLLxB",
-  iosWriteKey: "BpLkO0nXEQJUJyjQCqZk5TWawTQN83QC",
+  androidWriteKey: "8HtHVn4EIoIbIkvpFPuzckTxQXcOxw6b",
+  iosWriteKey: "n6U9DUWX0GhihvTMWQgLRfQKCUGHj4H8",
 });
 
 // Don't rename these; it can mess a bunch of stuff down the pipe
