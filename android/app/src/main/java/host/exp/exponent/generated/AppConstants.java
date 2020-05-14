@@ -91,10 +91,11 @@ public class AppConstants {
         
         
         
+      
       // ADD EMBEDDED RESPONSES HERE
       // START EMBEDDED RESPONSES
-      embeddedResponses.add(new Constants.EmbeddedResponse("https://exp.host/@erosson/FreeCBT", "assets://shell-app-manifest.json", "application/json"));
-      embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40erosson%2FFreeCBT%2F2.2.0%2F5de143ca62db7d7913714c323453bcc1-37.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
+      embeddedResponses.add(new Constants.EmbeddedResponse("https://exp.host/@erosson/freecbt", "assets://shell-app-manifest.json", "application/json"));
+      embeddedResponses.add(new Constants.EmbeddedResponse("https://d1wp6m56sqw74a.cloudfront.net/%40erosson%2Ffreecbt%2F2.2.0%2F5de143ca62db7d7913714c323453bcc1-37.0.0-android.js", "assets://shell-app.bundle", "application/javascript"));
       // END EMBEDDED RESPONSES
     EMBEDDED_RESPONSES = embeddedResponses;
   }

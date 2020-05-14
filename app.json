@@ -2,7 +2,7 @@
   "expo": {
     "icon": "./assets/ios.png",
     "name": "FreeCBT",
-    "slug": "FreeCBT",
+    "slug": "freecbt",
     "privacy": "unlisted",
     "platforms": [
       "ios",
@@ -40,12 +40,13 @@
         {
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
-            "organization": "evan-conrad",
-            "project": "quirk"
+            "organization": "erossonorg",
+            "project": "freecbt"
           }
         }
       ]
     },
-    "scheme": "exp4d07d66c4b23470393769aad813cee0c"
+    "scheme": "exp4d07d66c4b23470393769aad813cee0c",
+    "description": ""
   }
 }
