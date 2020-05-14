@@ -5,4 +5,4 @@ set -e # exit if something goes wrong
 expo build:android --release-channel production --non-interactive --type apk --generate-keystore
 
 # Download the apk
-curl -o app.apk "$(exp url:apk --non-interactive)"
+#curl -o app.apk "$(exp url:apk --non-interactive)"
