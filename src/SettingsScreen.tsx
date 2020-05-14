@@ -1,7 +1,8 @@
 import React from "react";
 import { ScrollView, StatusBar, Platform } from "react-native";
 import theme from "./theme";
-import { Constants, Linking } from "expo";
+import Constants from "expo-constants";
+import * as Linking from "expo-linking";
 import {
   Header,
   Row,

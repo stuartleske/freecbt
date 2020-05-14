@@ -53,7 +53,7 @@ import theme from "./theme";
 import i18n from "./i18n";
 import { storeExpirationDate } from "./subscriptions/subscriptionstore";
 import dayjs from "dayjs";
-import { SplashScreen } from "expo";
+import * as SplashScreen from "expo-splash-screen";
 import * as stats from "./stats";
 import { BallIndicator } from "react-native-indicators";
 import { getAppleExpirationDateFromReceipt } from "./subscriptions/iosReceipts";
