@@ -1,7 +1,7 @@
 <p align="center">
 <h1 align="center">✨🐙 FreeCBT. </h1>
 </p>
-<div><i>(A fork of <a href="https://github.com/Flaque/quirk">Quirk</a>)</i></div>
+<div align="center"><i>(A fork of <a href="https://github.com/Flaque/quirk">Quirk</a>)</i></div>
 <p align="center">
   <a href="#">Download iOS (coming soon)</a> •
   <a href="#">Download Android (coming soon)</a> •
