@@ -10,6 +10,8 @@
 <br><br>
 </p>
 
+![Node.js CI](https://github.com/erosson/freecbt/workflows/Node.js%20CI/badge.svg)
+
 FreeCBT (a fork of [Quirk](https://github.com/Flaque/quirk)) is a crossplatform, GPL-licensed, [Cognitive Behavioral Therapy (CBT)](https://en.wikipedia.org/wiki/Cognitive_behavioral_therapy)
 app built in React Native / Expo.
 
