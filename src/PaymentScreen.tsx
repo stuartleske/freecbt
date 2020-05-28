@@ -503,8 +503,8 @@ class PaymentScreen extends React.Component<
               fillColor="#EDF0FC"
               textColor={theme.darkBlue}
               onPress={() => {
-                Linking.canOpenURL("https://quirk.fyi/privacy").then(() =>
-                  Linking.openURL("https://quirk.fyi/privacy")
+                Linking.canOpenURL("https://freecbt.erosson.org/privacy").then(() =>
+                  Linking.openURL("https://freecbt.erosson.org/privacy")
                 );
               }}
             />
@@ -526,8 +526,8 @@ class PaymentScreen extends React.Component<
               fillColor="#EDF0FC"
               textColor={theme.darkBlue}
               onPress={() => {
-                Linking.canOpenURL("https://quirk.fyi/tos").then(() =>
-                  Linking.openURL("https://quirk.fyi/tos")
+                Linking.canOpenURL("https://freecbt.erosson.org/tos").then(() =>
+                  Linking.openURL("https://freecbt.erosson.org/tos")
                 );
               }}
             />

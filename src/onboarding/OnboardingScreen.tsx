@@ -57,16 +57,17 @@ const RecordStep = () => (
       textColor={theme.darkBlue}
       onPress={() => {
         stats.userClickedQuirkGuide();
-        Linking.canOpenURL("https://quirk.fyi/explanation?ref=quirk").then(
+        const url = "https://freecbt.erosson.org/explanation?ref=quirk"
+        Linking.canOpenURL(url).then(
           canOpen => {
             if (!canOpen) {
               stats.userCantOpenLink();
               Alert.alert(
                 "You can't open this",
-                "We're not sure why, but your phone is telling us that you can't open this link. You can find it at 'https://quirk.fyi/explanation'"
+                `We're not sure why, but your phone is telling us that you can't open this link. You can find it at '${url}'`
               );
             }
-            Linking.openURL("https://quirk.fyi/explanation?ref=quirk");
+            Linking.openURL(url);
           }
         );
       }}
