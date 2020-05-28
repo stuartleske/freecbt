@@ -3,7 +3,7 @@
 </p>
 <div align="center"><i>(A fork of <a href="https://github.com/Flaque/quirk">Quirk</a>)</i></div>
 <p align="center">
-  <a href="#">Download iOS (coming soon)</a> •
+  <a href="https://github.com/erosson/freecbt/issues/3">Download iOS (coming soon)</a> •
   <a href="https://play.google.com/store/apps/details?id=org.erosson.freecbt">Download Android</a> •
   <a href="mailto:freecbt+readme@erosson.org">Contact</a> •
   <a href="./CHANGELOG.md">Changelog</a>
