@@ -6,8 +6,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "lint": "tslint src/**/*.ts src/**/*.tsx",
-    "lint:prettier": "prettier -l src/**/*.ts src/**/*.tsx",
-    "format": "prettier --write src/**/*.ts src/**/*.tsx",
+    "lint:prettier": "prettier -l src/**/*.ts src/**/*.tsx www/public/**/*",
+    "format": "prettier --write src/**/*.ts src/**/*.tsx www/public/**/*",
     "test": "yarn lint && yarn lint:prettier && jest",
     "ship": "yarn test && ./scripts/ship.sh"
   },
