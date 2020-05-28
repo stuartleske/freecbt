@@ -284,3 +284,7 @@ button.jsx-3858592570 {
 .blue.jsx-2463146914 {
   color: rgb(84, 109, 229);
 }
+
+.jsx-989211465 a:hover {
+  border-bottom: 0 !important;
+}
