@@ -9,3 +9,5 @@ export function isHistoryButtonLabelSetting(
 }
 export const HISTORY_BUTTON_LABEL_DEFAULT: HistoryButtonLabelSetting =
   "alternative-thought";
+
+export const NOTIFICATIONS_KEY = "notifications";

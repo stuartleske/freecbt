@@ -15,10 +15,9 @@ import theme from "../theme";
 import haptic from "../haptic";
 import * as stats from "../stats";
 import { CBT_FORM_SCREEN } from "../screens";
-import OneSignal from "react-native-onesignal";
-import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import { FadesIn } from "../animations";
 import i18n from "../i18n";
+import { setNotifications } from "../SettingsScreen";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
@@ -143,7 +142,7 @@ const ChangeStep = () => (
   </View>
 );
 
-const RemindersStep = ({ onContinue, showPrompt }) => (
+const RemindersStep = ({ onContinue }) => (
   <View
     style={{
       height: "100%",
@@ -167,56 +166,33 @@ const RemindersStep = ({ onContinue, showPrompt }) => (
         marginBottom: 12,
       }}
     >
-      {showPrompt
-        ? "Before you finish, we can send you reminders if you'd like."
-        : "You can control reminders in the settings screen."}
+      Before you finish, we can send you reminders if you'd like.
     </Header>
-
-    {showPrompt ? (
-      <>
-        <Row
-          style={{
-            marginBottom: 8,
-          }}
-        >
-          <ActionButton
-            flex={1}
-            width="100%"
-            title={"Yes please!"}
-            onPress={() => {
-              stats.userTurnedOnNotifications();
-              if (Platform.OS === "ios") {
-                OneSignal.registerForPushNotifications();
-              }
-              OneSignal.setSubscription(true);
-              onContinue();
-            }}
-          />
-        </Row>
-
-        <Row>
-          <ActionButton
-            flex={1}
-            width="100%"
-            title={"Continue without reminders"}
-            fillColor="#EDF0FC"
-            textColor={theme.darkBlue}
-            onPress={onContinue}
-          />
-        </Row>
-      </>
-    ) : (
-      <Row>
-        <ActionButton
-          flex={1}
-          width="100%"
-          title={"Continue"}
-          onPress={() => {
-            onContinue();
-          }}
-        />
-      </Row>
-    )}
+    <Row
+      style={{
+        marginBottom: 8,
+      }}
+    >
+      <ActionButton
+        flex={1}
+        width="100%"
+        title={"Yes please!"}
+        onPress={async () => {
+          await setNotifications(true);
+          onContinue();
+        }}
+      />
+    </Row>
+    <Row>
+      <ActionButton
+        flex={1}
+        width="100%"
+        title={"Continue without reminders"}
+        fillColor="#EDF0FC"
+        textColor={theme.darkBlue}
+        onPress={onContinue}
+      />
+    </Row>
   </View>
 );
 
@@ -227,7 +203,6 @@ export default class extends React.Component<ScreenProps> {
 
   state = {
     activeSlide: 0,
-    showNotificationsPrompt: false,
     isReady: false,
   };
 
@@ -239,27 +214,6 @@ export default class extends React.Component<ScreenProps> {
   }
 
   componentDidMount() {
-    OneSignal.init(ONESIGNAL_SECRET, {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInFocusDisplayOption: 0,
-    });
-
-    OneSignal.getPermissionSubscriptionState(status => {
-      if (!status.hasPrompted && Platform.OS === "ios") {
-        this.setState({
-          showNotificationsPrompt: true,
-        });
-        return;
-      }
-
-      if (!status.subscriptionEnabled && Platform.OS === "android") {
-        this.setState({
-          showNotificationsPrompt: true,
-        });
-        return;
-      }
-    });
-
     // Triggers a fade in for fancy reasons
     setTimeout(() => {
       this.setState({
@@ -291,10 +245,7 @@ export default class extends React.Component<ScreenProps> {
 
     if (item.slug === "reminders-or-continue") {
       return (
-        <RemindersStep
-          onContinue={this.stopOnBoarding}
-          showPrompt={this.state.showNotificationsPrompt}
-        />
+        <RemindersStep onContinue={this.stopOnBoarding} />
       );
     }
 

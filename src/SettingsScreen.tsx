@@ -1,5 +1,7 @@
 import React from "react";
 import { ScrollView, StatusBar, Platform } from "react-native";
+import {Notifications} from "expo";
+import * as Permissions from 'expo-permissions';
 import theme from "./theme";
 import Constants from "expo-constants";
 import * as Linking from "expo-linking";
@@ -25,13 +27,12 @@ import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
 import {
   HISTORY_BUTTON_LABEL_KEY,
   HISTORY_BUTTON_LABEL_DEFAULT,
+  NOTIFICATIONS_KEY,
   HistoryButtonLabelSetting,
   isHistoryButtonLabelSetting,
 } from "./setting";
 import i18n from "./i18n";
 import { recordScreenCallOnFocus } from "./navigation";
-import OneSignal from "react-native-onesignal";
-import { ONESIGNAL_SECRET } from "react-native-dotenv";
 import * as stats from "./stats";
 import { FadesIn } from "./animations";
 
@@ -54,6 +55,60 @@ export async function getHistoryButtonLabel(): Promise<
   }
 
   return value;
+}
+
+export async function getNotifications(): Promise<bool> {
+  try {
+    const str = await getSettingOrSetDefault(NOTIFICATIONS_KEY, 'false');
+    return JSON.parse(str);
+  }
+  catch (e) {
+    return false;
+  }
+}
+
+export async function setNotifications(enabled: bool, debugSchedule: bool = false) {
+  await Notifications.cancelAllScheduledNotificationsAsync();
+  // don't enable without permission
+  enabled = enabled && await registerForLocalNotificationsAsync();
+  if (enabled) {
+    await Notifications.scheduleLocalNotificationAsync(
+      {
+        title: i18n.t("reminder_notification.title"),
+        body: i18n.t("reminder_notification.body"),
+        android: {
+          channelId: "default",
+        },
+      },
+      debugSchedule
+        ? {time: Date.now() + 3000, repeat: 'minute'}  // ridiculously often, for debugging
+        : {time: Date.now() + 1 * 3600 * 1000, repeat: 'day'}  // start one one hour later
+    );
+  }
+  setSetting(NOTIFICATIONS_KEY, JSON.stringify(enabled));
+  return enabled;
+}
+
+async function registerForLocalNotificationsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  let finalStatus = existingStatus;
+  if (existingStatus !== 'granted') {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+  if (finalStatus !== 'granted') {
+    return false;
+  }
+
+  if (Platform.OS === 'android') {
+    await Notifications.createChannelAndroidAsync('default', {
+      name: 'default',
+      sound: true,
+      priority: 'max',
+      vibrate: [0, 250, 250, 250],
+    });
+  }
+  return true;
 }
 
 interface Props {
@@ -84,27 +139,17 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    // OneSignal.init(ONESIGNAL_SECRET, {
-    //   kOSSettingsKeyAutoPrompt: false,
-    //   kOSSettingsKeyInFocusDisplayOption: 0,
-    // });
     await this.refresh();
   }
 
   refresh = async () => {
     const historyButtonLabel = await getHistoryButtonLabel();
+    const areNotificationsOn = await getNotifications();
     this.setState({
       historyButtonLabel,
+      areNotificationsOn,
       isReady: true,
     });
-
-    // Check notification status
-    // OneSignal.getPermissionSubscriptionState(status => {
-    //   this.setState({
-    //     areNotificationsOn: !!status.subscriptionEnabled,
-    //     isReady: true,
-    //   });
-    // });
   };
 
   navigateToList = () => {
@@ -167,7 +212,7 @@ class SettingScreen extends React.Component<Props, State> {
               />
             </Row>
 
-            {/*<Row
+            <Row
               style={{
                 marginBottom: 18,
                 display: "flex",
@@ -186,31 +231,21 @@ class SettingScreen extends React.Component<Props, State> {
               <RoundedSelectorButton
                 title={"Please remind me"}
                 selected={this.state.areNotificationsOn}
-                onPress={() => {
-                  if (Platform.OS === "ios") {
-                    OneSignal.registerForPushNotifications();
-                  }
-                  OneSignal.setSubscription(true);
-                  this.setState({
-                    areNotificationsOn: true,
-                  });
-                  stats.userTurnedOnNotifications();
+                onPress={async () => {
+                  await setNotifications(true);
+                  this.refresh();
                 }}
               />
 
               <RoundedSelectorButton
                 title={"No reminders, thanks"}
                 selected={!this.state.areNotificationsOn}
-                onPress={() => {
-                  OneSignal.setSubscription(false);
-                  this.setState({
-                    areNotificationsOn: false,
-                  });
-                  stats.userTurnedOffNotifications();
+                onPress={async () => {
+                  await setNotifications(false);
+                  this.refresh();
                 }}
               />
-            </Row>*/}
-
+            </Row>
             <Row
               style={{
                 marginBottom: 18,
