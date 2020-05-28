@@ -81,10 +81,10 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   async componentDidMount() {
-    OneSignal.init(ONESIGNAL_SECRET, {
-      kOSSettingsKeyAutoPrompt: false,
-      kOSSettingsKeyInFocusDisplayOption: 0,
-    });
+    // OneSignal.init(ONESIGNAL_SECRET, {
+    //   kOSSettingsKeyAutoPrompt: false,
+    //   kOSSettingsKeyInFocusDisplayOption: 0,
+    // });
     await this.refresh();
   }
 
@@ -96,12 +96,12 @@ class SettingScreen extends React.Component<Props, State> {
     });
 
     // Check notification status
-    OneSignal.getPermissionSubscriptionState(status => {
-      this.setState({
-        areNotificationsOn: !!status.subscriptionEnabled,
-        isReady: true,
-      });
-    });
+    // OneSignal.getPermissionSubscriptionState(status => {
+    //   this.setState({
+    //     areNotificationsOn: !!status.subscriptionEnabled,
+    //     isReady: true,
+    //   });
+    // });
   };
 
   navigateToList = () => {
@@ -164,7 +164,7 @@ class SettingScreen extends React.Component<Props, State> {
               />
             </Row>
 
-            <Row
+            {/*<Row
               style={{
                 marginBottom: 18,
                 display: "flex",
@@ -206,7 +206,7 @@ class SettingScreen extends React.Component<Props, State> {
                   stats.userTurnedOffNotifications();
                 }}
               />
-            </Row>
+            </Row>*/}
 
             <Row
               style={{
