@@ -21,7 +21,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false,
+      "supportsTablet": true,
       "bundleIdentifier": "org.erosson.freecbt",
       "icon": "./assets/ios.png",
       "publishBundlePath": "ios/quirk/Supporting/shell-app.bundle",
