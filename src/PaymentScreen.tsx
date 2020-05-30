@@ -180,6 +180,15 @@ class PaymentScreen extends React.Component<
   purchaseErrorSubscription: EmitterSubscription;
 
   async componentDidMount() {
+    if (this.purchaseUpdateSubscription) {
+      this.purchaseUpdateSubscription.remove();
+      this.purchaseUpdateSubscription = null;
+    }
+    if (this.purchaseErrorSubscription) {
+      this.purchaseErrorSubscription.remove();
+      this.purchaseErrorSubscription = null;
+    }
+
     SplashScreen.preventAutoHideAsync();
 
     this.purchaseUpdateSubscription = InAppPurchases.purchaseUpdatedListener(
@@ -233,17 +242,6 @@ class PaymentScreen extends React.Component<
     }
 
     await this.showPaymentsScreen();
-  }
-
-  componentWillMount() {
-    if (this.purchaseUpdateSubscription) {
-      this.purchaseUpdateSubscription.remove();
-      this.purchaseUpdateSubscription = null;
-    }
-    if (this.purchaseErrorSubscription) {
-      this.purchaseErrorSubscription.remove();
-      this.purchaseErrorSubscription = null;
-    }
   }
 
   componentWillUnmount() {
