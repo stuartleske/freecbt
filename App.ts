@@ -5,7 +5,7 @@ import {
   EXPLANATION_SCREEN,
   SETTING_SCREEN,
   CBT_ON_BOARDING_SCREEN,
-  PAYMENT_SCREEN,
+  INIT_SCREEN,
   CBT_VIEW_SCREEN,
   LOCK_SCREEN,
 } from "./src/screens";
@@ -16,12 +16,12 @@ import ExplanationScreen from "./src/ExplanationScreen";
 import SettingScreen from "./src/SettingsScreen";
 import OnboardingScreen from "./src/onboarding/OnboardingScreen";
 import withErrorBoundary from "./src/sentry/withErrorBoundary";
-import PaymentScreen from "./src/PaymentScreen";
+import InitScreen from "./src/InitScreen";
 import LockScreen from "./src/lock/LockScreen";
 
 const App = createStackNavigator(
   {
-    [PAYMENT_SCREEN]: PaymentScreen,
+    [INIT_SCREEN]: InitScreen,
     [CBT_ON_BOARDING_SCREEN]: OnboardingScreen,
     [CBT_LIST_SCREEN]: CBTListScreen,
     [CBT_FORM_SCREEN]: CBTFormScreen,
@@ -31,7 +31,7 @@ const App = createStackNavigator(
     [LOCK_SCREEN]: LockScreen,
   },
   {
-    initialRouteName: PAYMENT_SCREEN,
+    initialRouteName: INIT_SCREEN,
     mode: "modal",
   }
 );

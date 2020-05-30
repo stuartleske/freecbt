@@ -16,6 +16,7 @@ android/app/src/main/assets/shell-app-manifest.json
 android/app/src/main/assets/shell-app.bundle
 ios/quirk/Supporting/shell-app-manifest.json
 ios/quirk/Supporting/shell-app.bundle
+web-build/
 
 # Created by https://www.gitignore.io/api/reactnative
 # Edit at https://www.gitignore.io/?templates=reactnative

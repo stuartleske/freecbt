@@ -62,7 +62,6 @@ interface Props {
 interface State {
   isReady: boolean;
   historyButtonLabel?: HistoryButtonLabelSetting;
-  subscriptionExpirationDate?: string;
   areNotificationsOn?: boolean;
 }
 

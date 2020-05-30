@@ -31,7 +31,6 @@ interface FormScreenState {
   thought?: SavedThought | Thought;
   slideToShow: Slides;
   shouldShowHelpBadge: boolean;
-  shouldShowOnboarding: boolean;
   shouldShowInFlowOnboarding: boolean;
   isReady: boolean;
 }
@@ -46,7 +45,6 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     thought: newThought(),
     slideToShow: "automatic" as Slides,
     shouldShowHelpBadge: false,
-    shouldShowOnboarding: false,
     shouldShowInFlowOnboarding: false,
     isReady: false,
   };
@@ -97,14 +95,6 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
   }
 
   async componentDidMount() {
-    const isExisting = await getIsExistingUser();
-    if (!isExisting) {
-      setIsExistingUser();
-      this.setState({
-        shouldShowOnboarding: true,
-      });
-    }
-
     // Check if coming from onboarding
     // @ts-ignore argle bargle typescript plz don't do these things
     if (this.props.navigation.getParam("fromOnboarding", false)) {
@@ -120,6 +110,11 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     this.setState({
       isReady: true,
     });
+
+    if (!await getIsExistingUser()) {
+      setIsExistingUser();
+      this.props.navigation.replace(CBT_ON_BOARDING_SCREEN);
+    }
   }
 
   onChangeAutomaticThought = val => {
@@ -187,14 +182,9 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
   render() {
     const {
       shouldShowHelpBadge,
-      shouldShowOnboarding,
       shouldShowInFlowOnboarding,
       isReady,
     } = this.state;
-
-    if (shouldShowOnboarding) {
-      this.props.navigation.replace(CBT_ON_BOARDING_SCREEN);
-    }
 
     return (
       <FadesIn
