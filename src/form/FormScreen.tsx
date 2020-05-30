@@ -111,7 +111,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
       isReady: true,
     });
 
-    if (!await getIsExistingUser()) {
+    if (!(await getIsExistingUser())) {
       setIsExistingUser();
       this.props.navigation.replace(CBT_ON_BOARDING_SCREEN);
     }
