@@ -25,7 +25,10 @@
       "bundleIdentifier": "org.erosson.freecbt",
       "icon": "./assets/ios.png",
       "publishBundlePath": "ios/quirk/Supporting/shell-app.bundle",
-      "publishManifestPath": "ios/quirk/Supporting/shell-app-manifest.json"
+      "publishManifestPath": "ios/quirk/Supporting/shell-app-manifest.json",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "org.erosson.freecbt",
