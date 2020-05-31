@@ -2,6 +2,7 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 *.jks
+*.pem
 *.p12
 *.key
 *.mobileprovision
