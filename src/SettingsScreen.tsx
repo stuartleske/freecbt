@@ -67,7 +67,7 @@ export async function getNotifications(): Promise<bool> {
   }
 }
 
-export async function setNotifications(enabled: bool, debugSchedule: bool = false) {
+export async function setNotifications(enabled: bool) {
   await Notifications.cancelAllScheduledNotificationsAsync();
   // don't enable without permission
   enabled = enabled && await registerForLocalNotificationsAsync();
@@ -80,7 +80,7 @@ export async function setNotifications(enabled: bool, debugSchedule: bool = fals
           channelId: "default",
         },
       },
-      debugSchedule
+      feature.remindersEachMinute
         ? {time: Date.now() + 3000, repeat: 'minute'}  // ridiculously often, for debugging
         : {time: Date.now() + 1 * 3600 * 1000, repeat: 'day'}  // start one one hour later
     );
@@ -212,40 +212,42 @@ class SettingScreen extends React.Component<Props, State> {
               />
             </Row>
 
-            <Row
-              style={{
-                marginBottom: 18,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <SubHeader>*reminders</SubHeader>
-              <Paragraph
+            {feature.reminders &&
+              <Row
                 style={{
-                  marginBottom: 9,
+                  marginBottom: 18,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                If you'd like, you can turn on notification reminders that help
-                you build up the habit of challenging thoughts.
-              </Paragraph>
-              <RoundedSelectorButton
-                title={"Please remind me"}
-                selected={this.state.areNotificationsOn}
-                onPress={async () => {
-                  await setNotifications(true);
-                  this.refresh();
-                }}
-              />
+                <SubHeader>*reminders</SubHeader>
+                <Paragraph
+                  style={{
+                    marginBottom: 9,
+                  }}
+                >
+                  If you'd like, you can turn on notification reminders that help
+                  you build up the habit of challenging thoughts.
+                </Paragraph>
+                <RoundedSelectorButton
+                  title={"Please remind me"}
+                  selected={this.state.areNotificationsOn}
+                  onPress={async () => {
+                    await setNotifications(true);
+                    this.refresh();
+                  }}
+                />
 
-              <RoundedSelectorButton
-                title={"No reminders, thanks"}
-                selected={!this.state.areNotificationsOn}
-                onPress={async () => {
-                  await setNotifications(false);
-                  this.refresh();
-                }}
-              />
-            </Row>
+                <RoundedSelectorButton
+                  title={"No reminders, thanks"}
+                  selected={!this.state.areNotificationsOn}
+                  onPress={async () => {
+                    await setNotifications(false);
+                    this.refresh();
+                  }}
+                />
+              </Row>
+            }
             <Row
               style={{
                 marginBottom: 18,
