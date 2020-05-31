@@ -3,8 +3,9 @@ name: Continuous Integration
 on:
   pull_request:
   push:
-    branches:
-      - "!master"
+    branches-ignore:
+      # master branch pushes deploy; see deploy.yml
+      - master
 
 jobs:
   build:
