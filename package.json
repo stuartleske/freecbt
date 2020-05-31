@@ -10,7 +10,7 @@
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
     "//deploy": "don't publish by hand, this is for CI",
-    "deploy": "expo login --non-interactive -u $EXPO_USERNAME && yarn _version && expo publish --non-interactive",
+    "deploy": "yarn _version && expo publish --non-interactive",
     "_version": "./scripts/version.sh > .version.json"
   },
   "dependencies": {
