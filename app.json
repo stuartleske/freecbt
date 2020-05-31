@@ -35,7 +35,7 @@
       "package": "org.erosson.freecbt",
       "permissions": [],
       "icon": "./assets/android.png",
-      "versionCode": 17,
+      "versionCode": 18,
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },
