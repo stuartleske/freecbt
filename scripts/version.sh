@@ -2,5 +2,5 @@
 echo "{"
 echo "  \"timestamp\": `date +%s`,"
 echo "  \"date\": \"`date -R`\","
-echo "  \"hash\": \"`git describe --tags --dirty`\""
+echo "  \"hash\": \"`git describe --always --tags --dirty`\""
 echo "}"
