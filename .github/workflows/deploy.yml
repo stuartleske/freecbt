@@ -13,7 +13,7 @@ jobs:
       EXPO_CLI_PASSWORD: ${{secrets.EXPO_CLI_PASSWORD}}
     steps:
     - uses: actions/checkout@v2
-    - name: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: 12.x
     - run: yarn --dev --frozen-lockfile
