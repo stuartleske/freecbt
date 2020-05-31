@@ -16,10 +16,10 @@ jobs:
     # https://github.com/expo/expo-github-action
     # using their action avoids ENOSPC: https://github.com/expo/expo-github-action/issues/20
     - uses: expo/expo-github-action@v5
-        with:
-          expo-version: 3.x
-          expo-username: erosson
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+      with:
+        expo-version: 3.x
+        expo-username: erosson
+        expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
     - run: yarn --dev --frozen-lockfile
     - run: yarn test
     - run: yarn deploy  # `expo publish` plus some prepublish chores
