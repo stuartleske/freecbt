@@ -1,6 +1,6 @@
 import { Container, Row, Header, IconButton } from "../ui";
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { NavigationScreenProp, NavigationAction } from "react-navigation";
 import theme from "../theme";
 import Constants from "expo-constants";
@@ -21,7 +21,6 @@ import haptic from "../haptic";
 import { recordScreenCallOnFocus } from "../navigation";
 import * as stats from "../stats";
 import { FadesIn } from "../animations";
-import { hasPincode } from "../lock/lockstore";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<any, NavigationAction>;

@@ -47,7 +47,7 @@ export async function hasPincode(): Promise<boolean> {
 
 export async function resetCode(): Promise<void> {
   try {
-    await AsyncStorage.removeItem(KEY);
+    await AsyncStorage.removeItem(KEY_PINCODE);
   } catch (err) {
     Sentry.captureException(err);
   }

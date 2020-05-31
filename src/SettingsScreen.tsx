@@ -14,7 +14,6 @@ import {
   SubHeader,
   Paragraph,
   RoundedSelectorButton,
-  B,
   ActionButton,
 } from "./ui";
 import {
@@ -33,7 +32,6 @@ import {
 } from "./setting";
 import i18n from "./i18n";
 import { recordScreenCallOnFocus } from "./navigation";
-import * as stats from "./stats";
 import { FadesIn } from "./animations";
 
 export { HistoryButtonLabelSetting };
@@ -57,7 +55,7 @@ export async function getHistoryButtonLabel(): Promise<
   return value;
 }
 
-export async function getNotifications(): Promise<bool> {
+export async function getNotifications(): Promise<boolean> {
   try {
     const str = await getSettingOrSetDefault(NOTIFICATIONS_KEY, 'false');
     return JSON.parse(str);
@@ -67,7 +65,7 @@ export async function getNotifications(): Promise<bool> {
   }
 }
 
-export async function setNotifications(enabled: bool) {
+export async function setNotifications(enabled: boolean) {
   await Notifications.cancelAllScheduledNotificationsAsync();
   // don't enable without permission
   enabled = enabled && await registerForLocalNotificationsAsync();
@@ -120,7 +118,7 @@ interface State {
   historyButtonLabel?: HistoryButtonLabelSetting;
   areNotificationsOn?: boolean;
   // click the invisible button at the bottom 5 times to go to the secret debug screen
-  debugClicks: int;
+  debugClicks: number;
 }
 
 class SettingScreen extends React.Component<Props, State> {

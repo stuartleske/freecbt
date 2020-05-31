@@ -7,7 +7,7 @@ import {
 import { recordScreenCallOnFocus } from "../navigation";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { sliderWidth, itemWidth } from "../form/sizes";
-import { View, Image, Linking, Alert, Platform } from "react-native";
+import { View, Image, Linking, Alert } from "react-native";
 import { Header, Container, Paragraph, ActionButton, Row } from "../ui";
 import Constants from "expo-constants";
 import * as Haptic from "expo-haptics";

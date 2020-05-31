@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { hasPincode } from "./lock/lockstore";
+import { NavigationScreenProp, NavigationState, NavigationAction } from "react-navigation";
 import * as Screens from "./screens";
 
 interface Props {

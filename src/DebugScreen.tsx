@@ -1,10 +1,13 @@
 import React from "react";
-import { View, Text, Switch, FlatList, Platform } from "react-native";
-import Constants from 'expo-constants'
-import feature from './feature'
-import theme from "./theme";
+import { View, Text, Switch, Platform } from "react-native";
+import Constants from "expo-constants";
+import feature, { Feature } from "./feature";
 
-export default class DebugScreen extends React.Component {
+interface State {
+  feature: Feature;
+}
+
+export default class DebugScreen extends React.Component<{}, State> {
   constructor(props) {
     super(props);
     this.state = {feature};
@@ -21,10 +24,11 @@ export default class DebugScreen extends React.Component {
       ["App version", Constants.manifest.version],
       ["OS", Platform.OS],
       ["Test", <Text>test</Text>],
-      ...(Object.entries(this.state.feature)).map(([key, val]) => (
+      ...(Object.entries(this.state.feature)).map(([key, val]: [string, boolean]) => (
         [key,
         <Switch
           value={val}
+          // @ts-ignore
           onChange={() => {this.setFeature(key, !val);}}
         />
         ]
@@ -42,10 +46,9 @@ export default class DebugScreen extends React.Component {
 }
 
 function renderEntry([key, val], i) {
-  const rowStyle = {flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1}
   if (typeof val === "string") {
     return (
-      <View key={key} style={rowStyle}>
+      <View key={key} style={{flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1}}>
         <Text>{key}: </Text>
         <Text style={{alignSelf: "flex-end"}}>{val}</Text>
       </View>
@@ -53,7 +56,7 @@ function renderEntry([key, val], i) {
   }
   else if (React.isValidElement(val)) {
     return (
-      <View key={key} style={rowStyle}>
+      <View key={key} style={{flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1}}>
         <Text>{key}: </Text>
         <View>{val}</View>
       </View>
@@ -61,7 +64,7 @@ function renderEntry([key, val], i) {
   }
   else {
     return (
-      <View key={key} style={rowStyle}>
+      <View key={key} style={{flexDirection: "row", justifyContent: "space-between", borderBottomWidth: 1}}>
         <Text>{key}</Text>
       </View>
     )

@@ -402,6 +402,7 @@ export const ActionButton = ({
       backgroundColor: fillColor,
       padding: 12,
       borderRadius: 10,
+      // @ts-ignore
       textAlign: "center",
       justifyContent: "center",
       alignItems: "center",
