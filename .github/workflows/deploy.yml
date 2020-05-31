@@ -1,19 +1,25 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Continuous Integration
+name: Continuous Deployment
 
 on:
-  [push, pull-request]
+  push:
+    branches: [master]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    env:
+      EXPO_USER: erosson
+      EXPO_CLI_PASSWORD: ${{secrets.EXPO_CLI_PASSWORD}}
+
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 12.x
+    - name: Deploy
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
     - run: yarn --dev --frozen-lockfile
     - run: yarn test
+    - run: yarn publish

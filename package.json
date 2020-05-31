@@ -9,8 +9,8 @@
     "test": "yarn lint && yarn lint:prettier && yarn _version && jest",
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
-    "//publish": "you really shouldn't be publishing this by hand - CI will do so on commit",
-    "publish": "yarn _version && expo publish",
+    "//deploy": "don't publish by hand, this is for CI",
+    "deploy": "expo login --non-interactive -u $EXPO_USERNAME && yarn _version && expo publish",
     "_version": "./scripts/version.sh > .version.json"
   },
   "dependencies": {
