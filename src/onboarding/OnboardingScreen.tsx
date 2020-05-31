@@ -18,6 +18,7 @@ import { CBT_FORM_SCREEN } from "../screens";
 import { FadesIn } from "../animations";
 import i18n from "../i18n";
 import { setNotifications } from "../SettingsScreen";
+import feature from "../feature";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
@@ -142,7 +143,7 @@ const ChangeStep = () => (
   </View>
 );
 
-const RemindersStep = ({ onContinue }) => (
+const RemindersStep = ({ onContinue, showPrompt }) => (
   <View
     style={{
       height: "100%",
@@ -166,33 +167,50 @@ const RemindersStep = ({ onContinue }) => (
         marginBottom: 12,
       }}
     >
-      Before you finish, we can send you reminders if you'd like.
+      {showPrompt
+        ? "Before you finish, we can send you reminders if you'd like."
+        : "You can control reminders in the settings screen."}
     </Header>
-    <Row
-      style={{
-        marginBottom: 8,
-      }}
-    >
-      <ActionButton
-        flex={1}
-        width="100%"
-        title={"Yes please!"}
-        onPress={async () => {
-          await setNotifications(true);
-          onContinue();
-        }}
-      />
-    </Row>
-    <Row>
-      <ActionButton
-        flex={1}
-        width="100%"
-        title={"Continue without reminders"}
-        fillColor="#EDF0FC"
-        textColor={theme.darkBlue}
-        onPress={onContinue}
-      />
-    </Row>
+    {showPrompt ? (
+      <>
+        <Row
+          style={{
+            marginBottom: 8,
+          }}
+        >
+          <ActionButton
+            flex={1}
+            width="100%"
+            title={"Yes please!"}
+            onPress={async () => {
+              await setNotifications(true);
+              onContinue();
+            }}
+          />
+        </Row>
+        <Row>
+          <ActionButton
+            flex={1}
+            width="100%"
+            title={"Continue without reminders"}
+            fillColor="#EDF0FC"
+            textColor={theme.darkBlue}
+            onPress={onContinue}
+          />
+        </Row>
+      </>
+    ) : (
+      <Row>
+        <ActionButton
+          flex={1}
+          width="100%"
+          title={"Continue"}
+          fillColor="#EDF0FC"
+          textColor={theme.darkBlue}
+          onPress={onContinue}
+        />
+      </Row>
+    )}
   </View>
 );
 
@@ -245,7 +263,10 @@ export default class extends React.Component<ScreenProps> {
 
     if (item.slug === "reminders-or-continue") {
       return (
-        <RemindersStep onContinue={this.stopOnBoarding} />
+        <RemindersStep
+          onContinue={this.stopOnBoarding}
+          showPrompt={feature.reminders}
+        />
       );
     }
 
