@@ -3,6 +3,7 @@ import { ScrollView, StatusBar, Platform } from "react-native";
 import theme from "./theme";
 import Constants from "expo-constants";
 import * as Linking from "expo-linking";
+import feature from "./feature"
 import {
   Header,
   Row,
@@ -19,7 +20,7 @@ import {
   NavigationState,
   NavigationAction,
 } from "react-navigation";
-import { CBT_ON_BOARDING_SCREEN, LOCK_SCREEN } from "./screens";
+import { CBT_ON_BOARDING_SCREEN, LOCK_SCREEN, DEBUG_SCREEN } from "./screens";
 import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
 import {
   HISTORY_BUTTON_LABEL_KEY,
@@ -63,6 +64,8 @@ interface State {
   isReady: boolean;
   historyButtonLabel?: HistoryButtonLabelSetting;
   areNotificationsOn?: boolean;
+  // click the invisible button at the bottom 5 times to go to the secret debug screen
+  debugClicks: int;
 }
 
 class SettingScreen extends React.Component<Props, State> {
@@ -75,6 +78,7 @@ class SettingScreen extends React.Component<Props, State> {
     this.state = {
       isReady: false,
       areNotificationsOn: false,
+      debugClicks: 0,
     };
     recordScreenCallOnFocus(this.props.navigation, "settings");
   }
@@ -295,6 +299,23 @@ class SettingScreen extends React.Component<Props, State> {
           Linking.canOpenURL(url).then(() =>
             Linking.openURL(url)
           );
+        }}
+      />
+    </Row>
+    <Row>
+      <ActionButton
+        flex={1}
+        opacity={feature.debugVisible ? 1 : 0}
+        fillColor={feature.debugVisible ? null : "#ffffff"}
+        textColor={feature.debugVisible ? null : "#ffffff"}
+        title={"Debug"}
+        onPress={() => {
+          const debugClicks = this.state.debugClicks + 1;
+          this.setState({debugClicks});
+          if (debugClicks >= 5) {
+            this.setState({debugClicks: 0});
+            this.props.navigation.navigate(DEBUG_SCREEN);
+          }
         }}
       />
     </Row>

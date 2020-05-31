@@ -8,6 +8,7 @@ import {
   INIT_SCREEN,
   CBT_VIEW_SCREEN,
   LOCK_SCREEN,
+  DEBUG_SCREEN,
 } from "./src/screens";
 import CBTListScreen from "./src/CBTListScreen";
 import CBTFormScreen from "./src/form/FormScreen";
@@ -18,6 +19,7 @@ import OnboardingScreen from "./src/onboarding/OnboardingScreen";
 import withErrorBoundary from "./src/sentry/withErrorBoundary";
 import InitScreen from "./src/InitScreen";
 import LockScreen from "./src/lock/LockScreen";
+import DebugScreen from "./src/DebugScreen";
 
 const App = createStackNavigator(
   {
@@ -29,6 +31,7 @@ const App = createStackNavigator(
     [SETTING_SCREEN]: SettingScreen,
     [CBT_VIEW_SCREEN]: FinishedThoughtScreen,
     [LOCK_SCREEN]: LockScreen,
+    [DEBUG_SCREEN]: DebugScreen,
   },
   {
     initialRouteName: INIT_SCREEN,

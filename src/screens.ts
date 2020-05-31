@@ -6,3 +6,4 @@ export const SETTING_SCREEN = "SETTING_SCREEN";
 export const INIT_SCREEN = "INIT_SCREEN";
 export const CBT_VIEW_SCREEN = "CBT_VIEW_SCREEN";
 export const LOCK_SCREEN = "LOCK_SCREEN";
+export const DEBUG_SCREEN = "DEBUG_SCREEN";
