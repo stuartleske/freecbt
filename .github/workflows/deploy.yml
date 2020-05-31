@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      EXPO_USER: erosson
+      EXPO_USERNAME: erosson
       EXPO_CLI_PASSWORD: ${{secrets.EXPO_CLI_PASSWORD}}
     steps:
     - uses: actions/checkout@v2
