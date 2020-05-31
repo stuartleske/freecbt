@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Switch, Platform } from "react-native";
 import Constants from "expo-constants";
 import feature, { Feature } from "./feature";
+import version from "../.version.json"
 
 interface State {
   feature: Feature;
@@ -22,8 +23,11 @@ export default class DebugScreen extends React.Component<{}, State> {
       ["Installation id", Constants.installationId],
       ["Expo version", Constants.expoVersion],
       ["App version", Constants.manifest.version],
+      ["Revision", Constants.manifest.revisionId || "(dev)"],
+      ["Revision Git", version.hash],
+      ["Revision Date", version.date],
+      ["Revision Timestamp", version.timestamp + ''],
       ["OS", Platform.OS],
-      ["Test", <Text>test</Text>],
       ...(Object.entries(this.state.feature)).map(([key, val]: [string, boolean]) => (
         [key,
         <Switch

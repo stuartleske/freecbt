@@ -2,14 +2,16 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "www": "serve www/public",
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "yarn _version && expo start",
     "lint": "tslint src/**/*.ts src/**/*.tsx",
     "lint:prettier": "prettier -l src/**/*.ts src/**/*.tsx www/public/**/*",
     "format": "prettier --write src/**/*.ts src/**/*.tsx www/public/**/*",
-    "test": "yarn lint && yarn lint:prettier && jest",
-    "ship": "yarn test && ./scripts/ship.sh"
+    "test": "yarn lint && yarn lint:prettier && yarn _version && jest",
+    "build:android": "expo build:android",
+    "build:ios": "expo build:ios",
+    "//publish": "you really shouldn't be publishing this by hand - CI will do so on commit",
+    "publish": "yarn _version && expo publish",
+    "_version": "./scripts/version.sh > .version.json"
   },
   "dependencies": {
     "@assets/images": "file:assets",

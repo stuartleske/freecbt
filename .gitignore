@@ -11,6 +11,7 @@ app.ipa
 app.apk
 *.log
 .env
+.version.json
 
 android/app/src/main/assets/shell-app-manifest.json
 android/app/src/main/assets/shell-app.bundle
