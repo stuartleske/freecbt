@@ -60,6 +60,8 @@ yarn start
 You'll then be in the [expo development environment](https://docs.expo.io/versions/latest/).
 If you already have XCode installed with a simulator, you can just press `i` to start it.
 
+See [CONTRIBUTING.md](https://github.com/erosson/freecbt/blob/master/CONTRIBUTING.md) for more details!
+
 # Can I help?
 
 Of course!
@@ -72,9 +74,19 @@ Of course!
 
 **If you know a language other than English,** help [us translate the app!](/TRANSLATIONS.md)
 
+# FreeCBT and Quirk
+
+FreeCBT is based on [Quirk](https://github.com/Flaque/quirk)'s code. Why did I create a fork?
+
+* **Keep Quirk alive.** Quirk is a well-designed piece of software that is, sadly, [no longer maintained](https://github.com/Flaque/quirk). The single most important reason this fork exists is so a Quirk-like app can continue to exist.
+* **Zero cost, zero ads.** FreeCBT will be *free*. I want this app to help as many people as possible, the way Quirk helped me. Ads and tracking would risk hurting vulnerable people more than helping; paywalls sharply reduce the number of people this app can help.
+
+  The obvious trade-off is that FreeCBT makes its maintainer no money. *I think this app is important enough to work on anyway.* There is a less obvious trade-off that affects you: I can spend less time/energy/money working on FreeCBT than [Quirk's developer](https://github.com/Flaque) spent working on Quirk, which leads to...
+* **No major new features.** Quirk already works very well. I want to keep things working well, avoid bloat, and - as explained above - keep development time/costs low. Every new feature puts those things at risk.
+
 # Design
 
-FreeCBT's goal is to be both inviting and focused. It should be _really_ easy to enter in a thought; people frequently enter these in public settings and need to do it fairly quickly. It also should not cause any increased frustration.
+FreeCBT's - originally Quirk's - goal is to be both inviting and focused. It should be _really_ easy to enter in a thought; people frequently enter these in public settings and need to do it fairly quickly. It also should not cause any increased frustration.
 
 ## Design Logic
 
