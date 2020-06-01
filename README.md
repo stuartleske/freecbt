@@ -79,7 +79,7 @@ Of course!
 FreeCBT is based on [Quirk](https://github.com/Flaque/quirk)'s code. Why did I create a fork?
 
 * **Keep Quirk alive.** Quirk is a well-designed piece of software that is, sadly, [no longer maintained](https://github.com/Flaque/quirk). The single most important reason this fork exists is so a Quirk-like app can continue to exist.
-* **Zero cost, zero ads.** FreeCBT will be *free*. I want this app to help as many people as possible, the way Quirk helped me. Ads and tracking would risk hurting vulnerable people more than helping; paywalls sharply reduce the number of people this app can help.
+* **Zero cost, zero ads.** FreeCBT will be *free*. I want FreeCBT to help as many people as possible, the way Quirk helped me. Ads and tracking would risk hurting vulnerable people more than helping; a paywall would sharply reduce the number of people this app helps.
 
   The obvious trade-off is that FreeCBT makes its maintainer no money. *I think this app is important enough to work on anyway.* There is a less obvious trade-off that affects you: I can spend less time/energy/money working on FreeCBT than [Quirk's developer](https://github.com/Flaque) spent working on Quirk, which leads to...
 * **No major new features.** Quirk already works very well. I want to keep things working well, avoid bloat, and - as explained above - keep development time/costs low. Every new feature puts those things at risk.
