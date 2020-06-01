@@ -16,6 +16,8 @@ Note that the convention typically uses the English name for the language, so no
 
 Go through as much as you can and translate into your language. If you can't translate everything, that's okay, it will fall back to English.
 
+For consistency, the FreeCBT app should be called "FreeCBT" in all languages, even if your language has a different acronym for "CBT".
+
 ## Open up `src/i18n.ts` and add your language
 
 In the file, add an import line:
@@ -29,6 +31,18 @@ And then add it to the translations object:
 ```
 i18n.translations = { fr, en };
 ```
+
+## Translate the Play Store/App Store descriptions
+
+You've translated the app, but we'll also need translated app store descriptions.
+
+Please also translate the `.txt` files in these directories:
+
+`android/fastlane/metadata/android/en-US/full_description.txt`
+`android/fastlane/metadata/android/en-US/short_description.txt`
+`ios/fastlane/metadata/en-US/description.txt`
+`ios/fastlane/metadata/en-US/keywords.txt`
+`ios/fastlane/metadata/en-US/subtitle.txt`
 
 ## Save your code and open up a new PR
 
