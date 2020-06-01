@@ -253,11 +253,7 @@ export default class extends React.Component<
               justifyContent: "space-evenly",
             }}
           >
-            <KeypadSideButton
-              icon="help"
-              accessibilityLabel="help"
-              onPress={() => null}
-            />
+            <KeypadButton title="" onPress={() => null} />
             <KeypadButton title="0" onPress={() => this.onEnterCode("0")} />
             <KeypadSideButton
               icon="delete"
