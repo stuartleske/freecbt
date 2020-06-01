@@ -71,17 +71,24 @@ export async function setNotifications(enabled: boolean) {
   // don't enable without permission
   enabled = enabled && await registerForLocalNotificationsAsync();
   if (enabled) {
+    await Notifications.presentLocalNotificationAsync({
+      title: i18n.t("reminder_notification.intro.title"),
+      body: i18n.t("reminder_notification.intro.body"),
+      android: {
+        channelId: "default",
+      },
+    });
     await Notifications.scheduleLocalNotificationAsync(
       {
-        title: i18n.t("reminder_notification.title"),
-        body: i18n.t("reminder_notification.body"),
+        title: i18n.t("reminder_notification.1.title"),
+        body: i18n.t("reminder_notification.1.body"),
         android: {
           channelId: "default",
         },
       },
       feature.remindersEachMinute
-        ? {time: Date.now() + 3000, repeat: 'minute'}  // ridiculously often, for debugging
-        : {time: Date.now() + 1 * 3600 * 1000, repeat: 'day'}  // start one one hour later
+        ? {time: Date.now() + 10 * 1000, repeat: 'minute'}  // ridiculously often, for debugging
+        : {time: Date.now() + 86400 * 10000, repeat: 'day'}  // start one day later
     );
   }
   setSetting(NOTIFICATIONS_KEY, JSON.stringify(enabled));
