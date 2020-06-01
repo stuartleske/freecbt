@@ -23,6 +23,7 @@ import {
 } from "react-navigation";
 import { CBT_ON_BOARDING_SCREEN, LOCK_SCREEN, DEBUG_SCREEN } from "./screens";
 import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
+import { hasPincode, clearPincode } from "./lock/lockstore";
 import {
   HISTORY_BUTTON_LABEL_KEY,
   HISTORY_BUTTON_LABEL_DEFAULT,
@@ -116,7 +117,8 @@ interface Props {
 interface State {
   isReady: boolean;
   historyButtonLabel?: HistoryButtonLabelSetting;
-  areNotificationsOn?: boolean;
+  areNotificationsOn: boolean;
+  hasPincode: boolean,
   // click the invisible button at the bottom 5 times to go to the secret debug screen
   debugClicks: number;
 }
@@ -131,6 +133,7 @@ class SettingScreen extends React.Component<Props, State> {
     this.state = {
       isReady: false,
       areNotificationsOn: false,
+      hasPincode: false,
       debugClicks: 0,
     };
     recordScreenCallOnFocus(this.props.navigation, "settings");
@@ -141,11 +144,15 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   refresh = async () => {
-    const historyButtonLabel = await getHistoryButtonLabel();
-    const areNotificationsOn = await getNotifications();
+    const [h, n, p] = await Promise.all([
+      getHistoryButtonLabel(),
+      getNotifications(),
+      hasPincode(),
+    ]);
     this.setState({
-      historyButtonLabel,
-      areNotificationsOn,
+      historyButtonLabel: h,
+      areNotificationsOn: n,
+      hasPincode: p,
       isReady: true,
     });
   };
@@ -260,21 +267,51 @@ class SettingScreen extends React.Component<Props, State> {
                 }}
               >
                 You can lock the app with a pincode if you'd like. Be warned
-                that the only way to reset the code is to contact support (which
-                can take awhile), so be careful not to forget.
+                that the only way to reset a forgotten code is to erase all
+                your data, so be careful not to forget.
               </Paragraph>
-              <ActionButton
-                flex={1}
-                title={"Set Pincode"}
-                width={"100%"}
-                fillColor="#EDF0FC"
-                textColor={theme.darkBlue}
-                onPress={() => {
-                  this.props.navigation.push(LOCK_SCREEN, {
-                    isSettingCode: true,
-                  });
-                }}
-              />
+              { this.state.hasPincode
+                ? (
+                  <>
+                    <ActionButton
+                      flex={1}
+                      title={"Update Pincode"}
+                      width={"100%"}
+                      fillColor="#EDF0FC"
+                      textColor={theme.darkBlue}
+                      onPress={() => {
+                        this.props.navigation.push(LOCK_SCREEN, {
+                          isSettingCode: true,
+                        });
+                      }}
+                    />
+                    <ActionButton
+                      flex={1}
+                      title={"Clear Pincode"}
+                      width={"100%"}
+                      fillColor="#EDF0FC"
+                      textColor={theme.darkBlue}
+                      onPress={async () => {
+                        await clearPincode();
+                        this.refresh();
+                      }}
+                    />
+                  </>
+                ) : (
+                  <ActionButton
+                    flex={1}
+                    title={"Set Pincode"}
+                    width={"100%"}
+                    fillColor="#EDF0FC"
+                    textColor={theme.darkBlue}
+                    onPress={() => {
+                      this.props.navigation.push(LOCK_SCREEN, {
+                        isSettingCode: true,
+                      });
+                    }}
+                  />
+                )
+              }
             </Row>
 
             <Row

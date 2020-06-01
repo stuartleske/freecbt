@@ -45,7 +45,7 @@ export async function hasPincode(): Promise<boolean> {
   }
 }
 
-export async function resetCode(): Promise<void> {
+export async function clearPincode(): Promise<void> {
   try {
     await AsyncStorage.removeItem(KEY_PINCODE);
   } catch (err) {
