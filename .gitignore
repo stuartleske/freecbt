@@ -12,7 +12,14 @@ app.ipa
 app.apk
 *.log
 .env
+
 .version.json
+.bundle
+vendor
+/android/fastlane/.auth.json
+/ios/fastlane/.auth.env
+/ios/fastlane/metadata/trade_representative_contact_information
+/ios/fastlane/metadata/review_information/phone_number.txt
 
 android/app/src/main/assets/shell-app-manifest.json
 android/app/src/main/assets/shell-app.bundle
@@ -291,7 +298,7 @@ Temporary Items
 *.cer
 *.bak
 
-# Fastlane 
+# Fastlane
 # fastlane specific
 report.xml
 
@@ -310,7 +317,7 @@ android/app/build/
 android/build/
 
 
-# Project specific 
+# Project specific
 .expo
 .idea
 prodMinSdkDevKernel/

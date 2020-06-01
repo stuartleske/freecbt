@@ -1,8 +1,5 @@
 app_identifier("org.erosson.freecbt") # The bundle identifier of your app
-apple_id("flaqueeau@gmail.com") # Your Apple email address
-
-itc_team_id("117847754") # App Store Connect Team ID
-team_id("F29L6XF84H") # Developer Portal Team ID
+apple_id("apple@erosson.org") # Your Apple email address
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

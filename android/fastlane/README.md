@@ -16,31 +16,11 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## Android
-### android build
+### android storefront
 ```
-fastlane android build
+fastlane android storefront
 ```
-Assemble Build
-### android bump_version_code
-```
-fastlane android bump_version_code
-```
-
-### android test
-```
-fastlane android test
-```
-Runs all the tests
-### android internal
-```
-fastlane android internal
-```
-Submit a new Internal
-### android deploy
-```
-fastlane android deploy
-```
-Deploy a new version to the Google Play
+Update storefront text
 
 ----
 
