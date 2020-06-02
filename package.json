@@ -11,7 +11,7 @@
     "build:ios": "expo build:ios",
     "//deploy": "don't publish by hand, this is for CI",
     "deploy": "yarn _version && expo publish --non-interactive",
-    "_version": "./scripts/version.sh > .version.json"
+    "_version": "bash -c \"./scripts/version.sh > .version.json\""
   },
   "dependencies": {
     "@assets/images": "file:assets",
@@ -34,6 +34,7 @@
     "makecancelable": "^1.1.1",
     "prop-types": "^15.6.2",
     "react": "16.9.0",
+    "react-dom": "^16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-autogrow-textinput": "^5.2.0",
     "react-native-gesture-handler": "^1.6.1",
@@ -45,7 +46,8 @@
     "react-native-store-review": "^0.1.5",
     "react-native-svg": "11.0.1",
     "react-native-swiper": "^1.5.14",
-    "react-navigation": "^3.0.8",
+    "react-native-web": "^0.11.0",
+    "react-navigation": "^4.3.9",
     "safe-json-stringify": "^1.2.0",
     "sentry-expo": "^2.0.4",
     "tslib": "^1.9.3",

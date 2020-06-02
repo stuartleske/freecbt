@@ -1,5 +1,5 @@
 import React from "react";
-import Sentry from "./index";
+import Sentry from "../platform/sentry";
 
 class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {

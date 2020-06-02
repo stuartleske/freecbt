@@ -25,7 +25,7 @@
  * publicly due to legal + company risk)
  */
 
-import * as Segment from "expo-analytics-segment";
+import * as Segment from "./platform/segment";
 import isInDev from "./isInDev";
 import dayjs from "dayjs";
 

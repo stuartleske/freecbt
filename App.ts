@@ -1,4 +1,7 @@
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createAppContainer,
+} from "./src/platform/navigation";
 import {
   CBT_LIST_SCREEN,
   CBT_FORM_SCREEN,

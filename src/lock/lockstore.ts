@@ -1,5 +1,5 @@
 import { AsyncStorage } from "react-native";
-import Sentry from "../sentry";
+import Sentry from "../platform/sentry";
 
 const KEY_PINCODE = `@Quirk:pincode`;
 

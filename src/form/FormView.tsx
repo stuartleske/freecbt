@@ -1,6 +1,6 @@
 import { ActionButton } from "../ui";
 import React from "react";
-import Carousel from "react-native-snap-carousel";
+import Carousel from "../platform/carousel";
 import { View, Keyboard } from "react-native";
 import * as Haptic from "expo-haptics";
 import { sliderWidth, itemWidth } from "./sizes";
