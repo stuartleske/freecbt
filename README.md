@@ -10,7 +10,7 @@
 <br><br>
 </p>
 
-[![Continuous Deployment](https://github.com/erosson/freecbt/workflows/Continuous%20Deployment/badge.svg)](https://github.com/erosson/freecbt/actions?query=workflow%3A%22Node.js+CI%22)
+[![Continuous Deployment](https://github.com/erosson/freecbt/workflows/Continuous%20Deployment/badge.svg)](https://github.com/erosson/freecbt/actions?query=workflow%3A%22Continuous%20Deployment%22)
 
 FreeCBT (a fork of [Quirk](https://github.com/Flaque/quirk)) is a crossplatform, GPL-licensed, [Cognitive Behavioral Therapy (CBT)](https://en.wikipedia.org/wiki/Cognitive_behavioral_therapy)
 app built in React Native / Expo.
