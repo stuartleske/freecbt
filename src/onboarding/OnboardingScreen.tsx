@@ -265,9 +265,7 @@ export default class extends React.Component<ScreenProps> {
     }
 
     if (item.slug === "reminders-or-continue") {
-      return (
-        <RemindersStep onContinue={this.stopOnBoarding} />
-      );
+      return <RemindersStep onContinue={this.stopOnBoarding} />;
     }
 
     return null;
