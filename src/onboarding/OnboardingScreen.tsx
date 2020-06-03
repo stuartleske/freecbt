@@ -18,7 +18,7 @@ import { CBT_FORM_SCREEN } from "../screens";
 import { FadesIn } from "../animations";
 import i18n from "../i18n";
 import { setNotifications } from "../SettingsScreen";
-import feature from "../feature";
+import * as Feature from "../feature";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<NavigationState, NavigationAction>;
@@ -143,76 +143,79 @@ const ChangeStep = () => (
   </View>
 );
 
-const RemindersStep = ({ onContinue, showPrompt }) => (
-  <View
-    style={{
-      height: "100%",
-      justifyContent: "center",
-      flex: 1,
-    }}
-  >
-    <Image
-      source={require("../../assets/notifications/notifications.png")}
+const RemindersStep = ({ onContinue }) => {
+  const { feature } = React.useContext(Feature.Context);
+  return (
+    <View
       style={{
-        width: 256,
-        height: 196,
-        resizeMode: "contain",
-        alignSelf: "center",
-        marginBottom: 48,
-      }}
-    />
-    <Header
-      style={{
-        fontSize: 28,
-        marginBottom: 12,
+        height: "100%",
+        justifyContent: "center",
+        flex: 1,
       }}
     >
-      {showPrompt
-        ? "Before you finish, we can send you reminders if you'd like."
-        : "You can control reminders in the settings screen."}
-    </Header>
-    {showPrompt ? (
-      <>
-        <Row
-          style={{
-            marginBottom: 8,
-          }}
-        >
-          <ActionButton
-            flex={1}
-            width="100%"
-            title={"Yes please!"}
-            onPress={async () => {
-              await setNotifications(true);
-              onContinue();
+      <Image
+        source={require("../../assets/notifications/notifications.png")}
+        style={{
+          width: 256,
+          height: 196,
+          resizeMode: "contain",
+          alignSelf: "center",
+          marginBottom: 48,
+        }}
+      />
+      <Header
+        style={{
+          fontSize: 28,
+          marginBottom: 12,
+        }}
+      >
+        {feature.reminders
+          ? "Before you finish, we can send you reminders if you'd like."
+          : "You can control reminders in the settings screen."}
+      </Header>
+      {feature.reminders ? (
+        <>
+          <Row
+            style={{
+              marginBottom: 8,
             }}
-          />
-        </Row>
+          >
+            <ActionButton
+              flex={1}
+              width="100%"
+              title={"Yes please!"}
+              onPress={async () => {
+                await setNotifications(feature, true);
+                onContinue();
+              }}
+            />
+          </Row>
+          <Row>
+            <ActionButton
+              flex={1}
+              width="100%"
+              title={"Continue without reminders"}
+              fillColor="#EDF0FC"
+              textColor={theme.darkBlue}
+              onPress={onContinue}
+            />
+          </Row>
+        </>
+      ) : (
         <Row>
           <ActionButton
             flex={1}
             width="100%"
-            title={"Continue without reminders"}
+            title={"Continue"}
             fillColor="#EDF0FC"
             textColor={theme.darkBlue}
             onPress={onContinue}
           />
         </Row>
-      </>
-    ) : (
-      <Row>
-        <ActionButton
-          flex={1}
-          width="100%"
-          title={"Continue"}
-          fillColor="#EDF0FC"
-          textColor={theme.darkBlue}
-          onPress={onContinue}
-        />
-      </Row>
-    )}
-  </View>
-);
+      )}
+    </View>
+  );
+};
 
 export default class extends React.Component<ScreenProps> {
   static navigationOptions = {
@@ -263,10 +266,7 @@ export default class extends React.Component<ScreenProps> {
 
     if (item.slug === "reminders-or-continue") {
       return (
-        <RemindersStep
-          onContinue={this.stopOnBoarding}
-          showPrompt={feature.reminders}
-        />
+        <RemindersStep onContinue={this.stopOnBoarding} />
       );
     }
 

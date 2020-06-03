@@ -1,23 +1,11 @@
 import React from "react";
 import { View, Text, Switch, Platform } from "react-native";
 import Constants from "expo-constants";
-import feature, { Feature } from "./feature";
+import * as Feature from "./feature";
 import version from "../.version.json"
 
-interface State {
-  feature: Feature;
-}
-
-export default class DebugScreen extends React.Component<{}, State> {
-  constructor(props) {
-    super(props);
-    this.state = {feature};
-  }
-  setFeature(key, val) {
-    feature[key] = val;
-    this.setState({feature});
-  }
-  render() {
+export default () => {
+    const {feature, updateFeature} = React.useContext(Feature.Context);
     const items = [
       ["Release channel", Constants.manifest.releaseChannel || "(dev)"],
       ["Installation id", Constants.installationId],
@@ -28,14 +16,18 @@ export default class DebugScreen extends React.Component<{}, State> {
       ["Revision Date", version.date],
       ["Revision Timestamp", version.timestamp + ''],
       ["OS", Platform.OS],
-      ...(Object.entries(this.state.feature)).map(([key, val]: [string, boolean]) => (
-        [key,
-        <Switch
-          value={val}
-          // @ts-ignore
-          onChange={() => {this.setFeature(key, !val);}}
-        />
-        ]
+      ...(Object.entries(feature)
+        // @ts-ignore: sort features by name. I promise key in [key, value] is a string
+        .sort((a, b) => a[0] > b[0])
+        .map(([key, val]: [string, boolean]) => (
+          [key,
+          <Switch
+            value={val}
+            // @ts-ignore
+            onChange={() => updateFeature({[key]: !val})}
+          />
+          ]
+        )
       ))
     ]
     return (
@@ -46,8 +38,7 @@ export default class DebugScreen extends React.Component<{}, State> {
         </View>
       </View>
     )
-  }
-}
+};
 
 function renderEntry([key, val], i) {
   if (typeof val === "string") {

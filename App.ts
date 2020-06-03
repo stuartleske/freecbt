@@ -10,6 +10,7 @@ import {
   LOCK_SCREEN,
   DEBUG_SCREEN,
 } from "./src/screens";
+import * as Feature from "./src/feature";
 import CBTListScreen from "./src/CBTListScreen";
 import CBTFormScreen from "./src/form/FormScreen";
 import FinishedThoughtScreen from "./src/form/FinishedThoughtScreen";
@@ -39,4 +40,4 @@ const App = createStackNavigator(
   }
 );
 
-export default withErrorBoundary(createAppContainer(App));
+export default withErrorBoundary(Feature.withState(createAppContainer(App)));

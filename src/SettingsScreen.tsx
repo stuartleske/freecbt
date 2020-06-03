@@ -5,7 +5,7 @@ import * as Permissions from 'expo-permissions';
 import theme from "./theme";
 import Constants from "expo-constants";
 import * as Linking from "expo-linking";
-import feature from "./feature"
+import * as Feature from "./feature"
 import {
   Header,
   Row,
@@ -66,7 +66,7 @@ export async function getNotifications(): Promise<boolean> {
   }
 }
 
-export async function setNotifications(enabled: boolean) {
+export async function setNotifications(feature: Feature.Feature, enabled: boolean): Promise<boolean> {
   await Notifications.cancelAllScheduledNotificationsAsync();
   // don't enable without permission
   enabled = enabled && await registerForLocalNotificationsAsync();
@@ -197,6 +197,8 @@ class SettingScreen extends React.Component<Props, State> {
     const { historyButtonLabel, isReady } = this.state;
 
     return (
+      <Feature.Context.Consumer>
+        {({feature}) => (
       <FadesIn
         style={{ backgroundColor: theme.lightOffwhite }}
         pose={isReady ? "visible" : "hidden"}
@@ -245,7 +247,7 @@ class SettingScreen extends React.Component<Props, State> {
                   title={"Please remind me"}
                   selected={this.state.areNotificationsOn}
                   onPress={async () => {
-                    await setNotifications(true);
+                    await setNotifications(feature, true);
                     this.refresh();
                   }}
                 />
@@ -254,7 +256,7 @@ class SettingScreen extends React.Component<Props, State> {
                   title={"No reminders, thanks"}
                   selected={!this.state.areNotificationsOn}
                   onPress={async () => {
-                    await setNotifications(false);
+                    await setNotifications(feature, false);
                     this.refresh();
                   }}
                 />
@@ -401,6 +403,8 @@ class SettingScreen extends React.Component<Props, State> {
           </Container>
         </ScrollView>
       </FadesIn>
+    )}
+    </Feature.Context.Consumer>
     );
   }
 }
