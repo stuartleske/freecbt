@@ -2,9 +2,10 @@ import React from "react";
 import { ScrollView, View, Text, Switch, Platform, AsyncStorage } from "react-native";
 import Constants from "expo-constants";
 import * as Feature from "./feature";
-import version from "../.version.json"
+import versionJson from "../.version.json"
 
-export default () => {
+export default (props) => {
+  const version = props.version || versionJson;
   const {feature, updateFeature} = React.useContext(Feature.Context);
   const [async_, setAsync] = React.useState(null);
   const [dump, setDump] = React.useState(false);

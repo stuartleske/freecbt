@@ -12,7 +12,7 @@ module.exports = {
     // https://docs.expo.io/guides/testing-with-jest/#jest-configuration
     "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*|react-pose-core|animated-pose)",
   ],
-  moduleFileExtensions: ["js", "ts", "tsx"],
+  moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx"],
   globals: {
     "ts-jest": {
       tsConfig: {
