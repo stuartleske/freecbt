@@ -4,20 +4,29 @@ import Constants from "expo-constants";
 import * as Feature from "./feature";
 import versionJson from "../.version.json"
 
-export default (props) => {
-  const version = props.version || versionJson;
-  const {feature, updateFeature} = React.useContext(Feature.Context);
+export default function Component(props) {
   const [async_, setAsync] = React.useState(null);
   const [dump, setDump] = React.useState(false);
   React.useEffect(() => {
     if (dump && async_ === null) {
       (async () => {
         const keys = await AsyncStorage.getAllKeys();
-        const dump = await AsyncStorage.multiGet(keys);
-        setAsync(dump);
+        const state = await AsyncStorage.multiGet(keys);
+        setAsync(state);
       })();
     }
   });
+  return Pure({
+    ...React.useContext(Feature.Context),
+    version: versionJson,
+    async_,
+    setAsync,
+    dump,
+    setDump,
+  })
+}
+
+export function Pure({version, feature, updateFeature, async_, setAsync, dump, setDump}) {
   const items = [
     ["Release channel", Constants.manifest.releaseChannel || "(dev)"],
     ["Installation id", Constants.installationId],
@@ -56,7 +65,8 @@ export default (props) => {
       </View>
     </ScrollView>
   )
-};
+}
+Component.Pure = Pure;
 
 function renderEntry([key, val], i) {
   if (typeof val === "string") {

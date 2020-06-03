@@ -41,7 +41,7 @@ export type Feature = {
   reminders: boolean,
   remindersEachMinute: boolean,
 };
-const defaults: Feature = {
+export const defaults: Feature = {
   debugVisible: false,
   reminders: false,
   remindersEachMinute: false,
