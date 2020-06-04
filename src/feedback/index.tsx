@@ -113,7 +113,7 @@ export default class extends React.Component<
             title={"Let us know"}
             width={"100%"}
             onPress={() => {
-              Linking.openURL("mailto:quirk@erosson.org");
+              Linking.openURL("mailto:freecbt@erosson.org");
             }}
           />
         </Row>
