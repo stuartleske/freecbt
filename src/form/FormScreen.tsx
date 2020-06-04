@@ -24,6 +24,7 @@ import { FadesIn } from "../animations";
 
 interface ScreenProps {
   navigation: NavigationScreenProp<any, NavigationAction>;
+  slideToShow?: Slides;
 }
 
 interface FormScreenState {
@@ -235,7 +236,9 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
           <FormView
             onSave={this.onSave}
             thought={this.state.thought}
-            slideToShow={this.state.slideToShow}
+            // props.slideToShow is used only in storybook/unit tests.
+            // usually we use state.slideToShow
+            slideToShow={this.props.slideToShow || this.state.slideToShow}
             shouldShowInFlowOnboarding={shouldShowInFlowOnboarding}
             onChangeAlternativeThought={this.onChangeAlternativeThought}
             onChangeAutomaticThought={this.onChangeAutomaticThought}

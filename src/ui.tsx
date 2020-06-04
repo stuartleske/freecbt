@@ -193,7 +193,7 @@ export const RoundedSelector = ({
     }}
   >
     {items.map(({ slug, selected }) => {
-      const item = find(distortions, { slug });
+      const item = find(distortions(), { slug });
       if (!item) {
         return null;
       }

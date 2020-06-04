@@ -6,6 +6,7 @@ import './rn-addons';
 // import stories
 configure(() => {
   require('./stories');
+  require('../src/form/FormScreen.stories');
   require('../src/DebugScreen.stories');
 }, module);
 
