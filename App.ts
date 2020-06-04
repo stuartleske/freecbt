@@ -21,7 +21,7 @@ import withErrorBoundary from "./src/sentry/withErrorBoundary";
 import InitScreen from "./src/InitScreen";
 import LockScreen from "./src/lock/LockScreen";
 import DebugScreen from "./src/DebugScreen";
-// import Storybook from "./storybook";
+import Storybook from "./storybook";
 
 const App = createStackNavigator(
   {
@@ -41,7 +41,6 @@ const App = createStackNavigator(
   }
 );
 
-//export default process.env.EXPO_STORYBOOK
-//  ? Storybook
-//  : withErrorBoundary(Feature.withState(createAppContainer(App)));
-export default withErrorBoundary(Feature.withState(createAppContainer(App)));
+export default process.env.EXPO_STORYBOOK
+  ? Storybook
+  : withErrorBoundary(Feature.withState(createAppContainer(App)));
