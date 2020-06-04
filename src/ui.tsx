@@ -309,7 +309,7 @@ export const GhostButtonWithGuts = ({
     style={{
       padding: 12,
       borderRadius: 10,
-      borderColor: borderColor,
+      borderColor,
       borderWidth: 1,
       borderBottomWidth: 2,
       flex,
@@ -351,7 +351,7 @@ export const GhostButton = ({
       borderRadius: 10,
       justifyContent: "center",
       alignItems: "center",
-      borderColor: borderColor,
+      borderColor,
       borderWidth: 1,
       borderBottomWidth: 2,
       maxHeight: 48,

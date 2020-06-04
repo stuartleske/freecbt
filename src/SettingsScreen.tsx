@@ -1,11 +1,11 @@
 import React from "react";
 import { ScrollView, StatusBar, Platform } from "react-native";
-import {Notifications} from "expo";
-import * as Permissions from 'expo-permissions';
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 import theme from "./theme";
 import Constants from "expo-constants";
 import * as Linking from "expo-linking";
-import * as Feature from "./feature"
+import * as Feature from "./feature";
 import {
   Header,
   Row,
@@ -58,18 +58,20 @@ export async function getHistoryButtonLabel(): Promise<
 
 export async function getNotifications(): Promise<boolean> {
   try {
-    const str = await getSettingOrSetDefault(NOTIFICATIONS_KEY, 'false');
+    const str = await getSettingOrSetDefault(NOTIFICATIONS_KEY, "false");
     return JSON.parse(str);
-  }
-  catch (e) {
+  } catch (e) {
     return false;
   }
 }
 
-export async function setNotifications(feature: Feature.Feature, enabled: boolean): Promise<boolean> {
+export async function setNotifications(
+  feature: Feature.Feature,
+  enabled: boolean
+): Promise<boolean> {
   await Notifications.cancelAllScheduledNotificationsAsync();
   // don't enable without permission
-  enabled = enabled && await registerForLocalNotificationsAsync();
+  enabled = enabled && (await registerForLocalNotificationsAsync());
   if (enabled) {
     await Notifications.presentLocalNotificationAsync({
       title: i18n.t("reminder_notification.intro.title"),
@@ -87,8 +89,8 @@ export async function setNotifications(feature: Feature.Feature, enabled: boolea
         },
       },
       feature.remindersEachMinute
-        ? {time: Date.now() + 10 * 1000, repeat: 'minute'}  // ridiculously often, for debugging
-        : {time: Date.now() + 86400 * 10000, repeat: 'day'}  // start one day later
+        ? { time: Date.now() + 10 * 1000, repeat: "minute" } // ridiculously often, for debugging
+        : { time: Date.now() + 86400 * 10000, repeat: "day" } // start one day later
     );
   }
   setSetting(NOTIFICATIONS_KEY, JSON.stringify(enabled));
@@ -96,21 +98,23 @@ export async function setNotifications(feature: Feature.Feature, enabled: boolea
 }
 
 async function registerForLocalNotificationsAsync() {
-  const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
   let finalStatus = existingStatus;
-  if (existingStatus !== 'granted') {
+  if (existingStatus !== "granted") {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     finalStatus = status;
   }
-  if (finalStatus !== 'granted') {
+  if (finalStatus !== "granted") {
     return false;
   }
 
-  if (Platform.OS === 'android') {
-    await Notifications.createChannelAndroidAsync('default', {
-      name: 'default',
+  if (Platform.OS === "android") {
+    await Notifications.createChannelAndroidAsync("default", {
+      name: "default",
       sound: true,
-      priority: 'max',
+      priority: "max",
       vibrate: [0, 250, 250, 250],
     });
   }
@@ -125,7 +129,7 @@ interface State {
   isReady: boolean;
   historyButtonLabel?: HistoryButtonLabelSetting;
   areNotificationsOn: boolean;
-  hasPincode: boolean,
+  hasPincode: boolean;
   // click the invisible button at the bottom 5 times to go to the secret debug screen
   debugClicks: number;
 }
@@ -198,93 +202,117 @@ class SettingScreen extends React.Component<Props, State> {
 
     return (
       <Feature.Context.Consumer>
-        {({feature}) => (
-      <FadesIn
-        style={{ backgroundColor: theme.lightOffwhite }}
-        pose={isReady ? "visible" : "hidden"}
-      >
-        <ScrollView
-          style={{
-            backgroundColor: theme.lightOffwhite,
-            marginTop: Constants.statusBarHeight,
-            paddingTop: 24,
-            height: "100%",
-          }}
-        >
-          <Container
-            style={{
-              paddingBottom: 128,
-            }}
+        {({ feature }) => (
+          <FadesIn
+            style={{ backgroundColor: theme.lightOffwhite }}
+            pose={isReady ? "visible" : "hidden"}
           >
-            <StatusBar barStyle="dark-content" />
-            <Row style={{ marginBottom: 18 }}>
-              <Header>{i18n.t("settings.header")}</Header>
-              <IconButton
-                featherIconName={"list"}
-                accessibilityLabel={i18n.t("accessibility.list_button")}
-                onPress={() => this.navigateToList()}
-              />
-            </Row>
-
-            {feature.reminders &&
-              <Row
-                style={{
-                  marginBottom: 18,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <SubHeader>*reminders</SubHeader>
-                <Paragraph
-                  style={{
-                    marginBottom: 9,
-                  }}
-                >
-                  If you'd like, you can turn on notification reminders that help
-                  you build up the habit of challenging thoughts.
-                </Paragraph>
-                <RoundedSelectorButton
-                  title={"Please remind me"}
-                  selected={this.state.areNotificationsOn}
-                  onPress={async () => {
-                    await setNotifications(feature, true);
-                    this.refresh();
-                  }}
-                />
-
-                <RoundedSelectorButton
-                  title={"No reminders, thanks"}
-                  selected={!this.state.areNotificationsOn}
-                  onPress={async () => {
-                    await setNotifications(feature, false);
-                    this.refresh();
-                  }}
-                />
-              </Row>
-            }
-            <Row
+            <ScrollView
               style={{
-                marginBottom: 18,
-                display: "flex",
-                flexDirection: "column",
+                backgroundColor: theme.lightOffwhite,
+                marginTop: Constants.statusBarHeight,
+                paddingTop: 24,
+                height: "100%",
               }}
             >
-              <SubHeader>*pincode lock 🔒</SubHeader>
-              <Paragraph
+              <Container
                 style={{
-                  marginBottom: 9,
+                  paddingBottom: 128,
                 }}
               >
-                You can lock the app with a pincode if you'd like. Be warned
-                that the only way to reset a forgotten code is to erase all
-                your data, so be careful not to forget.
-              </Paragraph>
-              { this.state.hasPincode
-                ? (
-                  <>
+                <StatusBar barStyle="dark-content" />
+                <Row style={{ marginBottom: 18 }}>
+                  <Header>{i18n.t("settings.header")}</Header>
+                  <IconButton
+                    featherIconName={"list"}
+                    accessibilityLabel={i18n.t("accessibility.list_button")}
+                    onPress={() => this.navigateToList()}
+                  />
+                </Row>
+
+                {feature.reminders && (
+                  <Row
+                    style={{
+                      marginBottom: 18,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <SubHeader>*reminders</SubHeader>
+                    <Paragraph
+                      style={{
+                        marginBottom: 9,
+                      }}
+                    >
+                      If you'd like, you can turn on notification reminders that
+                      help you build up the habit of challenging thoughts.
+                    </Paragraph>
+                    <RoundedSelectorButton
+                      title={"Please remind me"}
+                      selected={this.state.areNotificationsOn}
+                      onPress={async () => {
+                        await setNotifications(feature, true);
+                        this.refresh();
+                      }}
+                    />
+
+                    <RoundedSelectorButton
+                      title={"No reminders, thanks"}
+                      selected={!this.state.areNotificationsOn}
+                      onPress={async () => {
+                        await setNotifications(feature, false);
+                        this.refresh();
+                      }}
+                    />
+                  </Row>
+                )}
+                <Row
+                  style={{
+                    marginBottom: 18,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <SubHeader>*pincode lock 🔒</SubHeader>
+                  <Paragraph
+                    style={{
+                      marginBottom: 9,
+                    }}
+                  >
+                    You can lock the app with a pincode if you'd like. Be warned
+                    that the only way to reset a forgotten code is to erase all
+                    your data, so be careful not to forget.
+                  </Paragraph>
+                  {this.state.hasPincode ? (
+                    <>
+                      <ActionButton
+                        flex={1}
+                        title={"Update Pincode"}
+                        width={"100%"}
+                        fillColor="#EDF0FC"
+                        textColor={theme.darkBlue}
+                        onPress={() => {
+                          this.props.navigation.push(LOCK_SCREEN, {
+                            isSettingCode: true,
+                          });
+                        }}
+                      />
+                      <ActionButton
+                        flex={1}
+                        title={"Clear Pincode"}
+                        width={"100%"}
+                        fillColor="#EDF0FC"
+                        textColor={theme.darkBlue}
+                        onPress={async () => {
+                          await clearPincode();
+                          this.refresh();
+                        }}
+                      />
+                    </>
+                  ) : (
                     <ActionButton
                       flex={1}
-                      title={"Update Pincode"}
+                      title={"Set Pincode"}
                       width={"100%"}
                       fillColor="#EDF0FC"
                       textColor={theme.darkBlue}
@@ -294,117 +322,90 @@ class SettingScreen extends React.Component<Props, State> {
                         });
                       }}
                     />
-                    <ActionButton
-                      flex={1}
-                      title={"Clear Pincode"}
-                      width={"100%"}
-                      fillColor="#EDF0FC"
-                      textColor={theme.darkBlue}
-                      onPress={async () => {
-                        await clearPincode();
-                        this.refresh();
-                      }}
-                    />
-                  </>
-                ) : (
+                  )}
+                </Row>
+
+                <Row
+                  style={{
+                    marginBottom: 18,
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <SubHeader>*history button labels</SubHeader>
+                  <Paragraph
+                    style={{
+                      marginBottom: 9,
+                    }}
+                  >
+                    By default, we set the buttons in the history screen to use
+                    the Alternative Thought. This helps cement the thought as
+                    "changed."
+                  </Paragraph>
+                  <RoundedSelectorButton
+                    title={"Alternative Thought"}
+                    selected={historyButtonLabel === "alternative-thought"}
+                    onPress={() => this.toggleHistoryButtonLabels()}
+                  />
+                  <RoundedSelectorButton
+                    title={"Automatic Thought"}
+                    selected={historyButtonLabel === "automatic-thought"}
+                    onPress={() => this.toggleHistoryButtonLabels()}
+                  />
+                </Row>
+
+                <Row
+                  style={{
+                    marginBottom: 9,
+                  }}
+                >
                   <ActionButton
                     flex={1}
-                    title={"Set Pincode"}
-                    width={"100%"}
+                    title={"Privacy Policy"}
                     fillColor="#EDF0FC"
                     textColor={theme.darkBlue}
                     onPress={() => {
-                      this.props.navigation.push(LOCK_SCREEN, {
-                        isSettingCode: true,
-                      });
+                      const url =
+                        "https://github.com/erosson/freecbt/blob/master/PRIVACY.md";
+                      Linking.canOpenURL(url).then(() => Linking.openURL(url));
                     }}
                   />
-                )
-              }
-            </Row>
-
-            <Row
-              style={{
-                marginBottom: 18,
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <SubHeader>*history button labels</SubHeader>
-              <Paragraph
-                style={{
-                  marginBottom: 9,
-                }}
-              >
-                By default, we set the buttons in the history screen to use the
-                Alternative Thought. This helps cement the thought as "changed."
-              </Paragraph>
-              <RoundedSelectorButton
-                title={"Alternative Thought"}
-                selected={historyButtonLabel === "alternative-thought"}
-                onPress={() => this.toggleHistoryButtonLabels()}
-              />
-              <RoundedSelectorButton
-                title={"Automatic Thought"}
-                selected={historyButtonLabel === "automatic-thought"}
-                onPress={() => this.toggleHistoryButtonLabels()}
-              />
-            </Row>
-
-    <Row
-      style={{
-        marginBottom: 9,
-      }}
-    >
-      <ActionButton
-        flex={1}
-        title={"Privacy Policy"}
-        fillColor="#EDF0FC"
-        textColor={theme.darkBlue}
-        onPress={() => {
-          const url = "https://github.com/erosson/freecbt/blob/master/PRIVACY.md"
-          Linking.canOpenURL(url).then(() =>
-            Linking.openURL(url)
-          );
-        }}
-      />
-    </Row>
-    <Row>
-      <ActionButton
-        flex={1}
-        title={"Terms of Service"}
-        fillColor="#EDF0FC"
-        textColor={theme.darkBlue}
-        onPress={() => {
-          const url = "https://github.com/erosson/freecbt/blob/master/TOS.md"
-          Linking.canOpenURL(url).then(() =>
-            Linking.openURL(url)
-          );
-        }}
-      />
-    </Row>
-    <Row>
-      <ActionButton
-        flex={1}
-        opacity={feature.debugVisible ? 1 : 0}
-        fillColor={feature.debugVisible ? null : "#ffffff"}
-        textColor={feature.debugVisible ? null : "#ffffff"}
-        title={"Debug"}
-        onPress={() => {
-          const debugClicks = this.state.debugClicks + 1;
-          this.setState({debugClicks});
-          if (debugClicks >= 5) {
-            this.setState({debugClicks: 0});
-            this.props.navigation.navigate(DEBUG_SCREEN);
-          }
-        }}
-      />
-    </Row>
-          </Container>
-        </ScrollView>
-      </FadesIn>
-    )}
-    </Feature.Context.Consumer>
+                </Row>
+                <Row>
+                  <ActionButton
+                    flex={1}
+                    title={"Terms of Service"}
+                    fillColor="#EDF0FC"
+                    textColor={theme.darkBlue}
+                    onPress={() => {
+                      const url =
+                        "https://github.com/erosson/freecbt/blob/master/TOS.md";
+                      Linking.canOpenURL(url).then(() => Linking.openURL(url));
+                    }}
+                  />
+                </Row>
+                <Row>
+                  <ActionButton
+                    flex={1}
+                    opacity={feature.debugVisible ? 1 : 0}
+                    fillColor={feature.debugVisible ? null : "#ffffff"}
+                    textColor={feature.debugVisible ? null : "#ffffff"}
+                    title={"Debug"}
+                    onPress={() => {
+                      const debugClicks = this.state.debugClicks + 1;
+                      this.setState({ debugClicks });
+                      if (debugClicks >= 5) {
+                        this.setState({ debugClicks: 0 });
+                        this.props.navigation.navigate(DEBUG_SCREEN);
+                      }
+                    }}
+                  />
+                </Row>
+              </Container>
+            </ScrollView>
+          </FadesIn>
+        )}
+      </Feature.Context.Consumer>
     );
   }
 }

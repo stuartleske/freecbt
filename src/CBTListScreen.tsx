@@ -288,7 +288,9 @@ class CBTListScreen extends React.Component<Props, State> {
           <Container>
             <StatusBar barStyle="dark-content" />
             <Row style={{ marginBottom: 18 }}>
-              <Header allowFontScaling={false}>{i18n.t("cbt_list.header")}</Header>
+              <Header allowFontScaling={false}>
+                {i18n.t("cbt_list.header")}
+              </Header>
 
               <View style={{ flexDirection: "row" }}>
                 <IconButton

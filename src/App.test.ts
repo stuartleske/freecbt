@@ -9,5 +9,5 @@ test("Storybook doesn't break promise.finally: #19", () => {
   // the app, and https://github.com/storybookjs/react-native/issues/20 seems to
   // describe this as a build problem. fix seems to work for both tests and prod
   // though!
-  expect(Promise.prototype.finally).toBeTruthy()
+  expect(Promise.prototype.finally).toBeTruthy();
 });

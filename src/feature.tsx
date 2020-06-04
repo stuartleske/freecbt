@@ -34,13 +34,13 @@
  *       <AppComponent />
  *     </Feature.State>
  */
-import React from "react"
+import React from "react";
 
-export type Feature = {
-  debugVisible: boolean,
-  reminders: boolean,
-  remindersEachMinute: boolean,
-};
+export interface Feature {
+  debugVisible: boolean;
+  reminders: boolean;
+  remindersEachMinute: boolean;
+}
 export const defaults: Feature = {
   debugVisible: false,
   reminders: false,
@@ -49,20 +49,24 @@ export const defaults: Feature = {
 
 export const Context = React.createContext({
   feature: defaults,
-  updateFeature: (action: object) => {},
+  updateFeature: (action: object) => undefined,
 });
 
-export const State = ({children}: React.PropsWithChildren<{}>) => {
+export const State = ({ children }: React.PropsWithChildren<{}>) => {
   const [feature, updateFeature] = React.useReducer(
-    (state, newState) => ({...state, ...newState}),
-    defaults,
+    (state, newState) => ({ ...state, ...newState }),
+    defaults
   );
   return (
-    <Context.Provider value={{feature, updateFeature}}>
+    <Context.Provider value={{ feature, updateFeature }}>
       {children}
     </Context.Provider>
-  )
+  );
 };
 export function withState(Component) {
-  return () => <State><Component /></State>
+  return () => (
+    <State>
+      <Component />
+    </State>
+  );
 }
