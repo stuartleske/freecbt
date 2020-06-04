@@ -3,7 +3,7 @@
   "scripts": {
     "www": "serve www/public",
     "start": "yarn _version && expo start",
-    "storybook": "yarn _version && EXPO_STORYBOOK=1 expo start",
+    "storybook": "yarn _version && EXPO_STORYBOOK=1 expo start --config storybook.config.js",
     "lint": "tslint src/**/*.ts src/**/*.tsx",
     "lint:prettier": "prettier -l src/**/*.ts src/**/*.tsx www/public/**/*",
     "format": "prettier --write src/**/*.ts src/**/*.tsx www/public/**/*",

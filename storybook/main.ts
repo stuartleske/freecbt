@@ -9,13 +9,14 @@ configure(() => {
   require('../src/DebugScreen.stories');
 }, module);
 
-// Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
-// To find allowed options for getStorybookUI
+// https://github.com/storybookjs/storybook/tree/master/app/react-native#getstorybookui-options
 const StorybookUIRoot = (() => {
   try {
     return getStorybookUI({
       // @ts-ignore: I'm just following the docs leave me alone
       asyncStorage: AsyncStorage,
+      isUIHidden: true,
+      // onDeviceUI: false,
     });
   }
   catch (e) {
