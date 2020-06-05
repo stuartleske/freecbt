@@ -5,9 +5,9 @@ import i18n from "./i18n";
 import { BubbleThought } from "./imgs/Bubbles";
 import { emojiForSlug } from "./distortions";
 
-const cognitiveDistortionsToText = cognitiveDistortions => {
+const cognitiveDistortionsToText = (cognitiveDistortions) => {
   const paragraphs = cognitiveDistortions
-    .filter(distortion => distortion.selected) // Only take selected items
+    .filter((distortion) => distortion.selected) // Only take selected items
     .map(({ label, slug }) => (
       <Paragraph
         key={slug}

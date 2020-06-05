@@ -25,7 +25,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default Component => {
+export default (Component) => {
   return class extends React.Component {
     render() {
       return (

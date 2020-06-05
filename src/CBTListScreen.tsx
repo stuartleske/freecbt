@@ -87,12 +87,12 @@ const ThoughtItem = ({
         <Paragraph>
           {take(
             thought.cognitiveDistortions
-              .filter(n => n) // Filters out any nulls or undefineds which can crop up
-              .filter(distortion => distortion.selected)
-              .map(dist => emojiForSlug(dist.slug)),
+              .filter((n) => n) // Filters out any nulls or undefineds which can crop up
+              .filter((distortion) => distortion.selected)
+              .map((dist) => emojiForSlug(dist.slug)),
             8 // only take a max of 8
           )
-            .filter(n => n)
+            .filter((n) => n)
             .join(" ")
             .trim()}
         </Paragraph>
@@ -149,8 +149,8 @@ const ThoughtItemList = ({
     return <EmptyThoughtIllustration />;
   }
 
-  const items = groups.map(group => {
-    const thoughts = group.thoughts.map(thought => (
+  const items = groups.map((group) => {
+    const thoughts = group.thoughts.map((thought) => (
       <ThoughtItem
         key={thought.uuid}
         thought={thought}
@@ -216,10 +216,10 @@ class CBTListScreen extends React.Component<Props, State> {
     };
 
     getExercises()
-      .then(data => {
+      .then((data) => {
         const thoughts: SavedThought[] = data
           .map(([_, value]) => JSON.parse(value))
-          .filter(n => n) // Worst case scenario, if bad data gets in we don't show it.
+          .filter((n) => n) // Worst case scenario, if bad data gets in we don't show it.
           .map(fixTimestamps);
 
         const groups: ThoughtGroup[] = groupThoughtsByDay(thoughts).filter(
@@ -237,7 +237,7 @@ class CBTListScreen extends React.Component<Props, State> {
   };
 
   loadSettings = (): void => {
-    getHistoryButtonLabel().then(historyButtonLabel => {
+    getHistoryButtonLabel().then((historyButtonLabel) => {
       this.setState({ historyButtonLabel });
     });
   };

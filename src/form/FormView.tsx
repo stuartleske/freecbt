@@ -57,7 +57,7 @@ export default class extends React.Component<FormViewProps, FormViewState> {
   onSave = () => {
     universalHaptic.notification(Haptic.NotificationFeedbackType.Success);
 
-    saveExercise(this.props.thought).then(thought => {
+    saveExercise(this.props.thought).then((thought) => {
       stats.thoughtRecorded();
       this.props.onSave(thought);
     });
@@ -122,7 +122,7 @@ export default class extends React.Component<FormViewProps, FormViewState> {
   render() {
     return (
       <Carousel
-        ref={c => {
+        ref={(c) => {
           this._carousel = c;
         }}
         data={[
@@ -134,7 +134,7 @@ export default class extends React.Component<FormViewProps, FormViewState> {
         renderItem={this._renderItem}
         sliderWidth={sliderWidth}
         itemWidth={itemWidth}
-        onSnapToItem={index => {
+        onSnapToItem={(index) => {
           this.setState({ activeSlide: index });
           Keyboard.dismiss();
         }}

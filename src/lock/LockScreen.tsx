@@ -88,7 +88,7 @@ export default class extends React.Component<
   };
 
   async componentDidMount() {
-    this.props.navigation.addListener("willFocus", async payload => {
+    this.props.navigation.addListener("willFocus", async (payload) => {
       const isSettingCode = get(payload, "state.params.isSettingCode", false);
       this.setState({
         isSettingCode,
@@ -104,7 +104,7 @@ export default class extends React.Component<
   onEnterCode = async (key: string) => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Light);
 
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       if (prevState.code.length === 4) {
         return prevState;
       }
@@ -138,7 +138,7 @@ export default class extends React.Component<
 
   onBackspace = () => {
     haptic.impact(Haptic.ImpactFeedbackStyle.Medium);
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.code.length === 0) {
         return prevState;
       }

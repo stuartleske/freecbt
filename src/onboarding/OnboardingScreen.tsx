@@ -58,7 +58,7 @@ const RecordStep = () => (
       onPress={() => {
         stats.userClickedQuirkGuide();
         const url = "https://freecbt.erosson.org/explanation?ref=quirk";
-        Linking.canOpenURL(url).then(canOpen => {
+        Linking.canOpenURL(url).then((canOpen) => {
           if (!canOpen) {
             stats.userCantOpenLink();
             Alert.alert(
@@ -287,7 +287,7 @@ export default class extends React.Component<ScreenProps> {
       >
         <FadesIn pose={this.state.isReady ? "visible" : "hidden"}>
           <Carousel
-            ref={c => {
+            ref={(c) => {
               this._carousel = c;
             }}
             data={[
@@ -299,7 +299,7 @@ export default class extends React.Component<ScreenProps> {
             renderItem={this._renderItem}
             sliderWidth={sliderWidth}
             itemWidth={itemWidth}
-            onSnapToItem={index => this.setState({ activeSlide: index })}
+            onSnapToItem={(index) => this.setState({ activeSlide: index })}
           />
 
           <Pagination

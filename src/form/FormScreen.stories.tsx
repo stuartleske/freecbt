@@ -7,7 +7,7 @@ import FormScreen from "./FormScreen";
 import i18n from "../i18n";
 
 const stories = storiesOf("FormScreen", module)
-  .addDecorator(Story => {
+  .addDecorator((Story) => {
     const App = createAppContainer(
       createStackNavigator(
         {
@@ -23,7 +23,7 @@ const stories = storiesOf("FormScreen", module)
   })
   .addDecorator(Knobs.withKnobs);
 
-stories.add("1/automatic", props => {
+stories.add("1/automatic", (props) => {
   i18n.locale = Knobs.select("locale", Object.keys(i18n.translations), "en");
   return (
     <>
@@ -32,7 +32,7 @@ stories.add("1/automatic", props => {
     </>
   );
 });
-stories.add("2/distortions", props => {
+stories.add("2/distortions", (props) => {
   i18n.locale = Knobs.select("locale", Object.keys(i18n.translations), "en");
   return (
     <>
@@ -41,7 +41,7 @@ stories.add("2/distortions", props => {
     </>
   );
 });
-stories.add("3/challenge", props => {
+stories.add("3/challenge", (props) => {
   i18n.locale = Knobs.select("locale", Object.keys(i18n.translations), "en");
   return (
     <>
@@ -50,7 +50,7 @@ stories.add("3/challenge", props => {
     </>
   );
 });
-stories.add("4/alternative", props => {
+stories.add("4/alternative", (props) => {
   i18n.locale = Knobs.select("locale", Object.keys(i18n.translations), "en");
   return (
     <>

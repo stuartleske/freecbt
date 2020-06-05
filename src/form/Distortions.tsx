@@ -29,7 +29,7 @@ export default ({
           </SubHeader>
           <RoundedSelector
             items={distortions}
-            onPress={slug => {
+            onPress={(slug) => {
               stats.userFilledOutFormField("distortions");
               stats.userCheckedDistortion(slug);
               onChange(slug);

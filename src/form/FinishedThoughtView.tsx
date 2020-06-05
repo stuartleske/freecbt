@@ -14,9 +14,9 @@ import theme from "../theme";
 import { Slides } from "./FormView";
 import Feedback from "../feedback";
 
-const cognitiveDistortionsToText = cognitiveDistortions => {
+const cognitiveDistortionsToText = (cognitiveDistortions) => {
   const paragraphs = cognitiveDistortions
-    .filter(distortion => distortion.selected) // Only take selected items
+    .filter((distortion) => distortion.selected) // Only take selected items
     .map(({ label, slug }) => (
       <Paragraph
         key={slug}

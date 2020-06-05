@@ -52,7 +52,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
   constructor(props) {
     super(props);
 
-    this.props.navigation.addListener("willFocus", async payload => {
+    this.props.navigation.addListener("willFocus", async (payload) => {
       // We've come from a list item or the viewer
       const thought = get(payload, "state.params.thought", false);
       if (thought && thought.uuid) {
@@ -86,7 +86,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
 
     recordScreenCallOnFocus(this.props.navigation, "form");
 
-    getIsExistingUser().then(isExisting => {
+    getIsExistingUser().then((isExisting) => {
       // New Users
       if (!isExisting) {
         stats.newuser();
@@ -103,7 +103,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
       });
     }
 
-    flagstore.get("start-help-badge", "true").then(val => {
+    flagstore.get("start-help-badge", "true").then((val) => {
       this.setState({ shouldShowHelpBadge: val });
     });
 
@@ -117,22 +117,22 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     }
   }
 
-  onChangeAutomaticThought = val => {
-    this.setState(prevState => {
+  onChangeAutomaticThought = (val) => {
+    this.setState((prevState) => {
       prevState.thought.automaticThought = val;
       return prevState;
     });
   };
 
   onChangeChallenge = (val: string) => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       prevState.thought.challenge = val;
       return prevState;
     });
   };
 
   onChangeAlternativeThought = (val: string) => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       prevState.thought.alternativeThought = val;
       return prevState;
     });
@@ -141,7 +141,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
   onChangeDistortion = (selected: string) => {
     haptic.selection(); // iOS users get a selected buzz
 
-    this.setState(prevState => {
+    this.setState((prevState) => {
       const { cognitiveDistortions } = prevState.thought;
       const index = cognitiveDistortions.findIndex(
         ({ slug }) => slug === selected
@@ -155,7 +155,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     });
   };
 
-  onSave = thought => {
+  onSave = (thought) => {
     this.props.navigation.push(CBT_VIEW_SCREEN, {
       thought,
     });

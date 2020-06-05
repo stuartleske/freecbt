@@ -117,7 +117,7 @@ const distortions: () => CognitiveDistortion[] = () =>
   }); // Alphabetical sorting
 
 export const emojiForSlug = (slug: string): string => {
-  const distortion = distortions().find(dist => dist.slug === slug);
+  const distortion = distortions().find((dist) => dist.slug === slug);
   return distortion ? distortion.emoji : "🤷‍";
 };
 

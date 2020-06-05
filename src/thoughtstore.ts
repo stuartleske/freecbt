@@ -83,7 +83,7 @@ export const deleteExercise = async (uuid: string) => {
 
 export const getExercises = async () => {
   try {
-    const keys = (await AsyncStorage.getAllKeys()).filter(key =>
+    const keys = (await AsyncStorage.getAllKeys()).filter((key) =>
       key.startsWith(THOUGHTS_KEY_PREFIX)
     );
 
@@ -98,7 +98,7 @@ export const getExercises = async () => {
     // This filter removes "null", "undefined"
     // which we should _never_ ever ever ever let
     // get back to the user since it'll brick their app
-    return rows.filter(n => n);
+    return rows.filter((n) => n);
   } catch (error) {
     console.error(error);
     return [];
