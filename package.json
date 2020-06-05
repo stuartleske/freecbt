@@ -46,6 +46,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.2",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-ondevice-knobs": "^5.3.19",
     "@storybook/addon-ondevice-notes": "^5.3.19",
@@ -59,6 +60,7 @@
     "@types/react-native": "^0.62.13",
     "babel-eslint": "^10.0.1",
     "babel-preset-expo": "^8.2.1",
+    "eslint": "^7.1.0",
     "eslint-config-xo-react": "^0.23.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-native-a11y": "^2.0.0",
@@ -66,6 +68,7 @@
     "jest": "^25.5.4",
     "jest-expo": "^37.0.0",
     "prettier": "2.0.5",
+    "react-dom": "^16.13.1",
     "react-native-dotenv": "^0.2.0",
     "react-native-typescript-transformer": "^1.2.11",
     "serve": "^11.3.2",
