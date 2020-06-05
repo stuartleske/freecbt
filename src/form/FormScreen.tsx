@@ -1,7 +1,8 @@
 import { Container, Row, Header, IconButton } from "../ui";
 import React from "react";
 import { StatusBar } from "react-native";
-import { NavigationScreenProp, NavigationAction } from "react-navigation";
+import { NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import theme from "../theme";
 import Constants from "expo-constants";
 import * as Haptic from "expo-haptics";
@@ -23,7 +24,7 @@ import * as stats from "../stats";
 import { FadesIn } from "../animations";
 
 interface ScreenProps {
-  navigation: NavigationScreenProp<any, NavigationAction>;
+  navigation: NavigationStackProp<any, NavigationAction>;
   slideToShow?: Slides;
 }
 

@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationAction,
-} from "react-navigation";
+import { NavigationState, NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import { recordScreenCallOnFocus } from "../navigation";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { sliderWidth, itemWidth } from "../form/sizes";
@@ -21,7 +18,7 @@ import { setNotifications } from "../SettingsScreen";
 import * as Feature from "../feature";
 
 interface ScreenProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationAction>;
+  navigation: NavigationStackProp<NavigationState, NavigationAction>;
 }
 
 const RecordStep = () => (

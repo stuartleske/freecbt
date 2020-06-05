@@ -11,11 +11,8 @@ import { Header, Row, Container, IconButton, Label, Paragraph } from "./ui";
 import theme from "./theme";
 import { CBT_FORM_SCREEN, SETTING_SCREEN, CBT_VIEW_SCREEN } from "./screens";
 import { SavedThought, ThoughtGroup, groupThoughtsByDay } from "./thoughts";
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationAction,
-} from "react-navigation";
+import { NavigationState, NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import universalHaptic from "./haptic";
 import Constants from "expo-constants";
 import * as Haptic from "expo-haptics";
@@ -175,7 +172,7 @@ const ThoughtItemList = ({
 };
 
 interface Props {
-  navigation: NavigationScreenProp<NavigationState, NavigationAction>;
+  navigation: NavigationStackProp<NavigationState, NavigationAction>;
 }
 
 interface State {

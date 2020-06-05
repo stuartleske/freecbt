@@ -16,11 +16,8 @@ import {
   RoundedSelectorButton,
   ActionButton,
 } from "./ui";
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationAction,
-} from "react-navigation";
+import { NavigationState, NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import { CBT_ON_BOARDING_SCREEN, LOCK_SCREEN, DEBUG_SCREEN } from "./screens";
 import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
 import { hasPincode, clearPincode } from "./lock/lockstore";
@@ -122,7 +119,7 @@ async function registerForLocalNotificationsAsync() {
 }
 
 interface Props {
-  navigation: NavigationScreenProp<NavigationState, NavigationAction>;
+  navigation: NavigationStackProp<NavigationState, NavigationAction>;
 }
 
 interface State {

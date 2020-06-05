@@ -2,7 +2,8 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { storiesOf } from "@storybook/react-native";
 import * as Knobs from "@storybook/addon-knobs";
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 import FormScreen from "./FormScreen";
 import i18n from "../i18n";
 

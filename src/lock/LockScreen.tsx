@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationAction,
-} from "react-navigation";
+import { NavigationState, NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import { StatusBar } from "react-native";
 import { Container, Row, GhostButton, Header, IconButton } from "../ui";
 import theme from "../theme";
@@ -16,7 +13,7 @@ import { get } from "lodash";
 import haptic from "../haptic";
 
 interface ScreenProps {
-  navigation: NavigationScreenProp<NavigationState, NavigationAction>;
+  navigation: NavigationStackProp<NavigationState, NavigationAction>;
 }
 
 const KeypadButton = ({ title, onPress, style = {} }) => (

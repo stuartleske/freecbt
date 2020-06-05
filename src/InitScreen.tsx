@@ -1,15 +1,12 @@
 import React from "react";
 import { View } from "react-native";
 import { hasPincode } from "./lock/lockstore";
-import {
-  NavigationScreenProp,
-  NavigationState,
-  NavigationAction,
-} from "react-navigation";
+import { NavigationState, NavigationAction } from "react-navigation";
+import { NavigationStackProp } from "react-navigation-stack";
 import * as Screens from "./screens";
 
 interface Props {
-  navigation: NavigationScreenProp<NavigationState, NavigationAction>;
+  navigation: NavigationStackProp<NavigationState, NavigationAction>;
 }
 
 export default class InitScreen extends React.Component<Props, {}> {
