@@ -5,12 +5,12 @@ updates:
     schedule:
       interval: daily
     open-pull-requests-limit: 10
-  - package-ecosystem: "ruby:bundler"
+  - package-ecosystem: "bundler"
     directory: "/android"
     schedule:
       interval: daily
     open-pull-requests-limit: 10
-  - package-ecosystem: "ruby:bundler"
+  - package-ecosystem: "bundler"
     directory: "/ios"
     schedule:
       interval: daily
