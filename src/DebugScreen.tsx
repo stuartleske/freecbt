@@ -6,6 +6,7 @@ import {
   Switch,
   Platform,
   AsyncStorage,
+  Button,
 } from "react-native";
 import Constants from "expo-constants";
 import * as Feature from "./feature";
@@ -51,6 +52,15 @@ export function Pure({
     ["Revision Git", version.hash],
     ["Revision Date", version.date],
     ["Revision Timestamp", version.timestamp + ""],
+    [
+      "Test error reporting",
+      <Button
+        title="Oops"
+        onPress={() => {
+          throw new Error("oops");
+        }}
+      />,
+    ],
     ["OS", Platform.OS],
     ...Object.entries(feature)
       // @ts-ignore: sort features by name. I promise key in [key, value] is a string
