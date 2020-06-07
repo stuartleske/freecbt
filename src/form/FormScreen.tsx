@@ -21,6 +21,7 @@ import { getIsExistingUser, setIsExistingUser } from "../thoughtstore";
 import haptic from "../haptic";
 import { recordScreenCallOnFocus } from "../navigation";
 import * as stats from "../stats";
+import * as Promise from "../promise";
 import { FadesIn } from "../animations";
 
 interface ScreenProps {
@@ -49,6 +50,8 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     shouldShowInFlowOnboarding: false,
     isReady: false,
   };
+  fetchIsExistingUser?: Promise.Cancellable<boolean>;
+  fetchStartHelpBadge?: Promise.Cancellable<boolean>;
 
   constructor(props) {
     super(props);
@@ -95,7 +98,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
     });
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // Check if coming from onboarding
     // @ts-ignore argle bargle typescript plz don't do these things
     if (this.props.navigation.getParam("fromOnboarding", false)) {
@@ -104,7 +107,11 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
       });
     }
 
-    flagstore.get("start-help-badge", "true").then((val) => {
+    this.fetchStartHelpBadge = Promise.makeCancellable(
+      flagstore.get("start-help-badge", "true")
+    );
+    this.fetchStartHelpBadge.promise.then((val) => {
+      delete this.fetchStartHelpBadge;
       this.setState({ shouldShowHelpBadge: val });
     });
 
@@ -112,9 +119,22 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
       isReady: true,
     });
 
-    if (!(await getIsExistingUser())) {
-      setIsExistingUser();
-      this.props.navigation.replace(CBT_ON_BOARDING_SCREEN);
+    this.fetchIsExistingUser = Promise.makeCancellable(getIsExistingUser());
+    this.fetchIsExistingUser.promise.then((exists) => {
+      delete this.fetchIsExistingUser;
+      if (!exists) {
+        setIsExistingUser();
+        this.props.navigation.replace(CBT_ON_BOARDING_SCREEN);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.fetchIsExistingUser) {
+      this.fetchIsExistingUser.cancel();
+    }
+    if (this.fetchStartHelpBadge) {
+      this.fetchStartHelpBadge.cancel();
     }
   }
 

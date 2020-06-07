@@ -8,6 +8,7 @@
     "lint:prettier": "bash -O globstar -c \"prettier -l src/**/*.{ts,tsx} www/public/**/*.html\"",
     "format": "bash -O globstar -c \"prettier --write src/**/*.{ts,tsx} www/public/**/*.html\"",
     "test": "yarn lint && yarn lint:prettier && yarn _version && jest",
+    "_test": "jest",
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
     "//deploy": "don't publish by hand, this is for CI",
