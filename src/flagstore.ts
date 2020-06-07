@@ -2,7 +2,7 @@
  * A place for boolean flags
  */
 
-import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 
 const EXISTING_USER_KEY = "@Quirk:flags";
 

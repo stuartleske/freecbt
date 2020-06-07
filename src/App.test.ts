@@ -1,15 +1,8 @@
-// Before importing app, mock out asyncstorage.
-// https://react-native-community.github.io/async-storage/docs/advanced/jest
-import mockAsyncStorage from "@react-native-community/async-storage/jest/async-storage-mock";
-jest.mock("@react-native-community/async-storage", () => mockAsyncStorage);
-
-// the import. The goal of the test is to get past this line
 import "../App";
 
 test("App was successfully imported", () => {
   expect(1).toBe(1);
 });
-
 test("Storybook doesn't break promise.finally: #19", () => {
   // See https://github.com/erosson/freecbt/issues/19
   // I don't think this is bulletproof: tests have different build steps than

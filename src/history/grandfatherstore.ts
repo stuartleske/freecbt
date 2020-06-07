@@ -22,7 +22,7 @@
      []     `===' `==='  hjw
 
 */
-import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 
 const FREE_SUBSCRIPTION_KEY = "@Grandfathered:free-subscription";
 
