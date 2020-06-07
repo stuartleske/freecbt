@@ -53,11 +53,29 @@ export function Pure({
     ["Revision Date", version.date],
     ["Revision Timestamp", version.timestamp + ""],
     [
-      "Test error reporting",
+      "Test exception reporting",
       <Button
         title="Oops"
         onPress={() => {
           throw new Error("oops");
+        }}
+      />,
+    ],
+    [
+      "Test console.error reporting",
+      <Button
+        title="Oops"
+        onPress={() => {
+          console.error("oops");
+        }}
+      />,
+    ],
+    [
+      "Test console.warn reporting",
+      <Button
+        title="Oops"
+        onPress={() => {
+          console.warn("oops");
         }}
       />,
     ],
