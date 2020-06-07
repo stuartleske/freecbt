@@ -13,7 +13,7 @@ const mockNavigation = {
 };
 
 const stories = storiesOf("FormScreen", module)
-  .addDecorator((Story) => Story({navigation: mockNavigation}))
+  .addDecorator((Story) => Story({ navigation: mockNavigation }))
   .addDecorator(Knobs.withKnobs);
 
 stories.add("1/automatic", (props) => {

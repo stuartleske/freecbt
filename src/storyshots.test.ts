@@ -6,6 +6,6 @@ import initStoryshots from "@storybook/addon-storyshots";
 jest.useFakeTimers();
 
 // * Quiet, posed. Thanks, https://stackoverflow.com/a/59593847
-jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 
 initStoryshots();
