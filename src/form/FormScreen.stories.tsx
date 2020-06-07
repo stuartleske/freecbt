@@ -2,26 +2,18 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { storiesOf } from "@storybook/react-native";
 import * as Knobs from "@storybook/addon-knobs";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
 import FormScreen from "./FormScreen";
 import i18n from "../i18n";
 
+const mockNavigation = {
+  addListener: () => undefined,
+  getParam: (key, default_) => default_,
+  push: () => undefined,
+  replace: () => undefined,
+};
+
 const stories = storiesOf("FormScreen", module)
-  .addDecorator((Story) => {
-    const App = createAppContainer(
-      createStackNavigator(
-        {
-          Story,
-        },
-        {
-          headerMode: "none",
-          navigationOptions: { header: null },
-        }
-      )
-    );
-    return <App />;
-  })
+  .addDecorator((Story) => Story({navigation: mockNavigation}))
   .addDecorator(Knobs.withKnobs);
 
 stories.add("1/automatic", (props) => {
