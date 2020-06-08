@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
+    "@sentry/integrations": "^5.16.1",
     "dayjs": "^1.8.28",
     "expo": "^37.0.12",
     "expo-analytics-segment": "^8.1.0",
