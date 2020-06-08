@@ -11,6 +11,8 @@
     "_test": "jest",
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
+    "build:ios:dev": "expo build:ios --release-channel dev",
+    "publish:ios:dev": "expo publish --release-channel dev",
     "//deploy": "don't publish by hand, this is for CI",
     "deploy": "yarn _version && expo publish --non-interactive",
     "_version": "./scripts/version.sh > .version.json"
