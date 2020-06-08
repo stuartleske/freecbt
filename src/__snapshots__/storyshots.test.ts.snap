@@ -439,7 +439,7 @@ exports[`Storyshots DebugScreen default view 1`] = `
                 "width": 51,
               }
             }
-            value={false}
+            value={true}
           />
         </View>
       </View>
