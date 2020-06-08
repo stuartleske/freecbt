@@ -45,7 +45,8 @@
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
             "organization": "erossonorg",
-            "project": "freecbt"
+            "project": "freecbt",
+            "setCommits": true
           }
         }
       ]
