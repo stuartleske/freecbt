@@ -166,12 +166,12 @@
   },
   "reminder_notification": {
     "1": {
-      "title": "If you're having trouble, FreeCBT can help.",
-      "body": "Take a moment now to challenge your thoughts"
+      "title": "If something's been going on, record it.",
+      "body": "Don't let your thoughts sit, work through them as soon as possible."
     },
     "2": {
-      "title": "If something's been going on, record it.",
-      "body": "Don't let your thoughts sit, challenge them as they happen"
+      "title": "If you're having trouble, FreeCBT can help.",
+      "body": "Take a moment now to challenge your thoughts"
     },
     "intro": {
       "title": "If you're having trouble, FreeCBT can help.",

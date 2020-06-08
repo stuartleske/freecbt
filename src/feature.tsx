@@ -35,6 +35,7 @@
  *     </Feature.State>
  */
 import React from "react";
+import { Platform } from "react-native";
 
 export interface Feature {
   debugVisible: boolean;
@@ -43,7 +44,7 @@ export interface Feature {
 }
 export const defaults: Feature = {
   debugVisible: false,
-  reminders: false,
+  reminders: Platform.OS === 'ios',
   remindersEachMinute: false,
 };
 
