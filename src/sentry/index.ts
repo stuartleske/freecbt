@@ -1,5 +1,5 @@
 import * as Sentry from "sentry-expo";
-import * as Integrations from '@sentry/integrations'
+import * as Integrations from "@sentry/integrations";
 
 Sentry.init({
   dsn:
@@ -7,7 +7,7 @@ Sentry.init({
   // enableInExpoDevelopment: true,
   // debug: true,
   integrations: [
-    new Integrations.CaptureConsole({levels: ["error", "warn"]}),
+    new Integrations.CaptureConsole({ levels: ["error", "warn"] }),
   ],
 });
 
