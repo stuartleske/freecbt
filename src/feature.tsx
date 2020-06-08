@@ -44,7 +44,7 @@ export interface Feature {
 }
 export const defaults: Feature = {
   debugVisible: false,
-  reminders: Platform.OS === 'ios',
+  reminders: Platform.OS === "ios",
   remindersEachMinute: false,
 };
 
