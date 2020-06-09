@@ -9284,6 +9284,13 @@ expo@*, expo@^37.0.12:
     unimodules-task-manager-interface "~5.1.0"
     uuid "^3.4.0"
 
+expokit@31.1.0:
+  version "31.1.0"
+  resolved "https://registry.yarnpkg.com/expokit/-/expokit-31.1.0.tgz#042414919a9564faf8fcd682cfb3ad495d770419"
+  integrity sha512-i/Mm1tDjc4a2VbHmPvokF7+mUMl8FyP6moeJs9RkdafGdml6nOPDLqxaifSnkYR6XvyWuWLYAOyCy/4e7Ev8gw==
+  dependencies:
+    jsc-android "^224109.1.0"
+
 express@4.16.4:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
@@ -12707,6 +12714,11 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
+
+jsc-android@^224109.1.0:
+  version "224109.1.0"
+  resolved "https://registry.yarnpkg.com/jsc-android/-/jsc-android-224109.1.0.tgz#9749ec92f1e284b3c09befe7c47cc6e60b1f0cdf"
+  integrity sha512-mhALFynePc/wJsUt9BJuH13mSK/dGWtBO/pcYwVV1I0A7iduyqy3fSoAt1b0yI+/B3TzlGyue/gqjPxsqG1HRQ==
 
 jsc-android@^245459.0.0:
   version "245459.0.0"
