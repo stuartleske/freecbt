@@ -75,7 +75,9 @@ export async function setNotifications(
       body: i18n.t("reminder_notification.intro.body"),
       android: {
         channelId: "default",
-        icon: "../assets/quirk-bw.png",
+        // icon: "https://freecbt.erosson.org/notifications/quirk-bw.png",
+        icon: "https://freecbt.erosson.org/static/favicon/favicon.ico",
+        color: "#F78FB3",
       },
     });
     await Notifications.scheduleLocalNotificationAsync(
@@ -84,7 +86,9 @@ export async function setNotifications(
         body: i18n.t("reminder_notification.1.body"),
         android: {
           channelId: "default",
-          icon: "../assets/quirk-bw.png",
+          // icon: "https://freecbt.erosson.org/notifications/quirk-bw.png",
+          icon: "https://freecbt.erosson.org/static/favicon/favicon.ico",
+          color: "#F78FB3",
         },
       },
       feature.remindersEachMinute

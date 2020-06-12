@@ -4,10 +4,7 @@
     "name": "FreeCBT",
     "slug": "freecbt",
     "privacy": "unlisted",
-    "platforms": [
-      "android",
-      "ios"
-    ],
+    "platforms": ["android", "ios"],
     "version": "2.2.1",
     "orientation": "portrait",
     "githubUrl": "https://github.com/erosson/freecbt",
@@ -17,9 +14,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#F8A5C2"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "buildNumber": "1",
@@ -38,6 +33,9 @@
       "versionCode": 18,
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "notifications": {
+      "icon": "./assets/quirk-bw.png"
     },
     "hooks": {
       "postPublish": [
