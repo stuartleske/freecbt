@@ -75,6 +75,7 @@ export async function setNotifications(
       body: i18n.t("reminder_notification.intro.body"),
       android: {
         channelId: "default",
+        icon: "../assets/quirk-bw.png",
       },
     });
     await Notifications.scheduleLocalNotificationAsync(
@@ -83,6 +84,7 @@ export async function setNotifications(
         body: i18n.t("reminder_notification.1.body"),
         android: {
           channelId: "default",
+          icon: "../assets/quirk-bw.png",
         },
       },
       feature.remindersEachMinute
