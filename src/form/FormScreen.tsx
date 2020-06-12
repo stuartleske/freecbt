@@ -223,6 +223,7 @@ export default class extends React.Component<ScreenProps, FormScreenState> {
             paddingRight: 0,
             marginTop: Constants.statusBarHeight,
             paddingTop: 12,
+            paddingBottom: 0,
           }}
         >
           <Row
