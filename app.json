@@ -34,7 +34,7 @@
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },
-    "notifications": {
+    "notification": {
       "icon": "./assets/quirk-bw.png"
     },
     "hooks": {
