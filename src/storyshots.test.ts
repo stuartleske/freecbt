@@ -12,7 +12,7 @@ jest.mock("react-native/Libraries/Animated/src/NativeAnimatedHelper");
 // to the version used by Expo.
 const consoleError = console.error;
 const asyncStorageMsg =
-  "Warning: AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-community/async-storage' instead of 'react-native'. See https://github.com/react-native-community/react-native-async-storage";
+  "Warning: AsyncStorage has been extracted from react-native core and will be removed in a future release. It can now be installed and imported from '@react-native-community/async-storage' instead of 'react-native'. See https://github.com/react-native-community/async-storage";
 jest.spyOn(console, "error").mockImplementation((msg) => {
   if (msg !== asyncStorageMsg) {
     consoleError.call(console, msg);
