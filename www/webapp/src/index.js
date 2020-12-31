@@ -2,7 +2,7 @@ import './main.css';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 import localforage from 'localforage';
-import i18nBundle from '../../src/locals/en.json'
+import i18nBundle from '../../../src/locals/en.json'
 import './i18n'
 
 async function main() {
