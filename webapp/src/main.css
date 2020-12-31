@@ -5,3 +5,9 @@ label {
 details[open] .distortion-icons {
   display: none;
 }
+
+textarea {
+  width: 40em;
+  max-width: 100%;
+  height: 6em;
+}
