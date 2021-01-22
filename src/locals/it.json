@@ -162,10 +162,9 @@
     "new_thought_button": "nuovo pensiero",
     "settings_button": "configurazione",
     "delete_thought_button": "cancella pensiero",
-  "close_button": "chiudi",
-  }
-},
-"payment": {
+    "close_button": "chiudi"
+  },
+  "payment": {
     "ios_explanation": "Il pagamento sarà effettuato tramite il tuo profilo Apple alla conferma di acquisto. L'abbonamento si rinnoverà automaticamente a meno che non si cancelli entro 24 ore dal rinnovo. Puoi cancellare l'abbonamento andando sull' App Store nella zona della configuarazione del tuo profilo account dopo l'acquisto."
   },
   "reminder_notification": {
@@ -193,5 +192,5 @@
   "should_statements_one_liner": "esempio: \" Dovrei aver fatto di meglio\"",
   "labeling_one_liner": "esempio: \"è un cretino\"",
   "self_blaming_one_liner": "Darti tutta la colpa",
-  "other_blaming_one_liner": "Dare la colpa tutta a qualcun altro",
+  "other_blaming_one_liner": "Dare la colpa tutta a qualcun altro"
 }
