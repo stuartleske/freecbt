@@ -15,7 +15,7 @@
     "publish:ios:dev": "expo publish --release-channel dev",
     "//deploy": "don't publish by hand, this is for CI",
     "deploy": "yarn _version && expo publish --non-interactive",
-    "_version": "./scripts/version.sh > .version.json"
+    "_version": "bash -c \"./scripts/version.sh > .version.json\""
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
