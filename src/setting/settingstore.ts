@@ -6,6 +6,21 @@ function getKey(slug: string) {
   return PREFIX + slug;
 }
 
+export async function getSetting(slug: string): Promise<string> {
+  return await AsyncStorage.getItem(getKey(slug));
+}
+export async function getSettingOrDefault(
+  slug: string,
+  defaultValue: string
+): Promise<string> {
+  try {
+    return (await AsyncStorage.getItem(getKey(slug))) || defaultValue;
+  } catch (err) {
+    console.error(err);
+    return "";
+  }
+}
+
 export async function getSettingOrSetDefault(
   slug: string,
   defaultValue: string
@@ -33,6 +48,16 @@ export async function setSetting<T extends string>(
 ): Promise<boolean> {
   try {
     await AsyncStorage.setItem(getKey(slug), value);
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
+
+export async function removeSetting(slug: string): Promise<boolean> {
+  try {
+    await AsyncStorage.removeItem(getKey(slug));
     return true;
   } catch (err) {
     console.error(err);

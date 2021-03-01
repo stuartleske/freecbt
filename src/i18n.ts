@@ -1,4 +1,6 @@
 import * as Localization from "expo-localization";
+import { getSetting } from "./setting/settingstore";
+import { LOCALE_KEY } from "./setting";
 import i18n from "i18n-js";
 import en from "./locals/en.json";
 import it from "./locals/it.json";
@@ -37,5 +39,13 @@ i18n.translations = {
   ro,
 };
 i18n.locale = Localization.locale;
+
+async function loadLocaleSetting() {
+  const locale = await getSetting(LOCALE_KEY);
+  if (locale) {
+    i18n.locale = locale;
+  }
+}
+loadLocaleSetting();
 
 export default i18n;

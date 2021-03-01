@@ -11,3 +11,4 @@ export const HISTORY_BUTTON_LABEL_DEFAULT: HistoryButtonLabelSetting =
   "alternative-thought";
 
 export const NOTIFICATIONS_KEY = "notifications";
+export const LOCALE_KEY = "locale";

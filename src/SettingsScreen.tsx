@@ -19,18 +19,26 @@ import {
 import { NavigationState, NavigationAction } from "react-navigation";
 import { NavigationStackProp } from "react-navigation-stack";
 import { CBT_ON_BOARDING_SCREEN, LOCK_SCREEN, DEBUG_SCREEN } from "./screens";
-import { setSetting, getSettingOrSetDefault } from "./setting/settingstore";
+import {
+  setSetting,
+  removeSetting,
+  getSetting,
+  getSettingOrSetDefault,
+} from "./setting/settingstore";
 import { hasPincode, clearPincode } from "./lock/lockstore";
 import {
   HISTORY_BUTTON_LABEL_KEY,
   HISTORY_BUTTON_LABEL_DEFAULT,
   NOTIFICATIONS_KEY,
+  LOCALE_KEY,
   HistoryButtonLabelSetting,
   isHistoryButtonLabelSetting,
 } from "./setting";
 import i18n from "./i18n";
 import { recordScreenCallOnFocus } from "./navigation";
 import { FadesIn } from "./animations";
+import * as Localization from "expo-localization";
+import { Picker } from "react-native";
 
 export { HistoryButtonLabelSetting };
 
@@ -53,6 +61,20 @@ export async function getHistoryButtonLabel(): Promise<
   return value;
 }
 
+export async function getLocaleSetting(): Promise<string> {
+  return await getSetting(LOCALE_KEY);
+}
+export async function setLocaleSetting(
+  locale: string | null
+): Promise<boolean> {
+  if (locale) {
+    i18n.locale = locale;
+    return await setSetting(LOCALE_KEY, locale);
+  } else {
+    i18n.locale = Localization.locale;
+    return await removeSetting(LOCALE_KEY);
+  }
+}
 export async function getNotifications(): Promise<boolean> {
   try {
     const str = await getSettingOrSetDefault(NOTIFICATIONS_KEY, "false");
@@ -148,6 +170,7 @@ class SettingScreen extends React.Component<Props, State> {
       isReady: false,
       areNotificationsOn: false,
       hasPincode: false,
+      localeSetting: undefined,
       debugClicks: 0,
     };
     recordScreenCallOnFocus(this.props.navigation, "settings");
@@ -158,15 +181,17 @@ class SettingScreen extends React.Component<Props, State> {
   }
 
   refresh = async () => {
-    const [h, n, p] = await Promise.all([
+    const [h, n, p, l] = await Promise.all([
       getHistoryButtonLabel(),
       getNotifications(),
       hasPincode(),
+      getLocaleSetting(),
     ]);
     this.setState({
       historyButtonLabel: h,
       areNotificationsOn: n,
       hasPincode: p,
+      localeSetting: l,
       isReady: true,
     });
   };
@@ -356,7 +381,60 @@ class SettingScreen extends React.Component<Props, State> {
                     onPress={() => this.toggleHistoryButtonLabels()}
                   />
                 </Row>
+                {feature.localeSetting && (
+                  <Row
+                    style={{
+                      marginBottom: 18,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <SubHeader>*{i18n.t("settings.locale.header")}</SubHeader>
+                    {this.state.isReady && (
+                      <Picker
+                        selectedValue={this.state.localeSetting}
+                        onValueChange={async (val) => {
+                          this.setState({ localeSetting: val });
+                          await setLocaleSetting(val);
+                        }}
+                      >
+                        <Picker.Item
+                          label={i18n.t("settings.locale.default")}
+                          value={null}
+                        />
+                        {Object.keys(i18n.translations).map((locale) => (
+                          <Picker.Item
+                            key={locale}
+                            label={i18n.t("settings.locale.list." + locale)}
+                            value={locale}
+                          />
+                        ))}
+                      </Picker>
+                    )}
+                  </Row>
+                )}
 
+                {feature.localeSetting && (
+                  <Row
+                    style={{
+                      marginBottom: 9,
+                    }}
+                  >
+                    <ActionButton
+                      flex={1}
+                      title={i18n.t("settings.locale.contribute")}
+                      fillColor="#EDF0FC"
+                      textColor={theme.darkBlue}
+                      onPress={() => {
+                        const url =
+                          "https://github.com/erosson/freecbt/blob/master/TRANSLATIONS.md";
+                        Linking.canOpenURL(url).then(() =>
+                          Linking.openURL(url)
+                        );
+                      }}
+                    />
+                  </Row>
+                )}
                 <Row
                   style={{
                     marginBottom: 9,

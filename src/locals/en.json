@@ -95,7 +95,31 @@
     "header": ".FreeCBT"
   },
   "settings": {
-    "header": "FreeCBT*"
+    "header": "FreeCBT*",
+    "locale": {
+      "header": "language",
+      "default": "System default",
+      "contribute": "Help translate FreeCBT",
+      "// list": "translator note: use each language's native translation here; don't translate this list in other file. initial list based on https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes",
+      "list": {
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "fi": "Suomi",
+        "fr": "Français",
+        "it": "Italiano",
+        "ko": "한국어",
+        "nb": "Norsk Bokmål",
+        "nl": "Nederlands",
+        "pl": "język polski",
+        "pt-BR": "Português do Brasil",
+        "pt-PT": "Português",
+        "ro": "Română",
+        "ru": "русский",
+        "sv": "Svenska",
+        "zh-Hans": "中文"
+      }
+    }
   },
   "cbt_form": {
     "header": "FreeCBT",
