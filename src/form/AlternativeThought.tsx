@@ -30,7 +30,7 @@ export default ({
           marginBottom: 12,
         }}
       >
-        This isn't a challenge, it's a way to cement an alternative thought.
+        {i18n.t("alt_thought_description")}
       </Paragraph>
       <TextInput
         style={textInputStyle}

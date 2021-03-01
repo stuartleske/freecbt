@@ -44,7 +44,7 @@ const RecordStep = () => (
         fontSize: 28,
       }}
     >
-      First, you should read this.
+      {i18n.t("onboarding_screen.readme")}
     </Header>
     <ActionButton
       flex={1}
@@ -167,8 +167,8 @@ const RemindersStep = ({ onContinue }) => {
         }}
       >
         {feature.reminders
-          ? "Before you finish, we can send you reminders if you'd like."
-          : "You can control reminders in the settings screen."}
+          ? i18n.t("onboarding_screen.reminders.header")
+          : i18n.t("onboarding_screen.reminders.disabled")}
       </Header>
       {feature.reminders ? (
         <>
@@ -180,7 +180,7 @@ const RemindersStep = ({ onContinue }) => {
             <ActionButton
               flex={1}
               width="100%"
-              title={"Yes please!"}
+              title={i18n.t("onboarding_screen.reminders.button.yes")}
               onPress={async () => {
                 await setNotifications(feature, true);
                 onContinue();
@@ -191,7 +191,7 @@ const RemindersStep = ({ onContinue }) => {
             <ActionButton
               flex={1}
               width="100%"
-              title={"Continue without reminders"}
+              title={i18n.t("onboarding_screen.reminders.button.no")}
               fillColor="#EDF0FC"
               textColor={theme.darkBlue}
               onPress={onContinue}
@@ -203,7 +203,7 @@ const RemindersStep = ({ onContinue }) => {
           <ActionButton
             flex={1}
             width="100%"
-            title={"Continue"}
+            title={i18n.t("onboarding_screen.reminders.button.continue")}
             fillColor="#EDF0FC"
             textColor={theme.darkBlue}
             onPress={onContinue}

@@ -12,6 +12,7 @@ import Challenge from "./Challenge";
 import Distortions from "./Distortions";
 import { saveExercise } from "../thoughtstore";
 import * as stats from "../stats";
+import i18n from "../i18n";
 
 export type Slides = "automatic" | "distortions" | "challenge" | "alternative";
 
@@ -107,7 +108,7 @@ export default class extends React.Component<FormViewProps, FormViewState> {
             }}
           >
             <ActionButton
-              title="Save & Finish"
+              title={i18n.t("cbt_form.submit")}
               width="100%"
               onPress={this.onSave}
             />

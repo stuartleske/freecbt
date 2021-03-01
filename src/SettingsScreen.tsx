@@ -266,17 +266,16 @@ class SettingScreen extends React.Component<Props, State> {
                       flexDirection: "column",
                     }}
                   >
-                    <SubHeader>*reminders</SubHeader>
+                    <SubHeader>{i18n.t("settings.reminders.header")}</SubHeader>
                     <Paragraph
                       style={{
                         marginBottom: 9,
                       }}
                     >
-                      If you'd like, you can turn on notification reminders that
-                      help you build up the habit of challenging thoughts.
+                      {i18n.t("settings.reminders.description")}
                     </Paragraph>
                     <RoundedSelectorButton
-                      title={"Please remind me"}
+                      title={i18n.t("settings.reminders.button.yes")}
                       selected={this.state.areNotificationsOn}
                       onPress={async () => {
                         await setNotifications(feature, true);
@@ -285,7 +284,7 @@ class SettingScreen extends React.Component<Props, State> {
                     />
 
                     <RoundedSelectorButton
-                      title={"No reminders, thanks"}
+                      title={i18n.t("settings.reminders.button.no")}
                       selected={!this.state.areNotificationsOn}
                       onPress={async () => {
                         await setNotifications(feature, false);
@@ -301,21 +300,19 @@ class SettingScreen extends React.Component<Props, State> {
                     flexDirection: "column",
                   }}
                 >
-                  <SubHeader>*pincode lock 🔒</SubHeader>
+                  <SubHeader>{i18n.t("settings.pincode.header")}</SubHeader>
                   <Paragraph
                     style={{
                       marginBottom: 9,
                     }}
                   >
-                    You can lock the app with a pincode if you'd like. Be warned
-                    that the only way to reset a forgotten code is to erase all
-                    your data, so be careful not to forget.
+                    {i18n.t("settings.pincode.description")}
                   </Paragraph>
                   {this.state.hasPincode ? (
                     <>
                       <ActionButton
                         flex={1}
-                        title={"Update Pincode"}
+                        title={i18n.t("settings.pincode.button.update")}
                         width={"100%"}
                         fillColor="#EDF0FC"
                         textColor={theme.darkBlue}
@@ -327,7 +324,7 @@ class SettingScreen extends React.Component<Props, State> {
                       />
                       <ActionButton
                         flex={1}
-                        title={"Clear Pincode"}
+                        title={i18n.t("settings.pincode.button.clear")}
                         width={"100%"}
                         fillColor="#EDF0FC"
                         textColor={theme.darkBlue}
@@ -340,7 +337,7 @@ class SettingScreen extends React.Component<Props, State> {
                   ) : (
                     <ActionButton
                       flex={1}
-                      title={"Set Pincode"}
+                      title={i18n.t("settings.pincode.button.set")}
                       width={"100%"}
                       fillColor="#EDF0FC"
                       textColor={theme.darkBlue}
@@ -360,27 +357,26 @@ class SettingScreen extends React.Component<Props, State> {
                     flexDirection: "column",
                   }}
                 >
-                  <SubHeader>*history button labels</SubHeader>
+                  <SubHeader>{i18n.t("settings.history.header")}</SubHeader>
                   <Paragraph
                     style={{
                       marginBottom: 9,
                     }}
                   >
-                    By default, we set the buttons in the history screen to use
-                    the Alternative Thought. This helps cement the thought as
-                    "changed."
+                    {i18n.t("settings.history.description")}
                   </Paragraph>
                   <RoundedSelectorButton
-                    title={"Alternative Thought"}
+                    title={i18n.t("settings.history.button.alternative")}
                     selected={historyButtonLabel === "alternative-thought"}
                     onPress={() => this.toggleHistoryButtonLabels()}
                   />
                   <RoundedSelectorButton
-                    title={"Automatic Thought"}
+                    title={i18n.t("settings.history.button.automatic")}
                     selected={historyButtonLabel === "automatic-thought"}
                     onPress={() => this.toggleHistoryButtonLabels()}
                   />
                 </Row>
+
                 {feature.localeSetting && (
                   <Row
                     style={{
@@ -389,7 +385,7 @@ class SettingScreen extends React.Component<Props, State> {
                       flexDirection: "column",
                     }}
                   >
-                    <SubHeader>*{i18n.t("settings.locale.header")}</SubHeader>
+                    <SubHeader>{i18n.t("settings.locale.header")}</SubHeader>
                     {this.state.isReady && (
                       <Picker
                         selectedValue={this.state.localeSetting}
@@ -442,7 +438,7 @@ class SettingScreen extends React.Component<Props, State> {
                 >
                   <ActionButton
                     flex={1}
-                    title={"Privacy Policy"}
+                    title={i18n.t("settings.privacy")}
                     fillColor="#EDF0FC"
                     textColor={theme.darkBlue}
                     onPress={() => {
@@ -455,7 +451,7 @@ class SettingScreen extends React.Component<Props, State> {
                 <Row>
                   <ActionButton
                     flex={1}
-                    title={"Terms of Service"}
+                    title={i18n.t("settings.terms")}
                     fillColor="#EDF0FC"
                     textColor={theme.darkBlue}
                     onPress={() => {

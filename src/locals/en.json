@@ -1,5 +1,6 @@
 {
   "onboarding_screen": {
+    "readme": "First, you should read this.",
     "header": "The FreeCBT Guide",
     "block1": {
       "header": "FreeCBT is something you have to practice",
@@ -85,19 +86,54 @@
     "got_it": {
       "line1": "You're ready to go!",
       "btn_title": "Let's go!"
+    },
+    "reminders": {
+      "header": "Before you finish, we can send you reminders if you'd like.",
+      "disabled": "You can control reminders in the settings screen.",
+      "button": {
+        "yes": "Yes please!",
+        "no": "Continue without reminders",
+        "continue": "Continue"
+      }
     }
   },
   "auto_thought": "Automatic Thought",
   "cog_distortion": "Select any distortions that apply.",
   "challenge": "Challenge the thought.",
   "alt_thought": "Write an alternative thought.",
+  "alt_thought_description": "This isn't a challenge, it's a way to cement an alternative thought.",
   "cbt_list": {
     "header": ".FreeCBT"
   },
   "settings": {
     "header": "FreeCBT*",
+    "reminders": {
+      "header": "*reminders",
+      "description": "If you'd like, you can turn on notification reminders that help you build up the habit of challenging thoughts.",
+      "button": {
+        "yes": "Please remind me",
+        "no": "No reminders, thanks"
+      }
+    },
+    "pincode": {
+      "header": "*pincode lock 🔒",
+      "description": "You can lock the app with a pincode if you'd like. Be warned that the only way to reset a forgotten code is to erase all your data, so be careful not to forget.",
+      "button": {
+        "update": "Update Pincode",
+        "clear": "Clear Pincode",
+        "set": "Set Pincode"
+      }
+    },
+    "history": {
+      "header": "*history button labels",
+      "description": "By default, we set the buttons in the history screen to use the Alternative Thought. This helps cement the thought as \"changed.\"",
+      "button": {
+        "alternative": "Alternative Thought",
+        "automatic": "Automatic Thought"
+      }
+    },
     "locale": {
-      "header": "language",
+      "header": "*language",
       "default": "System default",
       "contribute": "Help translate FreeCBT",
       "// list": "translator note: use each language's native translation here; don't translate this list in other file. initial list based on https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes",
@@ -119,13 +155,16 @@
         "sv": "Svenska",
         "zh-Hans": "中文"
       }
-    }
+    },
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   },
   "cbt_form": {
     "header": "FreeCBT",
     "edit": "Edit",
     "new": "New",
     "save": "Save",
+    "submit": "Save & Finish",
     "auto_thought_placeholder": "ex: 'The plane might crash'",
     "cog_distortion": "Cognitive Distortion",
     "challenged": "Challenge",
@@ -133,7 +172,8 @@
     "alt_thought_placeholder": "What could we think instead?"
   },
   "explanation_screen": {
-    "header": "FreeCBT."
+    "header": "FreeCBT.",
+    "intro": "Intro"
   },
   "finished_screen": {
     "header": "FreeCBT"

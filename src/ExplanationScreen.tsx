@@ -248,7 +248,7 @@ class ExplanationScreen extends React.Component<Props> {
                 }}
               >
                 <GhostButton
-                  title="Intro"
+                  title={i18n.t("explanation_screen.intro")}
                   width={80}
                   height={48}
                   borderColor={theme.lightGray}
