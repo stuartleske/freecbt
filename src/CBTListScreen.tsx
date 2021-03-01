@@ -162,7 +162,7 @@ const ThoughtItemList = ({
 
     return (
       <View key={group.date} style={{ marginBottom: 18 }}>
-        <Label>{isToday ? "Today" : group.date}</Label>
+        <Label>{isToday ? i18n.t("cbt_list.today") : group.date}</Label>
         {thoughts}
       </View>
     );

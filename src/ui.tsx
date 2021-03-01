@@ -441,7 +441,7 @@ export const IconButton = ({
   style,
   hasBadge,
 }: {
-  featherIconName: string;
+  featherIconName: any;
   accessibilityLabel: string;
   onPress: () => void;
   style?: object;

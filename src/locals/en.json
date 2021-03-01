@@ -103,7 +103,8 @@
   "alt_thought": "Write an alternative thought.",
   "alt_thought_description": "This isn't a challenge, it's a way to cement an alternative thought.",
   "cbt_list": {
-    "header": ".FreeCBT"
+    "header": ".FreeCBT",
+    "today": "Today"
   },
   "settings": {
     "header": "FreeCBT*",

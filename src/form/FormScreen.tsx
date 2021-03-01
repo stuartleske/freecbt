@@ -25,7 +25,7 @@ import * as Promise from "../promise";
 import { FadesIn } from "../animations";
 
 interface ScreenProps {
-  navigation: NavigationStackProp<any, NavigationAction>;
+  navigation?: NavigationStackProp<any, NavigationAction>;
   slideToShow?: Slides;
 }
 

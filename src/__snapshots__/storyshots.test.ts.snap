@@ -565,7 +565,7 @@ exports[`Storyshots FormScreen 1/automatic 1`] = `
         "flexDirection": "column",
         "height": "100%",
         "justifyContent": "flex-start",
-        "marginTop": 20,
+        "marginTop": 44,
         "paddingBottom": 0,
         "paddingLeft": 0,
         "paddingRight": 0,
@@ -2337,7 +2337,7 @@ exports[`Storyshots FormScreen 2/distortions 1`] = `
         "flexDirection": "column",
         "height": "100%",
         "justifyContent": "flex-start",
-        "marginTop": 20,
+        "marginTop": 44,
         "paddingBottom": 0,
         "paddingLeft": 0,
         "paddingRight": 0,
@@ -4109,7 +4109,7 @@ exports[`Storyshots FormScreen 3/challenge 1`] = `
         "flexDirection": "column",
         "height": "100%",
         "justifyContent": "flex-start",
-        "marginTop": 20,
+        "marginTop": 44,
         "paddingBottom": 0,
         "paddingLeft": 0,
         "paddingRight": 0,
@@ -4171,7 +4171,7 @@ exports[`Storyshots FormScreen 3/challenge 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
       <Text
@@ -4231,7 +4231,7 @@ exports[`Storyshots FormScreen 3/challenge 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
@@ -5919,7 +5919,7 @@ exports[`Storyshots FormScreen 4/alternative 1`] = `
         "flexDirection": "column",
         "height": "100%",
         "justifyContent": "flex-start",
-        "marginTop": 20,
+        "marginTop": 44,
         "paddingBottom": 0,
         "paddingLeft": 0,
         "paddingRight": 0,
@@ -5981,7 +5981,7 @@ exports[`Storyshots FormScreen 4/alternative 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
       <Text
@@ -6041,7 +6041,7 @@ exports[`Storyshots FormScreen 4/alternative 1`] = `
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
