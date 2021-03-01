@@ -5,7 +5,7 @@
     "slug": "freecbt",
     "privacy": "unlisted",
     "platforms": ["android", "ios"],
-    "version": "2.2.1",
+    "version": "2.2.2",
     "orientation": "portrait",
     "githubUrl": "https://github.com/erosson/freecbt",
     "primaryColor": "#F8A5C2",
