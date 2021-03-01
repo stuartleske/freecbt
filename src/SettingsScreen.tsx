@@ -155,6 +155,7 @@ interface State {
   historyButtonLabel?: HistoryButtonLabelSetting;
   areNotificationsOn: boolean;
   hasPincode: boolean;
+  localeSetting: string | null;
   // click the invisible button at the bottom 5 times to go to the secret debug screen
   debugClicks: number;
 }
@@ -170,7 +171,7 @@ class SettingScreen extends React.Component<Props, State> {
       isReady: false,
       areNotificationsOn: false,
       hasPincode: false,
-      localeSetting: undefined,
+      localeSetting: null,
       debugClicks: 0,
     };
     recordScreenCallOnFocus(this.props.navigation, "settings");
