@@ -19,6 +19,16 @@ import nb from "./locals/nb.json";
 import sv from "./locals/sv.json";
 import ro from "./locals/ro.json";
 
+function walkReverse(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, val]) => [
+      key,
+      typeof val === "string"
+        ? val.split("").reverse().join("")
+        : walkReverse(val),
+    ])
+  );
+}
 i18n.fallbacks = true;
 i18n.translations = {
   fr,
@@ -37,7 +47,11 @@ i18n.translations = {
   nb,
   sv,
   ro,
+  // testing with an obviously-transformed language makes it easy to find and
+  // remove hardcoded strings. Hidden behind `feature.testLocalesVisible`.
+  _test: walkReverse(en),
 };
+
 i18n.locale = Localization.locale;
 
 async function loadLocaleSetting() {

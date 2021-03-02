@@ -42,12 +42,14 @@ export interface Feature {
   reminders: boolean;
   remindersEachMinute: boolean;
   localeSetting: boolean;
+  testLocalesVisible: boolean;
 }
 export const defaults: Feature = {
   debugVisible: false,
   reminders: Platform.OS === "ios",
   remindersEachMinute: false,
   localeSetting: false,
+  testLocalesVisible: false,
 };
 
 export const Context = React.createContext({

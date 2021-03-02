@@ -43,7 +43,9 @@ import { Picker } from "react-native";
 export { HistoryButtonLabelSetting };
 
 // Exportable settings
-export async function getHistoryButtonLabel(): Promise<HistoryButtonLabelSetting> {
+export async function getHistoryButtonLabel(): Promise<
+  HistoryButtonLabelSetting
+> {
   const value = await getSettingOrSetDefault(
     HISTORY_BUTTON_LABEL_KEY,
     HISTORY_BUTTON_LABEL_DEFAULT
@@ -397,13 +399,19 @@ class SettingScreen extends React.Component<Props, State> {
                           label={i18n.t("settings.locale.default")}
                           value={null}
                         />
-                        {Object.keys(i18n.translations).map((locale) => (
-                          <Picker.Item
-                            key={locale}
-                            label={i18n.t("settings.locale.list." + locale)}
-                            value={locale}
-                          />
-                        ))}
+                        {Object.keys(i18n.translations)
+                          .filter(
+                            (locale) =>
+                              !locale.startsWith("_") ||
+                              feature.testLocalesVisible
+                          )
+                          .map((locale) => (
+                            <Picker.Item
+                              key={locale}
+                              label={i18n.t("settings.locale.list." + locale)}
+                              value={locale}
+                            />
+                          ))}
                       </Picker>
                     )}
                   </Row>
