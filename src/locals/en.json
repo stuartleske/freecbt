@@ -104,7 +104,8 @@
   "alt_thought_description": "This isn't a challenge, it's a way to cement an alternative thought.",
   "cbt_list": {
     "header": ".FreeCBT",
-    "today": "Today"
+    "today": "Today",
+    "empty": "No thoughts yet!"
   },
   "settings": {
     "header": "FreeCBT*",

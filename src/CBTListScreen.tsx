@@ -124,7 +124,7 @@ const EmptyThoughtIllustration = () => (
       }}
     />
     <Label marginBottom={18} textAlign={"center"}>
-      No thoughts yet!
+      {i18n.t("cbt_list.empty")}
     </Label>
   </View>
 );
