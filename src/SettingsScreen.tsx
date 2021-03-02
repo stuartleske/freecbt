@@ -43,9 +43,7 @@ import { Picker } from "react-native";
 export { HistoryButtonLabelSetting };
 
 // Exportable settings
-export async function getHistoryButtonLabel(): Promise<
-  HistoryButtonLabelSetting
-> {
+export async function getHistoryButtonLabel(): Promise<HistoryButtonLabelSetting> {
   const value = await getSettingOrSetDefault(
     HISTORY_BUTTON_LABEL_KEY,
     HISTORY_BUTTON_LABEL_DEFAULT
