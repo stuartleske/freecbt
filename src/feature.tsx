@@ -48,7 +48,7 @@ export const defaults: Feature = {
   debugVisible: false,
   reminders: Platform.OS === "ios",
   remindersEachMinute: false,
-  localeSetting: false,
+  localeSetting: true,
   testLocalesVisible: false,
 };
 
