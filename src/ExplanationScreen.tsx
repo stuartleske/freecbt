@@ -1,8 +1,15 @@
 import React from "react";
 import { NavigationState, NavigationAction } from "react-navigation";
 import { NavigationStackProp } from "react-navigation-stack";
-import { SubHeader, Paragraph, Header, IconButton, GhostButton } from "./ui";
-import { ScrollView, View } from "react-native";
+import {
+  SubHeader,
+  Paragraph,
+  Header,
+  IconButton,
+  ActionButton,
+  GhostButton,
+} from "./ui";
+import { ScrollView, View, Linking } from "react-native";
 import Constants from "expo-constants";
 import * as Haptic from "expo-haptics";
 import theme from "./theme";
@@ -265,6 +272,25 @@ class ExplanationScreen extends React.Component<Props> {
                 }}
               />
             </View>
+          </View>
+
+          <View
+            style={{
+              marginBottom: 24,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <ActionButton
+              flex={1}
+              title={i18n.t("onboarding_screen.header")}
+              fillColor="#EDF0FC"
+              textColor={theme.darkBlue}
+              onPress={() => {
+                const url = "https://freecbt.erosson.org/explanation?ref=quirk";
+                Linking.canOpenURL(url).then(() => Linking.openURL(url));
+              }}
+            />
           </View>
 
           <AllOrNothingThinking />
