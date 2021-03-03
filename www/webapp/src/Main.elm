@@ -292,24 +292,10 @@ view mmodel =
 
 viewI18NProvider : Session -> List (Html msg) -> Html msg
 viewI18NProvider session =
-    let
-        locale =
-            session.settings
-                |> RemoteData.toMaybe
-                |> Maybe.andThen .locale
-                |> Maybe.withDefault session.defaultLocale
-    in
-    case Dict.get locale session.translations of
-        Just tl ->
-            I18N.provider tl
-
-        Nothing ->
-            case Dict.get session.defaultLocale session.translations of
-                Just tl ->
-                    I18N.provider tl
-
-                Nothing ->
-                    code [] [ text "no such defaultLocale: ", text session.defaultLocale ] |> always
+    session.settings
+        |> RemoteData.toMaybe
+        |> Maybe.andThen .locale
+        |> I18N.provider
 
 
 

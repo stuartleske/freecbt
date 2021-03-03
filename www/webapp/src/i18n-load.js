@@ -1,3 +1,5 @@
+import i18n from "i18n-js"
+
 import en from "../../../src/locals/en.json";
 import it from "../../../src/locals/it.json";
 import fr from "../../../src/locals/fr.json";
@@ -25,7 +27,7 @@ function walkReverse(obj) {
     ])
   );
 }
-const translations = {
+i18n.translations = {
   fr,
   en,
   it,
@@ -46,4 +48,6 @@ const translations = {
   // remove hardcoded strings. Hidden behind `feature.testLocalesVisible`.
   _test: walkReverse(en),
 }
-export default {translations, defaultLocale: "en"};
+i18n.defaultLocale = "en"
+i18n.fallbacks = true
+export default {translations: Object.keys(i18n.translations)}

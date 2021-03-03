@@ -69,12 +69,9 @@ view model =
                 [ label [ value "" ] [ L.message "settings.locale.header" ]
                 , select [ onInput OnLocaleChange ]
                     (option [] [ L.message "settings.locale.default" ]
-                        :: (Dict.keys model.session.translations
-                                |> List.map
-                                    (\l ->
-                                        option [ value l ] [ L.message <| "settings.locale.list." ++ l ]
-                                    )
-                           )
+                        :: List.map
+                            (\l -> option [ value l ] [ L.message <| "settings.locale.list." ++ l ])
+                            model.session.translations
                     )
                 ]
             , div [] [ a [ Route.href Route.Home ] [ text "Home" ] ]

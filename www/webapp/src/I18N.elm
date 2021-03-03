@@ -5,9 +5,9 @@ import Html.Attributes as A exposing (..)
 import Json.Encode as Json
 
 
-provider : Json.Value -> List (Html msg) -> Html msg
-provider bundle =
-    H.node "i18n-provider" [ A.property "bundle" bundle ]
+provider : Maybe String -> List (Html msg) -> Html msg
+provider locale =
+    H.node "i18n-provider" [ A.attribute "locale" <| Maybe.withDefault "" locale ]
 
 
 message : String -> Html msg

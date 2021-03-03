@@ -1,5 +1,5 @@
 // based on https://github.com/wolfadex/fluent-web
-const _ = require('lodash')
+import i18n from 'i18n-js'
 
 customElements.define('i18n-provider', class Provider extends HTMLElement {
   constructor() {
@@ -8,30 +8,33 @@ customElements.define('i18n-provider', class Provider extends HTMLElement {
   }
   connectedCallback() {
     this._listeners = [];
-    this.addEventListener("i18n-bundle-subscribe", bundlesSubscribe);
-    this.addEventListener("i18n-bundle-unsubscribe", bundlesUnsubscribe);
+    this.addEventListener("i18n-locale-subscribe", localeSubscribe);
+    this.addEventListener("i18n-locale-unsubscribe", localeUnsubscribe);
   }
   disconnectedCallback() {
     this._listeners = [];
-    this.removeEventListener("i18n-bundle-subscribe", bundlesSubscribe);
-    this.removeEventListener("i18n-bundle-unsubscribe", bundlesUnsubscribe);
+    this.removeEventListener("i18n-locale-subscribe", localeSubscribe);
+    this.removeEventListener("i18n-locale-unsubscribe", localeUnsubscribe);
   }
-  get bundle() {
-    return this._bundle;
+  static get observedAttributes() {
+    return ['locale'];
   }
-  set bundle(bundle) {
-    this._bundle = bundle
-    this._listeners.forEach((target) => {
-      target.providerBundle = this._bundle;
-    });
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'locale' && oldValue !== newValue) {
+      i18n.locale = newValue || null
+      this._locale = i18n.locale
+      this._listeners.forEach((target) => {
+        target.providerLocale = this._locale;
+      });
+    }
   }
 })
-function bundlesSubscribe(event) {
+function localeSubscribe(event) {
   const provider = event.currentTarget
   provider._listeners.push(event.target)
-  event.target.providerBundle = provider._bundle;
+  event.target.providerLocale = provider._locale;
 }
-function bundlesUnsubscribe(event) {
+function localeUnsubscribe(event) {
   const provider = event.currentTarget
   const i = provider._listeners.findIndex(event.target);
   if (i >= 0) {
@@ -41,15 +44,15 @@ function bundlesUnsubscribe(event) {
 
 class Node extends HTMLElement {
   getMessage({messageId}) {
-    const bundle = this._bundle || this._providerBundle;
-    if (bundle) {
-      return _.get(bundle, messageId)
+    const locale = this._locale || this._providerLocale;
+    if (locale) {
+      return i18n.t(messageId)
     }
     return null
   }
   connectedCallback() {
     this.dispatchEvent(
-      new CustomEvent("i18n-bundle-subscribe", {
+      new CustomEvent("i18n-locale-subscribe", {
         bubbles: true,
         target: this,
       })
@@ -58,18 +61,18 @@ class Node extends HTMLElement {
   }
   disconnectedCallback() {
     this.dispatchEvent(
-      new CustomEvent("i18n-bundle-unsubscribe", {
+      new CustomEvent("i18n-locale-unsubscribe", {
         bubbles: true,
         target: this,
       })
     );
   }
-  set providerBundle(bundle) {
-    this._providerBundle = bundle
+  set providerLocale(locale) {
+    this._providerLocale = locale
     this.render();
   }
-  set bundle(bundle) {
-    this._bundle = bundle
+  set locale(locale) {
+    this._locale = locale
     this.render();
   }
 }

@@ -1,7 +1,6 @@
 module Session exposing (Session, init)
 
 import Browser.Navigation as Nav
-import Dict exposing (Dict)
 import Json.Decode as D
 import RemoteData exposing (RemoteData)
 import Settings exposing (Settings)
@@ -12,13 +11,12 @@ type alias Session =
     -- See https://github.com/elm-explorations/test/issues/24
     { nav : Maybe Nav.Key
     , settings : RemoteData String Settings
-    , defaultLocale : String
-    , translations : Dict String D.Value
+    , translations : List String
     }
 
 
 type alias Flags =
-    { defaultLocale : String, translations : Dict String D.Value }
+    { translations : List String }
 
 
 init : Maybe Nav.Key -> D.Value -> Result String Session
@@ -28,12 +26,11 @@ init nav rawflags =
             err |> D.errorToString |> Err
 
         Ok flags ->
-            Session nav RemoteData.NotAsked flags.defaultLocale flags.translations |> Ok
+            Session nav RemoteData.NotAsked flags.translations |> Ok
 
 
 decodeFlags : D.Decoder Flags
 decodeFlags =
     D.field "i18n" <|
-        D.map2 Flags
-            (D.field "defaultLocale" D.string)
-            (D.field "translations" <| D.dict D.value)
+        D.map Flags
+            (D.field "translations" <| D.list D.string)
