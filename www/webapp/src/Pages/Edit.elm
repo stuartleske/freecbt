@@ -1,4 +1,4 @@
-module Pages.Edit exposing (Model, Msg(..), init, subscriptions, toSession, update, view)
+module Pages.Edit exposing (Model, Msg(..), init, subscriptions, toSession, update, updateSession, view)
 
 import Exercise exposing (Distortion, Exercise)
 import Html as H exposing (..)
@@ -46,6 +46,11 @@ init id session =
 toSession : Model -> Session
 toSession m =
     m.session
+
+
+updateSession : Session -> Model -> Model
+updateSession s m =
+    { m | session = s }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

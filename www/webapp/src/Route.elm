@@ -11,6 +11,7 @@ type Route
     = Home
     | List
     | Edit String
+    | Settings
     | Debug
 
 
@@ -26,6 +27,7 @@ parser =
                 [ P.map Home P.top
                 , P.map List <| P.s "list"
                 , P.map Edit <| P.s "edit" </> P.string
+                , P.map Settings <| P.s "settings"
                 , P.map Debug <| P.s "debug"
                 ]
 
@@ -42,6 +44,9 @@ toString route =
 
                 Edit id ->
                     "/edit/" ++ id
+
+                Settings ->
+                    "/settings"
 
                 Debug ->
                     "/debug"

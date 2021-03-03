@@ -2,8 +2,8 @@ import './main.css';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 import localforage from 'localforage';
-import i18nBundle from '../../../src/locals/en.json'
-import './i18n'
+import './i18n-element'
+import i18n from './i18n-load'
 
 async function main() {
   const store = {
@@ -11,11 +11,40 @@ async function main() {
       name: "freecbt",
       storeName: "exercises",
     }),
+    settings: await localforage.createInstance({
+      name: "freecbt",
+      storeName: "settings",
+    }),
   }
   // await store.exercises.dropInstance()
+  // await store.settings.dropInstance()
 
+  const flags = {i18n}
+  const app = Elm.Main.init({flags});
+  const exerciseRequests = buildExerciseRequests(store)
+
+  app.ports.exerciseReq.subscribe(async req =>
+    app.ports.exerciseRes.send(await (async () => {
+      try {
+        const fn = exerciseRequests[req.method]
+        if (!fn)
+          throw new Error('no such exercise method: '+req.method)
+        return {method: req.method, data: await fn(req.data)}
+      }
+      catch (e) {
+        return {method: req.method, error: e.message || '' + e}
+      }
+    })())
+  )
+  app.ports.settingsPush.subscribe(async data => {
+    await store.settings.setItem('settings', data)
+    app.ports.settingsPull.send({data})
+  })
+  app.ports.settingsPull.send({data: await store.settings.getItem('settings')})
+}
+function buildExerciseRequests(store) {
   const SEQ_KEY = 'seq'
-  const exerciseRequests = {
+  return {
     post: async data => {
       const seq = (await store.exercises.getItem(SEQ_KEY)) || 0
       const id = '' + seq
@@ -58,24 +87,8 @@ async function main() {
       return data
     },
   }
-
-  const flags = {i18nBundle}
-  const app = Elm.Main.init({flags});
-
-  app.ports.exerciseReq.subscribe(async req =>
-    app.ports.exerciseRes.send(await (async () => {
-      try {
-        const fn = exerciseRequests[req.method]
-        if (!fn)
-          throw new Error('no such exercise method: '+req.method)
-        return {method: req.method, data: await fn(req.data)}
-      }
-      catch (e) {
-        return {method: req.method, error: e.message || '' + e}
-      }
-    })())
-  )
 }
+
 main()
 
 // If you want your app to work offline and load faster, you can change

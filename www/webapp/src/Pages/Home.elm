@@ -1,4 +1,4 @@
-module Pages.Home exposing (Model, Msg(..), init, subscriptions, toSession, update, view)
+module Pages.Home exposing (Model, Msg(..), init, subscriptions, toSession, update, updateSession, view)
 
 import Exercise exposing (Distortion, Exercise)
 import Html as H exposing (..)
@@ -42,6 +42,11 @@ init session =
 toSession : Model -> Session
 toSession m =
     m.session
+
+
+updateSession : Session -> Model -> Model
+updateSession s m =
+    { m | session = s }
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -144,6 +149,7 @@ view ({ form } as model) =
 
         -- , details [] [ summary [] [ text "dump" ], pre [] [ text <| Debug.toString model ] ]
         , div [] [ a [ Route.href Route.List ] [ text "List" ] ]
+        , div [] [ a [ Route.href Route.Settings ] [ text "Settings" ] ]
         ]
     ]
 
