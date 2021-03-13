@@ -20,6 +20,7 @@
     "serve": "^11.3.2"
   },
   "dependencies": {
+    "i18n-js": "^3.8.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.20"
   }
