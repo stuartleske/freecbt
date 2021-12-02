@@ -1,0 +1,25 @@
+name: Build and release Android APK
+
+on:
+  push:
+    branches:
+      - master
+      # for development
+      - erosson/ci-apk-build
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: "8"
+      - run: yarn --dev --frozen-lockfile
+      - run: yarn turtle setup:android
+      - run: yarn turtle build:android -t apk
+      # TODO incomplete
