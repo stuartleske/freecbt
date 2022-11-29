@@ -1,17 +1,17 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: "/expo47"
     schedule:
-      interval: daily
+      interval: monthly
     open-pull-requests-limit: 10
   - package-ecosystem: "bundler"
-    directory: "/android"
+    directory: "/expo47/android"
     schedule:
-      interval: daily
+      interval: monthly
     open-pull-requests-limit: 10
   - package-ecosystem: "bundler"
-    directory: "/ios"
+    directory: "/expo47/ios"
     schedule:
-      interval: daily
+      interval: monthly
     open-pull-requests-limit: 10
