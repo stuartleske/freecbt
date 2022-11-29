@@ -14,14 +14,20 @@ Last updated 2022/11/29
 
 Releasing a new build with big updates/that requires a new appstore deployment
 
-- `yarn build:android`
-  - TODO: https://play.google.com/console/
-  - pretty easy iirc, but manual
-- `yarn build:ios`
-  - TODO: build and sign and upload. requires a mac...
-  - I used to use https://macincloud.com/ , but they ate my remaining pay-as-you-go credit and it's minimum $30 to get more
-  - open-source signers exist now, but it looks fragile: https://github.com/sauce-archives/isign
-  - `eas submit` might be our ticket? https://docs.expo.dev/submit/introduction/
-- `yarn build:apk`
+relevant documentation: https://docs.expo.dev/submit/introduction/
+
+- android
+  - increment `expo.android.versionCode` in `app.json`. submit to git. do this _before_ building
+  - `yarn build:android`
+  - `yarn submit:android` to upload to play console (previously very manual)
+  - https://play.google.com/console/
+  - requires api key, service account. relevant docs: https://github.com/expo/fyi/blob/main/creating-google-service-account.md
+- ios
+  - `yarn build:ios` to build
+  - `yarn submit:ios` to upload to appstore (this replaces macincloud. Thanks Expo!)
+  - result at https://appstoreconnect.apple.com/apps/1516063390/testflight/ios - manually test and launch
+  - requires api key. relevant auth docs: https://github.com/expo/fyi/blob/main/creating-asc-api-key.md
+- android apk (non-appstore)
+  - `yarn build:apk`
   - Upload to the releases page. https://github.com/erosson/freecbt/releases
   - There's a github-action that should automate this, but it's been broken for a while (since our big expo 47 update). https://github.com/erosson/freecbt/blob/master/.github/workflows/apk.yml

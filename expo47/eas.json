@@ -18,6 +18,18 @@
     "production": {}
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "../secrets/api-8973054243569294648-99738-e66bf9a72112.json"
+      },
+      "ios": {
+        "appleId": "apple@erosson.org",
+        "ascAppId": "1516063390",
+        "appleTeamId": "3HKV6P33M6",
+        "ascApiKeyId": "4NZKHUS9U2",
+        "ascApiKeyIssuerId": "17160876-a2bf-4839-bfda-56cae3e94d8f",
+        "ascApiKeyPath": "../secrets/AuthKey_4NZKHUS9U2.p8"
+      }
+    }
   }
 }

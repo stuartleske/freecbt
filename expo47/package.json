@@ -15,7 +15,9 @@
     "build": "eas build -p all",
     "build:apk": "eas build -p android --profile apk",
     "build:android": "eas build -p android",
+    "submit:android": "eas submit -p android --latest",
     "build:ios": "eas build -p ios",
+    "submit:ios": "eas submit -p ios --latest",
     "deploy": "eas update --branch production --auto"
   },
   "dependencies": {

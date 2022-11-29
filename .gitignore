@@ -327,3 +327,5 @@ Pods/
 Podfile.lock
 *.ipa
 *.bak
+
+/secrets/
