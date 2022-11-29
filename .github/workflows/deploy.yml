@@ -23,5 +23,6 @@ jobs:
       - run: yarn --dev --frozen-lockfile
       - run: yarn test
         working-directory: expo47
-      - run: yarn deploy # `expo publish` plus some prepublish chores
+      - run: npm install -g eas-cli # this one doesn't like local installs for some reason
+      - run: yarn deploy # `expo publish` plus some prepublish chores, using eas-cli
         working-directory: expo47

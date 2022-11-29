@@ -16,7 +16,7 @@
     "build:apk": "eas build -p android --profile apk",
     "build:android": "eas build -p android",
     "build:ios": "eas build -p ios",
-    "deploy": "expo publish --non-interactive"
+    "deploy": "eas update --branch production --auto"
   },
   "dependencies": {
     "@erosson/json-encode-decode": "erosson/json-encode-decode#944921f",
