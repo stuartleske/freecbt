@@ -20,7 +20,8 @@
   "submit": {
     "production": {
       "android": {
-        "serviceAccountKeyPath": "../secrets/api-8973054243569294648-99738-e66bf9a72112.json"
+        "serviceAccountKeyPath": "../secrets/api-8973054243569294648-99738-e66bf9a72112.json",
+	"changesNotSentForReview": true
       },
       "ios": {
         "appleId": "apple@erosson.org",
