@@ -16,8 +16,10 @@
     "build:apk": "eas build -p android --profile apk",
     "build:android": "eas build -p android",
     "submit:android": "eas submit -p android --latest",
+    "buildsubmit:android": "yarn build:android --auto-submit",
     "build:ios": "eas build -p ios",
     "submit:ios": "eas submit -p ios --latest",
+    "buildsubmit:ios": "yarn build:ios --auto-submit",
     "deploy": "eas update --branch production --auto"
   },
   "dependencies": {

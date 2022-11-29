@@ -18,13 +18,14 @@ relevant documentation: https://docs.expo.dev/submit/introduction/
 
 - android
   - increment `expo.android.versionCode` in `app.json`. submit to git. do this _before_ building
-  - `yarn build:android`
-  - `yarn submit:android` to upload to play console (previously very manual)
+  - `yarn buildsubmit:android` to build + upload to play console
+    - or `yarn build:android` + `yarn submit:android`, for separate steps
   - https://play.google.com/console/
   - requires api key, service account. relevant docs: https://github.com/expo/fyi/blob/main/creating-google-service-account.md
 - ios
-  - `yarn build:ios` to build
-  - `yarn submit:ios` to upload to appstore (this replaces macincloud. Thanks Expo!)
+  - `yarn buildsubmit:ios` to build + upload to play console
+    - or `yarn build:ios` + `yarn submit:ios`, for separate steps
+    - `submit` replaces my old macincloud shenanigans. Thanks Expo!
   - result at https://appstoreconnect.apple.com/apps/1516063390/testflight/ios - manually test and launch
   - requires api key. relevant auth docs: https://github.com/expo/fyi/blob/main/creating-asc-api-key.md
 - android apk (non-appstore)
