@@ -1,11 +1,11 @@
 name: Build and release Android APK
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - "*"
+  #push:
+  #  branches:
+  #    - master
+  #  tags:
+  #    - "*"
   workflow_dispatch:
 
 jobs:
