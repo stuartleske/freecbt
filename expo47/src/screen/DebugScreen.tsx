@@ -44,7 +44,7 @@ const writeThoughts: { [name: string]: () => Promise<void> } = {
   invalid: async () => {
     const t = exampleThought()
     const enc = Thought.encode(t)
-      ; (enc as any)["automaticThought"] = false
+    ;(enc as any)["automaticThought"] = false
     const raw = JSON.stringify(enc)
     await AsyncStorage.setItem(t.uuid, raw)
     console.log("write invalid")
