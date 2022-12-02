@@ -10,7 +10,8 @@
 <br><br>
 </p>
 
-[![Continuous Deployment](https://github.com/erosson/freecbt/workflows/Continuous%20Deployment/badge.svg)](https://github.com/erosson/freecbt/actions?query=workflow%3A%22Continuous%20Deployment%22)
+[![Publish production Typescript changes (`yarn deploy`/`eas update`)](https://github.com/erosson/freecbt/actions/workflows/publish-ts.yml/badge.svg)](https://github.com/erosson/freecbt/actions/workflows/publish-ts.yml)
+[![Build app, submit to appstores, tag git (`yarn buildsubmit:all`/`eas build --auto-submit`)](https://github.com/erosson/freecbt/actions/workflows/appstore-build.yml/badge.svg)](https://github.com/erosson/freecbt/actions/workflows/appstore-build.yml)
 
 FreeCBT (a fork of [Quirk](https://github.com/Flaque/quirk)) is a crossplatform, GPL-licensed, [Cognitive Behavioral Therapy (CBT)](https://en.wikipedia.org/wiki/Cognitive_behavioral_therapy)
 app built in React Native / Expo.
