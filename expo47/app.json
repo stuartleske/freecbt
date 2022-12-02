@@ -4,7 +4,10 @@
     "name": "FreeCBT",
     "slug": "freecbt",
     "privacy": "unlisted",
-    "platforms": ["android", "ios"],
+    "platforms": [
+      "android",
+      "ios"
+    ],
     "version": "2.3.0",
     "orientation": "portrait",
     "githubUrl": "https://github.com/erosson/freecbt",
@@ -14,14 +17,17 @@
       "resizeMode": "contain",
       "backgroundColor": "#F8A5C2"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "org.erosson.freecbt",
       "supportsTablet": true,
       "icon": "./assets/ios.png",
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "buildNumber": 22
     },
     "android": {
       "package": "org.erosson.freecbt",
@@ -30,7 +36,7 @@
         "foregroundImage": "./assets/android.png",
         "backgroundColor": "#F8A5C2"
       },
-      "versionCode": 21
+      "versionCode": 22
     },
     "notification": {
       "icon": "./assets/quirk-bw.png"

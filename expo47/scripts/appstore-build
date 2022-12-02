@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+cd "`dirname "$0"`/.."
+
+# assume we've already yarn-installed and run the tests.
+
+# first, create the git tags, so we fail quickly if we didn't
+# manually increment the build versions (happens all the time)
+# don't push them yet, the build might fail
+yarn create-tags
+
+# build the app for all platforms using the eas build servers.
+# submit to app stores from there too (even ios!)
+# this makes them available for testing, but not user-visible -
+# making them public is done manually.
+# https://docs.expo.dev/build/introduction/
+# https://docs.expo.dev/submit/introduction/
+yarn buildsubmit:all
+
+# finally, the build succeeded! save its git tags
+git push --tags

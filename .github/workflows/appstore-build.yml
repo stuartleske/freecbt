@@ -1,9 +1,9 @@
-name: Continuous Deployment
+name: Build app, submit to appstores, tag git (`yarn buildsubmit:all`/`eas build --auto-submit`)
 
 on:
   push:
     branches:
-      - master
+      - appstore-build
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 16.x
       # https://github.com/expo/expo-github-action
-      # using their action avoids ENOSPC: https://github.com/expo/expo-github-action/issues/20
+      # using their action logs us in, and avoids ENOSPC: https://github.com/expo/expo-github-action/issues/20
       - uses: expo/expo-github-action@v5
         with:
           expo-version: 3.x
@@ -24,5 +24,5 @@ jobs:
       - run: yarn test
         working-directory: expo47
       - run: npm install -g eas-cli # this one doesn't like local installs for some reason
-      - run: yarn deploy # `expo publish` plus some prepublish chores, using eas-cli
+      - run: yarn appstore-build
         working-directory: expo47

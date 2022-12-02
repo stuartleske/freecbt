@@ -1,0 +1,28 @@
+name: Publish production Typescript changes (`yarn deploy`/`eas update`)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      # https://github.com/expo/expo-github-action
+      # using their action logs us in, and avoids ENOSPC: https://github.com/expo/expo-github-action/issues/20
+      - uses: expo/expo-github-action@v5
+        with:
+          expo-version: 3.x
+          expo-username: erosson
+          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+      - run: yarn --dev --frozen-lockfile
+      - run: yarn test
+        working-directory: expo47
+      - run: npm install -g eas-cli # this one doesn't like local installs for some reason
+      - run: yarn publish-ts # `expo publish` plus some prepublish chores, using eas-cli
+        working-directory: expo47

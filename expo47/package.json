@@ -12,15 +12,20 @@
     "lint": "tsc",
     "lint:prettier": "bash -O globstar -c \"prettier -l src/**/*.{ts,tsx}\"",
     "format": "bash -O globstar -c \"prettier --write src/**/*.{ts,tsx}\"",
+    "build:setup": "npm install -g eas-cli",
     "build": "eas build -p all",
     "build:apk": "eas build -p android --profile apk",
     "build:android": "eas build -p android",
     "submit:android": "eas submit -p android --latest",
-    "buildsubmit:android": "yarn build:android --auto-submit",
     "build:ios": "eas build -p ios",
     "submit:ios": "eas submit -p ios --latest",
-    "buildsubmit:ios": "yarn build:ios --auto-submit",
-    "deploy": "eas update --branch production --auto"
+    "build:all": "eas build -p all",
+    "submit:all": "eas submit -p all --latest",
+    "buildsubmit:all": "yarn build:all --auto-submit",
+    "create-tags": "bash ./scripts/create-tags",
+    "delete-tags": "bash ./scripts/delete-tags",
+    "appstore-build": "bash ./scripts/appstore-build",
+    "publish-ts": "eas update --branch production --auto"
   },
   "dependencies": {
     "@erosson/json-encode-decode": "erosson/json-encode-decode#944921f",
