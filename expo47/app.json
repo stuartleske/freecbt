@@ -27,7 +27,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "buildNumber": 22
+      "buildNumber": "22"
     },
     "android": {
       "package": "org.erosson.freecbt",
