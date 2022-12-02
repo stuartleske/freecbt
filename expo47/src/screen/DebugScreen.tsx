@@ -8,7 +8,7 @@ import {
   Button,
   Alert,
 } from "react-native"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { AsyncStorage } from "react-native"
 import Constants from "expo-constants"
 import * as Feature from "../feature"
 import { useAsyncState, withDefault } from "../async-state"

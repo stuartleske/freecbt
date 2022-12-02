@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { AsyncStorage } from "react-native"
 
 const HIDDEN_KEY = `@AlertStore:hidden`
 const NEW_USER_KEY = `@AlertStore:new-user`
