@@ -13,11 +13,12 @@ import Constants from "expo-constants"
 import * as Feature from "../feature"
 import { useAsyncState, withDefault } from "../async-state"
 import { Screen, ScreenProps } from "../screens"
-import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
+// import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
 import * as Thought from "../thoughts"
 import * as ThoughtStore from "../thoughtstore"
 import version from "@freecbt/schema/dist/version.json"
 
+type KeyValuePair = [string, string]
 type Props = ScreenProps<Screen.DEBUG>
 
 function exampleThought(): Thought.Thought {
@@ -43,7 +44,7 @@ const writeThoughts: { [name: string]: () => Promise<void> } = {
   invalid: async () => {
     const t = exampleThought()
     const enc = Thought.encode(t)
-    ;(enc as any)["automaticThought"] = false
+      ; (enc as any)["automaticThought"] = false
     const raw = JSON.stringify(enc)
     await AsyncStorage.setItem(t.uuid, raw)
     console.log("write invalid")
@@ -113,6 +114,7 @@ const constItems: [string, string | JSX.Element][] = [
   ],
 ]
 export default function DebugScreen(props: Props): JSX.Element {
+  // const storage = useAsyncState<readonly KeyValuePair[]>(async () => {
   const storage = useAsyncState<readonly KeyValuePair[]>(async () => {
     const keys = await AsyncStorage.getAllKeys()
     return await AsyncStorage.multiGet(keys)
