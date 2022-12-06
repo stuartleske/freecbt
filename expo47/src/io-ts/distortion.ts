@@ -2,16 +2,21 @@ import * as T from "io-ts"
 import { Platform } from "react-native"
 import i18n from "../i18n"
 import { snakeCase, sortBy } from "lodash"
+import * as Ord from "fp-ts/lib/Ord"
+import * as S from "fp-ts/lib/string"
 
 export const ID = T.string
 export type ID = T.TypeOf<typeof ID>
 
-const DataT = "Distortion"
+export const VERSION = {
+  LEGACY: "Distortion-v0",
+  CURRENT: "Distortion-v1",
+}
 
 export const Data = T.intersection(
   [
     T.type({
-      type: T.literal(DataT),
+      v: T.literal(VERSION.CURRENT),
       slug: ID,
       emoji: T.array(T.string),
     }),
@@ -20,7 +25,7 @@ export const Data = T.intersection(
       descriptionKey: T.string,
     }),
   ],
-  DataT
+  "Distortion"
 )
 export type Data = T.TypeOf<typeof Data>
 
@@ -72,6 +77,7 @@ export const Legacy = T.intersection(
       description: T.string,
     }),
     T.partial({
+      v: T.undefined,
       emoji: T.union([T.string, T.array(T.string)]),
       selected: T.boolean,
     }),
@@ -99,12 +105,13 @@ export const DistortionFromID = T.string.pipe(
     (dis) => dis.slug
   )
 )
+// encoding legacy-distortions is still useful for testing
 export const DistortionFromLegacy = Legacy.pipe(
-  new T.Type<Distortion, Legacy, Legacy>(
+  new T.Type(
     "DistortionFromLegacy",
     DistortionFromData.is,
-    (legacy, c) => DistortionFromID.validate(legacy.slug, c),
-    (dis) => ({
+    (legacy: Legacy, c) => DistortionFromID.validate(legacy.slug, c),
+    (dis: Distortion) => ({
       slug: dis.slug,
       emoji: dis.emoji(),
       label: dis.label(),
@@ -112,11 +119,29 @@ export const DistortionFromLegacy = Legacy.pipe(
     })
   )
 )
+export const LegacyID = T.type({ slug: ID })
+export type LegacyID = T.TypeOf<typeof LegacyID>
+export const IDFromLegacyID: T.Type<ID, LegacyID> = LegacyID.pipe(
+  new T.Type(
+    "IDFromLegacyID",
+    ID.is,
+    (legacy: LegacyID, c) => T.success(legacy.slug),
+    (slug) => ({ slug })
+  )
+)
+export const DistortionFromLegacyID: T.Type<Distortion, LegacyID> =
+  IDFromLegacyID.pipe(DistortionFromID)
 
-export const DistortionFromAny = T.union([
-  DistortionFromID,
-  DistortionFromLegacy,
-])
+// This produces a working decoder - it can decode both ID and Legacy.
+// The type is wrong, though! It indicates we might encode a Legacy, even though we never actually do.
+// export const Codec = T.union([DistortionFromID, DistortionFromLegacy])
+
+export const Codec: typeof DistortionFromID = new T.Type(
+  "Distortion",
+  DistortionFromData.is,
+  T.union([DistortionFromID, DistortionFromLegacyID]).validate,
+  DistortionFromID.encode
+)
 
 export function sortedList(): Distortion[] {
   return sortBy(list, (d) => d.label().toUpperCase())
@@ -124,6 +149,10 @@ export function sortedList(): Distortion[] {
 export function legacyDistortions(): Legacy[] {
   return sortedList().map(DistortionFromLegacy.encode)
 }
+
+export const ord = Ord.contramap<string, Distortion>((d) => d.slug)(S.Ord)
+
+// hardcoded distortion data
 
 export const list: Distortion[] = [
   {
@@ -177,6 +206,6 @@ export const list: Distortion[] = [
     slug: "other-blaming",
     emoji: ["🧛‍", "👺"],
   },
-].map((d) => new Distortion({ ...d, type: DataT }))
+].map((d) => new Distortion({ ...d, v: VERSION.CURRENT }))
 
-const bySlug = Object.fromEntries(list.map((d) => [d.slug, d]))
+export const bySlug = Object.fromEntries(list.map((d) => [d.slug, d]))
