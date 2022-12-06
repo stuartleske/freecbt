@@ -41,8 +41,8 @@ test("encode", () => {
       TT.NumberFromString.pipe(TT.DateFromNumber, "testpipe").decode(12345)
     )
   ).toEqual(["Invalid value 12345 supplied to : testpipe"])
-  // @ts-expect-error: wrong pipe order is a typecheck fail
   if (false)
+    // @ts-expect-error: wrong pipe order is a typecheck fail
     expect(TT.DateFromNumber.pipe(TT.NumberFromString).decode("12345")).toEqual(
       E.right(new Date(12345))
     )
