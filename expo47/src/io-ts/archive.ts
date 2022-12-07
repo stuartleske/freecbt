@@ -1,7 +1,7 @@
 import * as T from "io-ts"
 import * as Thought from "./thought"
 
-const VERSION = 'Archive-v1'
+const VERSION = "Archive-v1"
 
 export const Archive = T.type(
   {
@@ -13,5 +13,5 @@ export const Archive = T.type(
 export type Archive = T.TypeOf<typeof Archive>
 
 export function create(thoughts: Thought.Thought[]): Archive {
-  return {v: VERSION, thoughts}
+  return { v: VERSION, thoughts }
 }

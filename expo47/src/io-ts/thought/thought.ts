@@ -2,7 +2,7 @@ import * as T from "io-ts"
 import { setFromArray, DateFromISOString } from "io-ts-types"
 import * as Distortion from "../distortion"
 import { v4 as uuidv4 } from "uuid"
-import { VERSION } from './persist'
+import { VERSION } from "./persist"
 
 export const ID = T.string
 export type ID = T.TypeOf<typeof ID>
@@ -63,8 +63,7 @@ export function groupByDay(thoughts: Thought[]): Group[] {
   const groups: Group[] = []
 
   const sortedThoughts = thoughts.sort(
-    (first, second) =>
-      second.createdAt.getTime() - first.createdAt.getTime()
+    (first, second) => second.createdAt.getTime() - first.createdAt.getTime()
   )
 
   for (const thought of sortedThoughts) {

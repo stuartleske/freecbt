@@ -28,9 +28,7 @@ test("Codec decodes legacy and id", () => {
     right: { slug: "all-or-nothing" },
   })
 
-  expect(D.Codec.encode(D.list[0])).toEqual(
-    D.list[0].slug
-  )
+  expect(D.Codec.encode(D.list[0])).toEqual(D.list[0].slug)
 
   // We'll always encode Distortions as ids, and the codec's type agrees
   const _: string = D.Codec.encode(D.list[0])

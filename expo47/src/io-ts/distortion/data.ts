@@ -1,4 +1,4 @@
-import { Distortion, VERSION } from './distortion'
+import { Distortion, VERSION } from "./distortion"
 
 /**
  * hardcoded distortion data
@@ -56,4 +56,4 @@ const list: Distortion[] = [
     emoji: ["🧛‍", "👺"],
   },
 ].map((d) => new Distortion({ ...d, v: VERSION }))
-export default list 
+export default list

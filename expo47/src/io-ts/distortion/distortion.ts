@@ -27,7 +27,7 @@ export const Data = T.intersection(
 export type Data = T.TypeOf<typeof Data>
 
 export class Distortion {
-  constructor(public data: Data) { }
+  constructor(public data: Data) {}
 
   get slug(): string {
     return this.data.slug

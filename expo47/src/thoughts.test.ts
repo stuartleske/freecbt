@@ -1,7 +1,7 @@
 import * as T from "./io-ts/thought"
 import * as D from "./io-ts/distortion"
 import * as _ from "lodash"
-import { decodeOrThrow } from './io-ts/io-utils'
+import { decodeOrThrow } from "./io-ts/io-utils"
 
 function empty(): T.Thought {
   return T.create({
@@ -222,10 +222,14 @@ test("decode failure", () => {
   }
   expect(decodeOrThrow(T.Codec, enc)).toBeTruthy()
   expect(() => decodeOrThrow(T.Codec, { ...enc, uuid: 3 })).toThrow()
-  expect(() => decodeOrThrow(T.Codec, { ...enc, automaticThought: 3 })).toThrow()
+  expect(() =>
+    decodeOrThrow(T.Codec, { ...enc, automaticThought: 3 })
+  ).toThrow()
   expect(() => decodeOrThrow(T.Codec, { ...enc, createdAt: "no" })).toThrow()
   expect(() => decodeOrThrow(T.Codec, _.omit(enc, "uuid"))).toThrow()
-  expect(() => decodeOrThrow(T.Codec, _.omit(enc, "automaticThought"))).toThrow()
+  expect(() =>
+    decodeOrThrow(T.Codec, _.omit(enc, "automaticThought"))
+  ).toThrow()
   expect(() => decodeOrThrow(T.Codec, _.omit(enc, "createdAt"))).toThrow()
 })
 
