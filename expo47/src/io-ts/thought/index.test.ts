@@ -1,5 +1,5 @@
-import * as Distortion from "./distortion"
-import * as Thought from "./thought"
+import * as Distortion from "../distortion"
+import * as Thought from "./index"
 import * as E from "fp-ts/lib/Either"
 import { PathReporter } from "io-ts/lib/PathReporter"
 
@@ -45,7 +45,7 @@ test("thought from legacy", () => {
     alternativeThought: "alt",
     challenge: "chal",
     cognitiveDistortions: [
-      Distortion.DistortionFromLegacy.encode(
+      Distortion.FromLegacy.encode(
         Distortion.bySlug["all-or-nothing"]
       ) as Distortion.Legacy,
     ],
@@ -68,14 +68,14 @@ test("thought from legacy", () => {
   )
 
   // we can transform modern thoughts to the legacy format - DebugScreen uses this
-  expect(Thought.DataFromLegacy.encode(thought)).toEqual(legacy)
-  expect(Thought.DataFromLegacy.decode(minLegacy)).toEqual(E.right(thought))
-  expect(Thought.DataFromLegacy.decode(legacy)).toEqual(E.right(thought))
+  expect(Thought.FromLegacy.encode(thought)).toEqual(legacy)
+  expect(Thought.FromLegacy.decode(minLegacy)).toEqual(E.right(thought))
+  expect(Thought.FromLegacy.decode(legacy)).toEqual(E.right(thought))
 
-  expect(Thought.DataFromLegacy.decode(minLegacy)).toEqual(
+  expect(Thought.FromLegacy.decode(minLegacy)).toEqual(
     Thought.Codec.decode(minLegacy)
   )
-  expect(Thought.DataFromLegacy.decode(legacy)).toEqual(
+  expect(Thought.FromLegacy.decode(legacy)).toEqual(
     Thought.Codec.decode(legacy)
   )
 

@@ -1,4 +1,3 @@
-import * as Data from "./distortion"
 import * as T from "io-ts"
 import * as TT from "io-ts-types"
 import * as E from "fp-ts/lib/Either"
@@ -57,7 +56,7 @@ test("encode", () => {
   ).toEqual(E.right(2))
   // trying out a class codec
   class C {
-    constructor(public val: number) {}
+    constructor(public val: number) { }
   }
   // based on https://github.com/gcanti/io-ts-types/blob/master/src/DateFromNumber.ts
   const CFromNumber = new T.Type<C, number>(

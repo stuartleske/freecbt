@@ -1,13 +1,17 @@
 import * as T from "io-ts"
 import * as Thought from "./thought"
 
-const CURRENT_VERSION = 1
+const VERSION = 'Archive-v1'
 
-export const Data = T.type(
+export const Archive = T.type(
   {
-    v: T.literal(CURRENT_VERSION),
-    thoughts: T.array(Thought.Data),
+    v: T.literal(VERSION),
+    thoughts: T.array(Thought.Thought),
   },
   "Archive"
 )
-export type Data = T.TypeOf<typeof Data>
+export type Archive = T.TypeOf<typeof Archive>
+
+export function create(thoughts: Thought.Thought[]): Archive {
+  return {v: VERSION, thoughts}
+}
