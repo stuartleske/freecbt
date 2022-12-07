@@ -52,3 +52,34 @@ export function create(args: CreateArgs): Thought {
     v: VERSION,
   }
 }
+
+export interface Group {
+  date: string
+  thoughts: Thought[]
+}
+
+export function groupByDay(thoughts: Thought[]): Group[] {
+  const dates: string[] = []
+  const groups: Group[] = []
+
+  const sortedThoughts = thoughts.sort(
+    (first, second) =>
+      second.createdAt.getTime() - first.createdAt.getTime()
+  )
+
+  for (const thought of sortedThoughts) {
+    const date = thought.createdAt.toDateString()
+    if (!dates.includes(date)) {
+      dates.push(date)
+      groups.push({
+        date,
+        thoughts: [thought],
+      })
+      continue
+    }
+
+    groups[dates.length - 1].thoughts.push(thought)
+  }
+
+  return groups
+}

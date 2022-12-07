@@ -1,3 +1,3 @@
-export { Thought, ID, create } from './thought'
-export { Persist, Legacy } from './persist'
+export { Thought, ID, create, Group, groupByDay } from './thought'
+export { Persist, Legacy, VERSION } from './persist'
 export { Codec, FromLegacy } from './codec'
