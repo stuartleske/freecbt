@@ -1,9 +1,12 @@
 import { AsyncStorage } from "react-native"
 import * as AsyncState from "../../async-state"
+import { either, Json, JsonFromString } from "io-ts-types"
+import * as E from 'fp-ts/lib/Either'
 import { Thought, ID, THOUGHTS_KEY_PREFIX } from "./thought"
 import { Persist } from "./persist"
 import { Codec } from "./codec"
 import { decodeOrThrow } from "../io-utils"
+import * as Archive from "../archive"
 
 const EXISTING_USER_KEY = "@Quirk:existing-user"
 
@@ -77,15 +80,19 @@ export async function remove(uuid: ID) {
   }
 }
 
+export async function getExercisesKeys(): Promise<string[]> {
+  const allKeys = await AsyncStorage.getAllKeys()
+  return allKeys.filter((key) => key.startsWith(THOUGHTS_KEY_PREFIX))
+}
+export async function getRawExercises(): Promise<[string, string][]> {
+  const keys = await getExercisesKeys()
+  return await AsyncStorage.multiGet(keys)
+}
 export async function getExercises(): Promise<
   AsyncState.Result<Thought, ParseError>[]
 > {
-  const keys = (await AsyncStorage.getAllKeys()).filter((key) =>
-    key.startsWith(THOUGHTS_KEY_PREFIX)
-  )
-
-  let rows = await AsyncStorage.multiGet(keys)
-  return rows.map(([key, raw]: [string, string | null]) =>
+  const rows = await getRawExercises()
+  return rows.map(([key, raw]) =>
     parseResult(raw ?? "", key)
   )
 }
@@ -93,4 +100,22 @@ export async function getExercises(): Promise<
 export const countThoughts = async (): Promise<number> => {
   const exercises = await getExercises()
   return exercises.length
+}
+
+export async function readArchive(): Promise<Archive.Archive> {
+  const rows = await getRawExercises()
+  const thoughts: Persist[] = rows.map(([key, raw]) => {
+    const result = JsonFromString.pipe(Persist).decode(raw)
+    return E.fold(err => [], (persist: Persist) => [persist])(result)
+  }).flat()
+  return Archive.create(thoughts)
+}
+
+export async function writeArchive(archive: Archive.Archive): Promise<void> {
+  const rows: [string, string][] = archive.thoughts.map(entry =>
+    [entry.uuid, JsonFromString.pipe(Persist).encode(entry)]
+  )
+  const oldKeys = await getExercisesKeys()
+  await AsyncStorage.multiRemove(oldKeys)
+  await AsyncStorage.multiSet(rows)
 }

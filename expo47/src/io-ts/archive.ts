@@ -6,12 +6,12 @@ const VERSION = "Archive-v1"
 export const Archive = T.type(
   {
     v: T.literal(VERSION),
-    thoughts: T.array(Thought.Thought),
+    thoughts: T.array(Thought.Persist),
   },
   "Archive"
 )
 export type Archive = T.TypeOf<typeof Archive>
 
-export function create(thoughts: Thought.Thought[]): Archive {
+export function create(thoughts: Thought.Persist[]): Archive {
   return { v: VERSION, thoughts }
 }
