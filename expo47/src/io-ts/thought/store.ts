@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native"
 import * as AsyncState from "../../async-state"
 import { either, Json, JsonFromString } from "io-ts-types"
-import * as E from 'fp-ts/lib/Either'
+import * as E from "fp-ts/lib/Either"
 import { Thought, ID, THOUGHTS_KEY_PREFIX } from "./thought"
 import { Persist } from "./persist"
 import { Codec } from "./codec"
@@ -92,9 +92,7 @@ export async function getExercises(): Promise<
   AsyncState.Result<Thought, ParseError>[]
 > {
   const rows = await getRawExercises()
-  return rows.map(([key, raw]) =>
-    parseResult(raw ?? "", key)
-  )
+  return rows.map(([key, raw]) => parseResult(raw ?? "", key))
 }
 
 export const countThoughts = async (): Promise<number> => {
@@ -104,17 +102,23 @@ export const countThoughts = async (): Promise<number> => {
 
 export async function readArchive(): Promise<Archive.Archive> {
   const rows = await getRawExercises()
-  const thoughts: Persist[] = rows.map(([key, raw]) => {
-    const result = JsonFromString.pipe(Persist).decode(raw)
-    return E.fold(err => [], (persist: Persist) => [persist])(result)
-  }).flat()
+  const thoughts: Persist[] = rows
+    .map(([key, raw]) => {
+      const result = JsonFromString.pipe(Persist).decode(raw)
+      return E.fold(
+        (err) => [],
+        (persist: Persist) => [persist]
+      )(result)
+    })
+    .flat()
   return Archive.create(thoughts)
 }
 
 export async function writeArchive(archive: Archive.Archive): Promise<void> {
-  const rows: [string, string][] = archive.thoughts.map(entry =>
-    [entry.uuid, JsonFromString.pipe(Persist).encode(entry)]
-  )
+  const rows: [string, string][] = archive.thoughts.map((entry) => [
+    entry.uuid,
+    JsonFromString.pipe(Persist).encode(entry),
+  ])
   const oldKeys = await getExercisesKeys()
   await AsyncStorage.multiRemove(oldKeys)
   await AsyncStorage.multiSet(rows)
