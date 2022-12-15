@@ -17,7 +17,8 @@ yarn create-tags
 # making them public is done manually.
 # https://docs.expo.dev/build/introduction/
 # https://docs.expo.dev/submit/introduction/
-yarn buildsubmit:all
+# `--non-interactive` prevents an unnecessary login-to-apple prompt
+yarn buildsubmit:all --non-interactive
 
 # finally, the build succeeded! save its git tags
 git push --tags
