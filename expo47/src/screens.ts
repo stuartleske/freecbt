@@ -31,7 +31,6 @@ export type ParamList = {
   [Screen.SETTING]: undefined
   [Screen.INIT]: undefined
   [Screen.CBT_VIEW]: {
-    // TODO replace with thought-id
     thoughtID: ThoughtID
   }
   [Screen.LOCK]: {

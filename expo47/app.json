@@ -32,8 +32,9 @@
     "android": {
       "package": "org.erosson.freecbt",
       "permissions": [],
+      "icon": "./assets/android.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/android.png",
+        "foregroundImage": "./assets/android-adaptive.png",
         "backgroundColor": "#F8A5C2"
       },
       "versionCode": 22
