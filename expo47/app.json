@@ -27,7 +27,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "buildNumber": "22"
+      "buildNumber": "23"
     },
     "android": {
       "package": "org.erosson.freecbt",
@@ -37,7 +37,7 @@
         "foregroundImage": "./assets/android-adaptive.png",
         "backgroundColor": "#F8A5C2"
       },
-      "versionCode": 22
+      "versionCode": 23
     },
     "notification": {
       "icon": "./assets/quirk-bw.png"
