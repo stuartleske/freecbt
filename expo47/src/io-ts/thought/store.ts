@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as AsyncState from "../../async-state"
 import { either, Json, JsonFromString } from "io-ts-types"
 import * as E from "fp-ts/lib/Either"
@@ -7,6 +7,7 @@ import { Persist } from "./persist"
 import { Codec } from "./codec"
 import { decodeOrThrow } from "../io-utils"
 import * as Archive from "../archive"
+import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
 
 const EXISTING_USER_KEY = "@Quirk:existing-user"
 
@@ -84,7 +85,7 @@ export async function getExercisesKeys(): Promise<string[]> {
   const allKeys = await AsyncStorage.getAllKeys()
   return allKeys.filter((key) => key.startsWith(THOUGHTS_KEY_PREFIX))
 }
-export async function getRawExercises(): Promise<[string, string][]> {
+export async function getRawExercises(): Promise<readonly KeyValuePair[]> {
   const keys = await getExercisesKeys()
   return await AsyncStorage.multiGet(keys)
 }
@@ -104,7 +105,7 @@ export async function readArchive(): Promise<Archive.Archive> {
   const rows = await getRawExercises()
   const thoughts: Persist[] = rows
     .map(([key, raw]) => {
-      const result = JsonFromString.pipe(Persist).decode(raw)
+      const result = JsonFromString.pipe(Persist).decode(raw ?? "")
       return E.fold(
         (err) => [],
         (persist: Persist) => [persist]

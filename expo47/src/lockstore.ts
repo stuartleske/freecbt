@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const KEY_PINCODE = `@Quirk:pincode`
 

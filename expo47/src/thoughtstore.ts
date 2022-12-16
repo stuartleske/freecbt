@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as AsyncState from "./async-state"
 import * as T from "./thoughts"
 
