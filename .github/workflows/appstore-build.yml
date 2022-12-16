@@ -24,5 +24,12 @@ jobs:
       - run: yarn test
         working-directory: expo47
       - run: npm install -g eas-cli # this one doesn't like local installs for some reason
+      # required for android store submission
+      - env:
+          EXPO_ANDROID_SERVICE_ACCOUNT_KEY_BASE64: ${{ secrets.EXPO_ANDROID_SERVICE_ACCOUNT_KEY_BASE64 }}
+        # path below must match `eas.json:android.serviceAccountKeyPath`
+        run: |
+          mkdir -p ./secrets/android
+          echo $EXPO_ANDROID_SERVICE_ACCOUNT_KEY_BASE64 | base64 --decode > ./secrets/android/api-8973054243569294648-99738-365ad35f4cc4.json
       - run: yarn appstore-build
         working-directory: expo47
