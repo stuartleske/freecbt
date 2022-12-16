@@ -21,7 +21,8 @@ yarn create-tags
 # yarn buildsubmit:all --non-interactive
 
 # the last build worked but the submit didn't, retry without building please
-yarn submit:all --non-interactive
+# yarn submit:all --non-interactive
+yarn submit:ios --non-interactive
 
 # finally, the build succeeded! save its git tags
 git push --tags
