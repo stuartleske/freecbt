@@ -10,13 +10,14 @@ import {
 } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import Constants from "expo-constants"
+import Application from "expo-application"
 import * as Feature from "../feature"
 import { useAsyncState, withDefault } from "../async-state"
 import { Screen, ScreenProps } from "../screens"
 import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
 import * as Thought from "../io-ts/thought"
 import * as ThoughtStore from "../io-ts/thought/store"
-import version from "@freecbt/schema/dist/version.json"
+// import version from "@freecbt/schema/dist/version.json"
 
 // type KeyValuePair = [string, string]
 type Props = ScreenProps<Screen.DEBUG>
@@ -53,12 +54,15 @@ const writeThoughts: { [name: string]: () => Promise<void> } = {
 
 const constItems: [string, string | JSX.Element][] = [
   ["Release channel", Constants.manifest?.releaseChannel ?? "(dev)"],
-  ["Expo version", Constants.expoVersion ?? "(unknown)"],
-  ["App version", Constants.manifest?.version ?? "(unknown)"],
+  ["Expo ver", Constants.expoVersion ?? "(???)"],
+  ["App ver", Constants.manifest?.version ?? "(???)"],
   ["Revision", Constants.manifest?.revisionId ?? "(dev)"],
-  ["Revision Git", version.hash],
-  ["Revision Date", version.date],
-  ["Revision Timestamp", version.timestamp + ""],
+  ["Native app ver ", Application?.nativeApplicationVersion ?? "(???)"],
+  ["Native build ver (android)", Application?.nativeBuildVersion ?? "(???)"],
+  ["buildNumber (ios)", Constants.manifest?.ios?.buildNumber ?? "(???)"],
+  // ["Revision Git", version.hash],
+  // ["Revision Date", version.date],
+  // ["Revision Timestamp", version.timestamp + ""],
   [
     "Test exception reporting",
     <Button

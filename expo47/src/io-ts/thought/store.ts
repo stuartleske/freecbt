@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as AsyncState from "../../async-state"
-import { either, Json, JsonFromString } from "io-ts-types"
+import { JsonFromString } from "io-ts-types"
 import * as E from "fp-ts/lib/Either"
 import { Thought, ID, THOUGHTS_KEY_PREFIX } from "./thought"
 import { Persist } from "./persist"
