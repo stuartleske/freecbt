@@ -25,4 +25,5 @@ yarn buildsubmit:all --non-interactive
 # yarn submit:ios --non-interactive
 
 # finally, the build succeeded! save its git tags
-git push --tags
+# git push --tags
+yarn push-tags

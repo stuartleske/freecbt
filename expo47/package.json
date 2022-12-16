@@ -25,6 +25,7 @@
     "buildsubmit:all": "yarn build:all --auto-submit",
     "create-tags": "bash ./scripts/create-tags",
     "delete-tags": "bash ./scripts/delete-tags",
+    "push-tags": "bash ./scripts/push-tags",
     "appstore-build": "bash ./scripts/appstore-build",
     "publish-ts": "eas update --branch production --auto"
   },
