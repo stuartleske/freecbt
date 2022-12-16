@@ -21,7 +21,7 @@
     "production": {
       "android": {
         "serviceAccountKeyPath": "../secrets/android/api-8973054243569294648-99738-365ad35f4cc4.json",
-        "changesNotSentForReview": true
+        "changesNotSentForReview": false
       },
       "ios": {
         "appleId": "apple@erosson.org",
