@@ -35,7 +35,7 @@
       "icon": "./assets/android.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-adaptive.png",
-        "backgroundColor": "#F8A5C2"
+        "backgroundColor": "#FFFFFF"
       },
       "versionCode": 24
     },
