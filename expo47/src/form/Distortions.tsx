@@ -2,7 +2,7 @@ import React from "react"
 import { SelectorTextItem, SubHeader } from "../ui"
 import { View, ScrollView } from "react-native"
 import i18n from "../i18n"
-import * as Distortion from "../distortions"
+import * as Distortion from "../io-ts/distortion"
 import theme from "../theme"
 import PropTypes from "prop-types"
 

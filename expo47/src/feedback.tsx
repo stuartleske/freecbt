@@ -5,7 +5,7 @@ import { SubHeader, Row, ActionButton } from "./ui"
 import theme from "./theme"
 import * as flagstore from "./flagstore"
 import * as AsyncState from "./async-state"
-import { countThoughts } from "./thoughtstore"
+import { countThoughts } from "./io-ts/thought/store"
 
 const PLAY_STORE_URL =
   "http://play.google.com/store/apps/details?id=org.erosson.freecbt"

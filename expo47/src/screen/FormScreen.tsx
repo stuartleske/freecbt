@@ -7,10 +7,10 @@ import i18n from "../i18n"
 import { Screen, ScreenProps } from "../screens"
 import * as flagstore from "../flagstore"
 import FormView, { Slides } from "../form/FormView"
-import * as Thought from "../thoughts"
-import * as ThoughtStore from "../thoughtstore"
-import * as Distortion from "../distortions"
-import { getIsExistingUser, setIsExistingUser } from "../thoughtstore"
+import * as Thought from "../io-ts/thought"
+import * as ThoughtStore from "../io-ts/thought/store"
+import * as Distortion from "../io-ts/distortion"
+import { getIsExistingUser, setIsExistingUser } from "../io-ts/thought/store"
 import * as Haptic from "expo-haptics"
 import haptic from "../haptic"
 import { FadesIn } from "../animations"
@@ -32,17 +32,18 @@ export default function FormScreen(props: Props): JSX.Element {
     new Set<Distortion.Distortion>([])
   )
   // TODO loading spinner
-  const thought0 = AsyncState.useAsyncState<Thought.T | null>(async () => {
-    if (thoughtID) {
-      const thought = await ThoughtStore.read(thoughtID)
-      setAutomatic(thought.automaticThought)
-      setAlternative(thought.alternativeThought)
-      setChallenge(thought.challenge)
-      setDistortions(thought.cognitiveDistortions)
-      return thought
-    }
-    return null
-  }, [thoughtID])
+  const thought0 =
+    AsyncState.useAsyncState<Thought.Thought | null>(async () => {
+      if (thoughtID) {
+        const thought = await ThoughtStore.read(thoughtID)
+        setAutomatic(thought.automaticThought)
+        setAlternative(thought.alternativeThought)
+        setChallenge(thought.challenge)
+        setDistortions(thought.cognitiveDistortions)
+        return thought
+      }
+      return null
+    }, [thoughtID])
 
   // `slide` is set from props on init, props on update, or setSlide in this file
   const slideProp = props.route.params?.slide
@@ -68,8 +69,11 @@ export default function FormScreen(props: Props): JSX.Element {
       challenge: challenge,
       cognitiveDistortions: distortions,
     }
-    const thought0_: Thought.T | null = AsyncState.withDefault(thought0, null)
-    const thought: Thought.T = thought0_
+    const thought0_: Thought.Thought | null = AsyncState.withDefault(
+      thought0,
+      null
+    )
+    const thought: Thought.Thought = thought0_
       ? { ...thought0_, ...args, updatedAt: new Date() }
       : Thought.create(args)
     await ThoughtStore.write(thought)

@@ -14,8 +14,8 @@ import * as Feature from "../feature"
 import { useAsyncState, withDefault } from "../async-state"
 import { Screen, ScreenProps } from "../screens"
 import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
-import * as Thought from "../thoughts"
-import * as ThoughtStore from "../thoughtstore"
+import * as Thought from "../io-ts/thought"
+import * as ThoughtStore from "../io-ts/thought/store"
 import version from "@freecbt/schema/dist/version.json"
 
 // type KeyValuePair = [string, string]
@@ -36,14 +36,14 @@ const writeThoughts: { [name: string]: () => Promise<void> } = {
   },
   legacy: async () => {
     const t = exampleThought()
-    const enc = Thought.encode(t, "legacy")
+    const enc = Thought.FromLegacy.encode(t)
     const raw = JSON.stringify(enc)
     await AsyncStorage.setItem(t.uuid, raw)
     console.log("write legacy")
   },
   invalid: async () => {
     const t = exampleThought()
-    const enc = Thought.encode(t)
+    const enc = Thought.FromLegacy.encode(t)
     ;(enc as any)["automaticThought"] = false
     const raw = JSON.stringify(enc)
     await AsyncStorage.setItem(t.uuid, raw)

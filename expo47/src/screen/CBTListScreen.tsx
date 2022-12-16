@@ -6,11 +6,11 @@ import {
   View,
   Image,
 } from "react-native"
-import * as ThoughtStore from "../thoughtstore"
+import * as ThoughtStore from "../io-ts/thought/store"
 import { Header, Row, Container, IconButton, Label, Paragraph } from "../ui"
 import theme from "../theme"
 import { Screen, ScreenProps } from "../screens"
-import * as Thought from "../thoughts"
+import * as Thought from "../io-ts/thought"
 import universalHaptic from "../haptic"
 import Constants from "expo-constants"
 import * as Haptic from "expo-haptics"
@@ -26,10 +26,10 @@ import { FadesIn } from "../animations"
 import * as AsyncState from "../async-state"
 
 const ThoughtItem = (props: {
-  thought: Thought.T
+  thought: Thought.Thought
   historyButtonLabel: HistoryButtonLabelSetting
-  onPress: (thought: Thought.T) => void
-  onDelete: (thought: Thought.T) => void
+  onPress: (thought: Thought.Thought) => void
+  onDelete: (thought: Thought.Thought) => void
 }) => {
   const { thought, historyButtonLabel, onPress, onDelete } = props
   return (
@@ -120,10 +120,10 @@ const EmptyThoughtIllustration = () => (
 )
 
 const ThoughtItemList = (props: {
-  groups: Thought.ThoughtGroup[]
+  groups: Thought.Group[]
   historyButtonLabel: HistoryButtonLabelSetting
-  navigateToViewer: (thought: Thought.T) => void
-  onItemDelete: (thought: Thought.T) => void
+  navigateToViewer: (thought: Thought.Thought) => void
+  onItemDelete: (thought: Thought.Thought) => void
 }) => {
   const { groups, historyButtonLabel, navigateToViewer, onItemDelete } = props
   if (!groups || groups.length === 0) {
@@ -232,15 +232,15 @@ export default function CBTListScreen({ navigation }: Props): JSX.Element {
   const [reload, setReload] = React.useState(0)
   const historyButtonLabel = AsyncState.useAsyncState(getHistoryButtonLabel)
   const thoughtRes = AsyncState.useAsyncState<
-    AsyncState.Result<Thought.T, ThoughtStore.ParseError>[]
+    AsyncState.Result<Thought.Thought, ThoughtStore.ParseError>[]
   >(ThoughtStore.getExercises, [reload])
-  const groups: AsyncState.RemoteData<Thought.ThoughtGroup[]> = AsyncState.map(
+  const groups: AsyncState.RemoteData<Thought.Group[]> = AsyncState.map(
     thoughtRes,
     (rs) => {
-      const ts: Thought.T[] = rs
+      const ts: Thought.Thought[] = rs
         .filter(AsyncState.isSuccess)
         .map((r) => r.value)
-      return Thought.groupThoughtsByDay(ts)
+      return Thought.groupByDay(ts)
     }
   )
   const failures: AsyncState.RemoteData<ThoughtStore.ParseError[]> =
@@ -294,12 +294,12 @@ export default function CBTListScreen({ navigation }: Props): JSX.Element {
               (gs) => (
                 <ThoughtItemList
                   groups={gs}
-                  navigateToViewer={(thought: Thought.T) => {
+                  navigateToViewer={(thought: Thought.Thought) => {
                     navigation.push(Screen.CBT_VIEW, {
                       thoughtID: thought.uuid,
                     })
                   }}
-                  onItemDelete={async (thought: Thought.T) => {
+                  onItemDelete={async (thought: Thought.Thought) => {
                     universalHaptic.notification(
                       Haptic.NotificationFeedbackType.Success
                     )

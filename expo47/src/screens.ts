@@ -3,7 +3,7 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack"
 import { Slides } from "./form/FormView"
-import { ThoughtID } from "./thoughts"
+import { ID as ThoughtID } from "./io-ts/thought"
 
 export const enum Screen {
   CBT_FORM = "CBT_FORM_SCREEN",
