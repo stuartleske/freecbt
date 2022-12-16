@@ -24,7 +24,8 @@ jobs:
       - run: yarn test
         working-directory: expo47
       - run: npm install -g eas-cli # this one doesn't like local installs for some reason
-      # required for android store submission
+
+      # submitting builds to the app stores requires some auth files, stored as github secrets
       - run: mkdir -p ./secrets/android ./secrets/ios
       - env:
           EXPO_ANDROID_SERVICE_ACCOUNT_KEY_BASE64: ${{ secrets.EXPO_ANDROID_SERVICE_ACCOUNT_KEY_BASE64 }}
@@ -38,5 +39,6 @@ jobs:
           echo $EXPO_IOS_API_KEY_BASE64 | base64 --ignore-garbage --decode > ./secrets/ios/AuthKey_DLK4FD42VZ.p8
       - run: cat ./secrets/android/*.json
       - run: cat ./secrets/ios/*.p8
+
       - run: yarn appstore-build
         working-directory: expo47
