@@ -35,8 +35,8 @@ jobs:
           EXPO_IOS_API_KEY_BASE64: ${{ secrets.EXPO_IOS_API_KEY_BASE64 }}
         # path below must match `eas.json:ios.ascApiKeyPath`
         run: |
-          echo $EXPO_IOS_API_KEY_BASE64 | base64 --ignore-garbage --decode > ./secrets/ios/AuthKey_DLK4FD42VZ.json
+          echo $EXPO_IOS_API_KEY_BASE64 | base64 --ignore-garbage --decode > ./secrets/ios/AuthKey_DLK4FD42VZ.p8
       - run: cat ./secrets/android/*.json
-      - run: cat ./secrets/ios/*.json
+      - run: cat ./secrets/ios/*.p8
       - run: yarn appstore-build
         working-directory: expo47
