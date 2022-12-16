@@ -191,6 +191,20 @@ test("legacy decode", () => {
         emoji: "💩",
         label: "whatever",
         description: "blah",
+        selected: true,
+      } as D.Legacy,
+      {
+        slug: "mind-reading",
+        emoji: "💩",
+        label: "whatever",
+        description: "blah",
+      },
+      {
+        slug: "should-statements",
+        emoji: "💩",
+        label: "whatever",
+        description: "blah",
+        selected: false,
       } as D.LegacyID,
     ],
   }

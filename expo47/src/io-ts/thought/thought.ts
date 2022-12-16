@@ -12,7 +12,7 @@ export const Thought = T.type(
     v: T.literal(VERSION),
     automaticThought: T.string,
     alternativeThought: T.string,
-    cognitiveDistortions: setFromArray(Distortion.Codec, Distortion.ord),
+    cognitiveDistortions: Distortion.SetCodec,
     challenge: T.string,
     createdAt: DateFromISOString,
     updatedAt: DateFromISOString,

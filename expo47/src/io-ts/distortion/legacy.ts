@@ -25,13 +25,17 @@ export const Legacy = T.intersection(
 )
 export type Legacy = T.TypeOf<typeof Legacy>
 
-export const LegacyID = T.type({ slug: ID })
+export const LegacyID = T.intersection([
+  T.type({ slug: ID }),
+  T.partial({ selected: T.boolean }),
+])
 export type LegacyID = T.TypeOf<typeof LegacyID>
-export const IDFromLegacyID: T.Type<ID, LegacyID> = LegacyID.pipe(
+
+export const FilterSelected = T.array(LegacyID).pipe(
   new T.Type(
-    "IDFromLegacyID",
-    ID.is,
-    (legacy: LegacyID, c) => T.success(legacy.slug),
-    (slug) => ({ slug })
+    "FilterSelected",
+    T.array(LegacyID).is,
+    (enc: LegacyID[], c) => T.success(enc.filter((l) => !!l.selected)),
+    (dec: LegacyID[]) => dec
   )
 )

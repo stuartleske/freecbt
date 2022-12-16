@@ -45,16 +45,23 @@ test("thought from legacy", () => {
     alternativeThought: "alt",
     challenge: "chal",
     cognitiveDistortions: [
-      Distortion.FromLegacy.encode(
-        Distortion.bySlug["all-or-nothing"]
-      ) as Distortion.Legacy,
-    ],
+      Distortion.FromLegacy.encode(Distortion.bySlug["all-or-nothing"]),
+      Distortion.FromLegacy.encode(Distortion.bySlug["mind-reading"]),
+      Distortion.FromLegacy.encode(Distortion.bySlug["should-statements"]),
+    ] as Distortion.Legacy[],
     createdAt: thought.createdAt.toISOString(),
     updatedAt: thought.updatedAt.toISOString(),
   }
+  legacy.cognitiveDistortions[0].selected = true
+  legacy.cognitiveDistortions[1].selected = false
+  delete legacy.cognitiveDistortions[2].selected
   const minLegacy: Thought.Legacy = {
     ...legacy,
-    cognitiveDistortions: [{ slug: "all-or-nothing" }],
+    cognitiveDistortions: [
+      { slug: "all-or-nothing", selected: true },
+      { slug: "mind-reading", selected: false },
+      { slug: "should-statements" },
+    ],
   }
   expect("v" in legacy).toBeFalsy()
   expect("v" in minLegacy).toBeFalsy()
@@ -68,7 +75,10 @@ test("thought from legacy", () => {
   )
 
   // we can transform modern thoughts to the legacy format - DebugScreen uses this
-  expect(Thought.FromLegacy.encode(thought)).toEqual(legacy)
+  expect(Thought.FromLegacy.encode(thought)).toEqual({
+    ...legacy,
+    cognitiveDistortions: [legacy.cognitiveDistortions[0]],
+  })
   expect(Thought.FromLegacy.decode(minLegacy)).toEqual(E.right(thought))
   expect(Thought.FromLegacy.decode(legacy)).toEqual(E.right(thought))
 

@@ -1,7 +1,7 @@
 export { Distortion, ID, VERSION, ord } from "./distortion"
 export { Legacy, LegacyID } from "./legacy"
 export { default as list } from "./data"
-export { bySlug, FromLegacy, Codec } from "./codec"
+export { bySlug, FromLegacy, Codec, SetCodec } from "./codec"
 
 import { Distortion } from "./distortion"
 import { Legacy } from "./legacy"
