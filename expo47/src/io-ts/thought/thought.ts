@@ -27,6 +27,9 @@ export interface CreateArgs {
   alternativeThought: string
   cognitiveDistortions: Iterable<Distortion.Distortion | string>
   challenge: string
+  createdAt?: Date
+  updatedAt?: Date
+  uuid?: string
 }
 export const THOUGHTS_KEY_PREFIX = `@Quirk:thoughts:`
 export function getThoughtKey(info: string): string {
@@ -46,9 +49,9 @@ export function create(args: CreateArgs): Thought {
   return {
     ...args,
     cognitiveDistortions,
-    uuid: getThoughtKey(uuidv4()),
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    uuid: args.uuid ?? getThoughtKey(uuidv4()),
+    createdAt: args.createdAt ?? new Date(),
+    updatedAt: args.updatedAt ?? new Date(),
     v: VERSION,
   }
 }
