@@ -1,5 +1,5 @@
 import React from "react"
-import { ScrollView, StatusBar, Platform, Text } from "react-native"
+import { ScrollView, StatusBar, Platform, Text, Alert } from "react-native"
 import * as Notifications from "expo-notifications"
 import theme from "../theme"
 import Constants from "expo-constants"
@@ -36,6 +36,8 @@ import i18n from "../i18n"
 import { FadesIn } from "../animations"
 import * as Localization from "expo-localization"
 import { Picker } from "@react-native-picker/picker"
+import * as TS from "../io-ts/thought/store"
+import * as T from "io-ts"
 
 export { HistoryButtonLabelSetting }
 
@@ -163,6 +165,26 @@ export default function SettingScreen(props: Props): JSX.Element {
       )
       setRefresh(refresh + 1)
     }
+  }
+
+  const archive = AsyncState.useAsyncState<string>(TS.readArchiveString)
+  const [archiveWrite, setArchiveWrite] = React.useState<
+    AsyncState.RemoteData<null, T.Errors>
+  >({
+    status: "init",
+  })
+  async function onImport(value: string = ""): Promise<void> {
+    const promise = TS.writeArchiveString(value ?? "")
+    setArchiveWrite({
+      status: "pending",
+      promise: promise.then(() => {}),
+    })
+    const result = await promise
+    setArchiveWrite(
+      result === null
+        ? { status: "success", value: null }
+        : { status: "failure", error: result }
+    )
   }
 
   return (
@@ -343,6 +365,18 @@ export default function SettingScreen(props: Props): JSX.Element {
                   </Row>
                 )
               )}
+              <SubHeader>{i18n.t("settings.backup.header")}</SubHeader>
+              <Row style={{ marginBottom: 9 }}>
+                <ActionButton
+                  flex={1}
+                  title={i18n.t("settings.backup.button")}
+                  fillColor="#EDF0FC"
+                  textColor={theme.darkBlue}
+                  onPress={() => {
+                    props.navigation.push(Screen.BACKUP)
+                  }}
+                />
+              </Row>
 
               {feature.localeSetting &&
                 AsyncState.fold(

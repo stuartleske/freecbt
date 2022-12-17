@@ -52,9 +52,25 @@ function FromPrefix(
   )
 }
 
+function FromSuffix(
+  suf: string,
+  message: string
+): T.Type<string, string, string> {
+  return new T.Type(
+    `FromSuffix(${suf})`,
+    T.string.is,
+    (enc: string, c) =>
+      enc.endsWith(suf)
+        ? T.success(enc.slice(0, -suf.length))
+        : T.failure(message, c),
+    (dec: string) => `${dec}${suf}`
+  )
+}
+
 // A FreeCBT archive string is a prefix, followed by an LZString-base64-compressed json body
 export const Codec: T.Type<Archive, string> = T.string
   .pipe(FromPrefix(":FreeCBT:", "Not a FreeCBT archive"))
+  .pipe(FromSuffix(":FreeCBT:", "Not a FreeCBT archive"))
   .pipe(LZStringBase64)
   .pipe(JsonFromString)
   .pipe(Archive, "Archive.Codec")

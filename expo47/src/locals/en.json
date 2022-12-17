@@ -134,6 +134,10 @@
         "automatic": "Automatic Thought"
       }
     },
+    "backup": {
+      "header": "*backup",
+      "button": "Backup/export your FreeCBT data"
+    },
     "locale": {
       "header": "*language",
       "default": "System default",
@@ -256,5 +260,20 @@
   "should_statements_one_liner": "ex: \"I should have been better\"",
   "labeling_one_liner": "ex: \"He's a jerk\"",
   "self_blaming_one_liner": "Taking all the blame on yourself",
-  "other_blaming_one_liner": "Assigning all the blame to someone else"
+  "other_blaming_one_liner": "Assigning all the blame to someone else",
+  "export_screen": {
+    "header": "FreeCBT->",
+    "export": {
+      "description": "To backup your FreeCBT data, copy and paste the text below to a safe place. Later, you can paste the backup text below to restore your data. Anyone with this text can read your FreeCBT exercises, so be careful where you save this text!",
+      "button": "Copy your FreeCBT data to the clipboard",
+      "success": "Copied to clipboard!"
+    },
+    "import": {
+      "description": "To restore your FreeCBT data from a backup, paste its text below. This will erase any existing FreeCBT data, replacing it with data from the backup, so consider making another backup first.",
+      "button": "Import your FreeCBT data",
+      "failure": "Import failed. Are you sure you pasted the entire FreeCBT backup text?",
+      "noop": "Import succeeded - but nothing changed! You should save your backup text for later, and paste it here if the app ever loses your data.",
+      "success": "Import succeeded!"
+    }
+  }
 }

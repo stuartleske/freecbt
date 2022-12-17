@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import * as AsyncState from "../../async-state"
+import * as T from "io-ts"
 import { JsonFromString } from "io-ts-types"
 import * as E from "fp-ts/lib/Either"
 import { Thought, ID, THOUGHTS_KEY_PREFIX } from "./thought"
@@ -8,6 +9,7 @@ import { Codec } from "./codec"
 import { decodeOrThrow } from "../io-utils"
 import * as Archive from "../archive"
 import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
+import { pipe } from "fp-ts/lib/function"
 
 const EXISTING_USER_KEY = "@Quirk:existing-user"
 
@@ -123,4 +125,24 @@ export async function writeArchive(archive: Archive.Archive): Promise<void> {
   const oldKeys = await getExercisesKeys()
   await AsyncStorage.multiRemove(oldKeys)
   await AsyncStorage.multiSet(rows)
+}
+
+export async function readArchiveString(): Promise<string> {
+  return pipe(await readArchive(), Archive.Codec.encode)
+}
+
+export async function writeArchiveString(
+  enc: string
+): Promise<T.Errors | null> {
+  return pipe(
+    enc.trim(),
+    Archive.Codec.decode,
+    E.fold(
+      async (err: T.Errors): Promise<T.Errors | null> => err,
+      async (dec: Archive.Archive) => {
+        await writeArchive(dec)
+        return null
+      }
+    )
+  )
 }

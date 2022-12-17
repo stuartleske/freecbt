@@ -15,6 +15,7 @@ export const enum Screen {
   CBT_VIEW = "CBT_VIEW_SCREEN",
   LOCK = "LOCK_SCREEN",
   DEBUG = "DEBUG_SCREEN",
+  BACKUP = "BACKUP_SCREEN",
 }
 
 export type ParamList = {
@@ -37,6 +38,7 @@ export type ParamList = {
     isSettingCode: boolean
   }
   [Screen.DEBUG]: undefined
+  [Screen.BACKUP]: undefined
 }
 
 export type NavigationProp = NativeStackNavigationProp<ParamList>
