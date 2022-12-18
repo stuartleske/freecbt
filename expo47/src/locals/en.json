@@ -265,13 +265,29 @@
     "header": "FreeCBT->",
     "export": {
       "description": "To backup your FreeCBT data, copy and paste the text below to a safe place. Later, you can paste the backup text below to restore your data. Anyone with this text can read your FreeCBT exercises, so be careful where you save this text!",
-      "button": "Copy your FreeCBT data to the clipboard",
-      "success": "Copied to clipboard!"
+      "clipboard": {
+        "button": "Export your FreeCBT data to the clipboard",
+        "success": "Copied to clipboard!"
+      },
+      "file": {
+        "button": "Export your FreeCBT data to a file",
+        "success": "Copied to file!"
+      },
+      "share": {
+        "warn": "The \"share\" dialog below lets you email your FreeCBT backup to yourself, or otherwise privately \"share\" it. Be very careful not to accidentally share it too widely!",
+        "button": "Export and share your FreeCBT data"
+      }
     },
     "import": {
       "description": "To restore your FreeCBT data from a backup, paste its text below. This will erase any existing FreeCBT data, replacing it with data from the backup, so consider making another backup first.",
-      "button": "Import your FreeCBT data",
-      "failure": "Import failed. Are you sure you pasted the entire FreeCBT backup text?",
+      "clipboard": {
+        "button": "Import your FreeCBT data from the clipboard",
+        "failure": "Import failed. Are you sure you pasted the entire FreeCBT backup text?"
+      },
+      "file": {
+        "button": "Import your FreeCBT data from a file",
+        "failure": "Import failed. Are you sure this is a FreeCBT backup file?"
+      },
       "noop": "Import succeeded - but nothing changed! You should save your backup text for later, and paste it here if the app ever loses your data.",
       "success": "Import succeeded!"
     }

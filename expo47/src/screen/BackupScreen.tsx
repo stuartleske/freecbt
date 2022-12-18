@@ -1,5 +1,12 @@
 import React from "react"
-import { ScrollView, StatusBar, TextInput, Text, Alert } from "react-native"
+import {
+  ScrollView,
+  StatusBar,
+  TextInput,
+  Text,
+  Alert,
+  Linking,
+} from "react-native"
 import theme from "../theme"
 import Constants from "expo-constants"
 import * as AsyncState from "../async-state"
@@ -21,7 +28,9 @@ import { FadesIn } from "../animations"
 import * as TS from "../io-ts/thought/store"
 import * as T from "io-ts"
 import * as Clipboard from "expo-clipboard"
-import { Archive } from "../io-ts/archive"
+import * as FS from "expo-file-system"
+import * as Sharing from "expo-sharing"
+import * as Picker from "expo-document-picker"
 
 type Props = ScreenProps<Screen.BACKUP>
 
@@ -46,7 +55,8 @@ export default function BackupScreen(props: Props): JSX.Element {
               featherIconName={"list"}
               accessibilityLabel={i18n.t("accessibility.list_button")}
               onPress={() => {
-                props.navigation.pop()
+                // props.navigation.pop()
+                props.navigation.push(Screen.CBT_LIST)
               }}
             />
           </Row>
@@ -71,7 +81,31 @@ export default function BackupScreen(props: Props): JSX.Element {
 }
 
 function Export(props: { archive: string }): JSX.Element {
-  const [isCopied, setIsCopied] = React.useState(false)
+  const [isCopied, setIsCopied] = React.useState<string | null>(null)
+  const isSharable = AsyncState.useAsyncState(Sharing.isAvailableAsync)
+  const writePath: string = FS.documentDirectory + "FreeCBT-backup.txt"
+  const sharePath: string = FS.cacheDirectory + "FreeCBT-backup.txt"
+
+  async function onExportClipboard() {
+    const success = await Clipboard.setStringAsync(props.archive)
+    setIsCopied(success ? "clipboard" : null)
+  }
+  async function onExportFile() {
+    await FS.writeAsStringAsync(writePath, props.archive)
+    // await Linking.openURL(writePath)
+    setIsCopied("file")
+  }
+  async function onExportShare() {
+    // Alert.alert(
+    // "Your FreeCBT data is private",
+    // 'Use the "share" dialog on the next screen to email your FreeCBT backup file to yourself, or otherwise save it somewhere privately. Be very careful where you click on the next screen - anyone with this file can read your FreeCBT exercises!'
+    // )
+    await FS.writeAsStringAsync(sharePath, props.archive)
+    await Sharing.shareAsync(sharePath, {
+      UTI: "org.erosson.freecbt.backup",
+      mimeType: "application/freecbt-backup",
+    })
+  }
 
   return (
     <>
@@ -96,19 +130,59 @@ function Export(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.export.button")}
+          title={i18n.t("export_screen.export.clipboard.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
-          onPress={async () => {
-            setIsCopied(await Clipboard.setStringAsync(props.archive))
-          }}
+          onPress={onExportClipboard}
         />
       </Row>
-      {isCopied ? (
+      {isCopied === "clipboard" ? (
         <Row style={{ marginBottom: 9 }}>
-          <Text>{i18n.t("export_screen.export.success")}</Text>
+          <Text>{i18n.t("export_screen.export.clipboard.success")}</Text>
         </Row>
       ) : null}
+      <Row style={{ marginBottom: 9 }}>
+        <ActionButton
+          flex={1}
+          title={i18n.t("export_screen.export.file.button")}
+          fillColor="#EDF0FC"
+          textColor={theme.darkBlue}
+          onPress={onExportFile}
+        />
+      </Row>
+      {isCopied === "file" ? (
+        <>
+          <Row style={{ marginBottom: 9 }}>
+            <Text>{i18n.t("export_screen.export.file.success")}</Text>
+          </Row>
+          <Row style={{ marginBottom: 9 }}>
+            <Text>{writePath}</Text>
+          </Row>
+        </>
+      ) : null}
+      {AsyncState.fold(
+        isSharable,
+        () => null,
+        () => null,
+        (err) => (
+          <Text>{err}</Text>
+        ),
+        (sharable) =>
+          sharable ? (
+            <>
+              <Paragraph>{i18n.t("export_screen.export.share.warn")}</Paragraph>
+              <Row style={{ marginBottom: 9 }}>
+                <ActionButton
+                  flex={1}
+                  title={i18n.t("export_screen.export.share.button")}
+                  fillColor="#EDF0FC"
+                  textColor={theme.darkBlue}
+                  onPress={onExportShare}
+                />
+              </Row>
+            </>
+          ) : null
+      )}
     </>
   )
 }
@@ -120,8 +194,11 @@ function Import(props: { archive: string }): JSX.Element {
     status: "init",
   })
   const [importText, setImportText] = React.useState<string>("")
-  async function onImport(): Promise<void> {
-    const promise = TS.writeArchiveString(importText ?? "")
+
+  async function onImportClipboard(): Promise<void> {
+    const s = importText ? importText : await Clipboard.getStringAsync()
+    if (s !== importText) setImportText(s)
+    const promise = TS.writeArchiveString(s)
     setArchiveWrite({
       status: "pending",
       promise: promise.then(() => {}),
@@ -132,6 +209,26 @@ function Import(props: { archive: string }): JSX.Element {
         ? { status: "success", value: null }
         : { status: "failure", error: result }
     )
+  }
+  async function onImportFile(): Promise<void> {
+    const res = await Picker.getDocumentAsync({
+      // type: "application/freecbt-backup",
+      type: "text/*",
+    })
+    if (res.type === "success") {
+      const s = await FS.readAsStringAsync(res.uri)
+      const promise = TS.writeArchiveString(s)
+      setArchiveWrite({
+        status: "pending",
+        promise: promise.then(() => {}),
+      })
+      const result = await promise
+      setArchiveWrite(
+        result === null
+          ? { status: "success", value: null }
+          : { status: "failure", error: result }
+      )
+    }
   }
 
   return (
@@ -163,10 +260,19 @@ function Import(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.import.button")}
+          title={i18n.t("export_screen.import.clipboard.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
-          onPress={onImport}
+          onPress={onImportClipboard}
+        />
+      </Row>
+      <Row style={{ marginBottom: 9 }}>
+        <ActionButton
+          flex={1}
+          title={i18n.t("export_screen.import.file.button")}
+          fillColor="#EDF0FC"
+          textColor={theme.darkBlue}
+          onPress={onImportFile}
         />
       </Row>
       {AsyncState.fold(
@@ -175,7 +281,7 @@ function Import(props: { archive: string }): JSX.Element {
         () => null,
         (err) => (
           <Row style={{ marginBottom: 9 }}>
-            <Text>{i18n.t("export_screen.import.failure")}</Text>
+            <Text>{i18n.t("export_screen.import.clipboard.failure")}</Text>
           </Row>
         ),
         () =>

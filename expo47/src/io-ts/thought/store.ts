@@ -123,8 +123,13 @@ export async function writeArchive(archive: Archive.Archive): Promise<void> {
     JsonFromString.pipe(Persist).encode(entry),
   ])
   const oldKeys = await getExercisesKeys()
-  await AsyncStorage.multiRemove(oldKeys)
-  await AsyncStorage.multiSet(rows)
+  // asyncstorage gets upset about empty lists, even though there's nothing wrong with them in theory
+  if (oldKeys.length) {
+    await AsyncStorage.multiRemove(oldKeys)
+  }
+  if (rows.length) {
+    await AsyncStorage.multiSet(rows)
+  }
 }
 
 export async function readArchiveString(): Promise<string> {

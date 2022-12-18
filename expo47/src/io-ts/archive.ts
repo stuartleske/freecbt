@@ -2,9 +2,6 @@ import * as T from "io-ts"
 import * as Thought from "./thought"
 import * as LZ from "lz-string"
 import { JsonFromString } from "io-ts-types"
-import { iso, Newtype } from "newtype-ts"
-import { pipe } from "fp-ts/lib/function"
-import * as E from "fp-ts/Either"
 
 const VERSION = "Archive-v1"
 
