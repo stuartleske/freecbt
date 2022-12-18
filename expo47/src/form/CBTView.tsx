@@ -1,13 +1,20 @@
 import React from "react"
 import * as Thought from "../io-ts/thought"
-import { ScrollView } from "react-native"
-import { SubHeader, Paragraph, FormContainer, GhostButtonWithGuts } from "../ui"
+import { ScrollView, TextInput } from "react-native"
+import {
+  SubHeader,
+  Paragraph,
+  FormContainer,
+  GhostButtonWithGuts,
+  Row,
+} from "../ui"
 import i18n from "../i18n"
 import { BubbleThought } from "../imgs/Bubbles"
 import * as Distortion from "../io-ts/distortion"
 import theme from "../theme"
 import { Slides } from "./FormView"
 import Feedback from "../feedback"
+import { textInputStyle } from "./textInputStyle"
 
 const cognitiveDistortionsToText = (
   cognitiveDistortions: Set<Distortion.Distortion>
@@ -144,6 +151,22 @@ export default ({
 
       <CBTView thought={thought} onEdit={onEdit} />
       <Feedback />
+
+      {/*<Row style={{ marginBottom: 9 }}>
+        <TextInput
+          style={{
+            ...textInputStyle,
+            backgroundColor: "white",
+          }}
+          // @ts-expect-error not sure why this isn't typed, but it makes this fill the width
+          flex={1}
+          value={Thought.toMarkdown(thought)}
+          multiline={true}
+          numberOfLines={3}
+          editable={true}
+          selectTextOnFocus={true}
+        />
+        </Row>*/}
     </ScrollView>
   )
 }
