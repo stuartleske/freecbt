@@ -30,10 +30,34 @@ function exampleThought(): Thought.Thought {
     cognitiveDistortions: ["all-or-nothing"],
   })
 }
+function symbolsThought(): Thought.Thought {
+  return Thought.create({
+    automaticThought: `A thought
+with
+newlines
+
+# and markdown symbols
+
+\`and more markdown symbols\`
+`,
+    alternativeThought: `A thought
+with
+newlines
+
+, and commas, "and quotes", 'and more quotes',
+and other special CSV symbols`,
+    challenge: `{"a": "thought", "with": ["JSON", "symbols"]} ]}]}"`,
+    cognitiveDistortions: ["all-or-nothing"],
+  })
+}
 const writeThoughts: { [name: string]: () => Promise<void> } = {
   example: async () => {
     await ThoughtStore.write(exampleThought())
     console.log("write example")
+  },
+  symbols: async () => {
+    await ThoughtStore.write(symbolsThought())
+    console.log("write symbols")
   },
   legacy: async () => {
     const t = exampleThought()
@@ -94,6 +118,10 @@ const constItems: [string, string | JSX.Element][] = [
   [
     "Test: create a simple thought",
     <Button title="Simple" onPress={() => writeThoughts.example()} />,
+  ],
+  [
+    "Test: create a symbols thought",
+    <Button title="Symbols" onPress={() => writeThoughts.symbols()} />,
   ],
   [
     "Test: create a legacy thought",
