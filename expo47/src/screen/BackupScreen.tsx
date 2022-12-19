@@ -1,12 +1,5 @@
 import React from "react"
-import {
-  ScrollView,
-  StatusBar,
-  TextInput,
-  Text,
-  Alert,
-  Linking,
-} from "react-native"
+import { ScrollView, StatusBar, Text } from "react-native"
 import theme from "../theme"
 import Constants from "expo-constants"
 import * as AsyncState from "../async-state"
@@ -20,14 +13,9 @@ import {
 } from "../ui"
 import { Screen, ScreenProps } from "../screens"
 import i18n from "../i18n"
-import {
-  textInputStyle,
-  textInputPlaceholderColor,
-} from "../form/textInputStyle"
 import { FadesIn } from "../animations"
 import * as TS from "../io-ts/thought/store"
 import * as T from "io-ts"
-import * as Clipboard from "expo-clipboard"
 import * as FS from "expo-file-system"
 import * as Sharing from "expo-sharing"
 import * as Picker from "expo-document-picker"
@@ -86,20 +74,16 @@ function Export(props: { archive: string }): JSX.Element {
   const writePath: string = FS.documentDirectory + "FreeCBT-backup.txt"
   const sharePath: string = FS.cacheDirectory + "FreeCBT-backup.txt"
 
-  async function onExportClipboard() {
-    const success = await Clipboard.setStringAsync(props.archive)
-    setIsCopied(success ? "clipboard" : null)
-  }
+  //async function onExportClipboard() {
+  //  const success = await Clipboard.setStringAsync(props.archive)
+  //  setIsCopied(success ? "clipboard" : null)
+  //}
   async function onExportFile() {
     await FS.writeAsStringAsync(writePath, props.archive)
     // await Linking.openURL(writePath)
     setIsCopied("file")
   }
   async function onExportShare() {
-    // Alert.alert(
-    // "Your FreeCBT data is private",
-    // 'Use the "share" dialog on the next screen to email your FreeCBT backup file to yourself, or otherwise save it somewhere privately. Be very careful where you click on the next screen - anyone with this file can read your FreeCBT exercises!'
-    // )
     await FS.writeAsStringAsync(sharePath, props.archive)
     await Sharing.shareAsync(sharePath, {
       UTI: "org.erosson.freecbt.backup",
@@ -112,13 +96,14 @@ function Export(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <Paragraph>{i18n.t("backup_screen.export.description")}</Paragraph>
       </Row>
+      {/*
       <Row style={{ marginBottom: 9 }}>
         <TextInput
           style={{
             ...textInputStyle,
             backgroundColor: "white",
           }}
-          // @ts-expect-error not sure why this isn't typed, but it makes this fill the width
+          // \@ts-expect-error not sure why this isn't typed, but it makes this fill the width
           flex={1}
           value={props.archive}
           multiline={true}
@@ -140,7 +125,29 @@ function Export(props: { archive: string }): JSX.Element {
         <Row style={{ marginBottom: 9 }}>
           <Text>{i18n.t("backup_screen.export.clipboard.success")}</Text>
         </Row>
-      ) : null}
+      ) : null}*/}
+      {AsyncState.fold(
+        isSharable,
+        () => null,
+        () => null,
+        (err) => (
+          <Text>{err}</Text>
+        ),
+        (sharable) =>
+          sharable ? (
+            <>
+              <Row style={{ marginBottom: 9 }}>
+                <ActionButton
+                  flex={1}
+                  title={i18n.t("backup_screen.export.share.button")}
+                  fillColor="#EDF0FC"
+                  textColor={theme.darkBlue}
+                  onPress={onExportShare}
+                />
+              </Row>
+            </>
+          ) : null
+      )}
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
@@ -160,29 +167,6 @@ function Export(props: { archive: string }): JSX.Element {
           </Row>
         </>
       ) : null}
-      {AsyncState.fold(
-        isSharable,
-        () => null,
-        () => null,
-        (err) => (
-          <Text>{err}</Text>
-        ),
-        (sharable) =>
-          sharable ? (
-            <>
-              <Paragraph>{i18n.t("backup_screen.export.share.warn")}</Paragraph>
-              <Row style={{ marginBottom: 9 }}>
-                <ActionButton
-                  flex={1}
-                  title={i18n.t("backup_screen.export.share.button")}
-                  fillColor="#EDF0FC"
-                  textColor={theme.darkBlue}
-                  onPress={onExportShare}
-                />
-              </Row>
-            </>
-          ) : null
-      )}
     </>
   )
 }
@@ -195,21 +179,21 @@ function Import(props: { archive: string }): JSX.Element {
   })
   const [importText, setImportText] = React.useState<string>("")
 
-  async function onImportClipboard(): Promise<void> {
-    const s = importText ? importText : await Clipboard.getStringAsync()
-    if (s !== importText) setImportText(s)
-    const promise = TS.writeArchiveString(s)
-    setArchiveWrite({
-      status: "pending",
-      promise: promise.then(() => {}),
-    })
-    const result = await promise
-    setArchiveWrite(
-      result === null
-        ? { status: "success", value: null }
-        : { status: "failure", error: result }
-    )
-  }
+  //async function onImportClipboard(): Promise<void> {
+  //  const s = importText ? importText : await Clipboard.getStringAsync()
+  //  if (s !== importText) setImportText(s)
+  //  const promise = TS.writeArchiveString(s)
+  //  setArchiveWrite({
+  //    status: "pending",
+  //    promise: promise.then(() => {}),
+  //  })
+  //  const result = await promise
+  //  setArchiveWrite(
+  //    result === null
+  //      ? { status: "success", value: null }
+  //      : { status: "failure", error: result }
+  //  )
+  //}
   async function onImportFile(): Promise<void> {
     const res = await Picker.getDocumentAsync({
       // type: "application/freecbt-backup",
@@ -217,6 +201,7 @@ function Import(props: { archive: string }): JSX.Element {
     })
     if (res.type === "success") {
       const s = await FS.readAsStringAsync(res.uri)
+      if (s !== importText) setImportText(s)
       const promise = TS.writeArchiveString(s)
       setArchiveWrite({
         status: "pending",
@@ -236,13 +221,13 @@ function Import(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <Paragraph>{i18n.t("backup_screen.import.description")}</Paragraph>
       </Row>
-      <Row style={{ marginBottom: 9 }}>
+      {/*<Row style={{ marginBottom: 9 }}>
         <TextInput
           style={{
             ...textInputStyle,
             backgroundColor: "white",
           }}
-          // @ts-expect-error not sure why this isn't typed, but it makes this fill the width
+          // \@ts-expect-error not sure why this isn't typed, but it makes this fill the width
           flex={1}
           placeholderTextColor={textInputPlaceholderColor}
           placeholder={props.archive}
@@ -266,6 +251,7 @@ function Import(props: { archive: string }): JSX.Element {
           onPress={onImportClipboard}
         />
       </Row>
+        */}
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
@@ -281,7 +267,8 @@ function Import(props: { archive: string }): JSX.Element {
         () => null,
         (err) => (
           <Row style={{ marginBottom: 9 }}>
-            <Text>{i18n.t("backup_screen.import.clipboard.failure")}</Text>
+            {/* <Text>{i18n.t("backup_screen.import.clipboard.failure")}</Text> */}
+            <Text>{i18n.t("backup_screen.import.file.failure")}</Text>
           </Row>
         ),
         () =>

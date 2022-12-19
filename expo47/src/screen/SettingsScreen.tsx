@@ -377,6 +377,17 @@ export default function SettingScreen(props: Props): JSX.Element {
                   }}
                 />
               </Row>
+              <Row style={{ marginBottom: 9 }}>
+                <ActionButton
+                  flex={1}
+                  title={i18n.t("settings.backup.export-button")}
+                  fillColor="#EDF0FC"
+                  textColor={theme.darkBlue}
+                  onPress={() => {
+                    props.navigation.push(Screen.EXPORT)
+                  }}
+                />
+              </Row>
 
               {feature.localeSetting &&
                 AsyncState.fold(

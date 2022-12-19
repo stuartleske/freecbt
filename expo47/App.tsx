@@ -14,6 +14,7 @@ import LockScreen from "./src/screen/LockScreen"
 import DebugScreen from "./src/screen/DebugScreen"
 import CBTViewScreen from "./src/screen/CBTViewScreen"
 import BackupScreen from "./src/screen/BackupScreen"
+import ExportScreen from "./src/screen/ExportScreen"
 
 const Stack = createNativeStackNavigator<ParamList>()
 
@@ -36,6 +37,7 @@ export function App() {
           <Stack.Screen name={Screen.INIT} component={InitScreen} />
           <Stack.Screen name={Screen.CBT_VIEW} component={CBTViewScreen} />
           <Stack.Screen name={Screen.BACKUP} component={BackupScreen} />
+          <Stack.Screen name={Screen.EXPORT} component={ExportScreen} />
           <Stack.Screen name={Screen.LOCK} component={LockScreen} />
           <Stack.Screen
             name={Screen.DEBUG}

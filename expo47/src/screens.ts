@@ -16,6 +16,7 @@ export const enum Screen {
   LOCK = "LOCK_SCREEN",
   DEBUG = "DEBUG_SCREEN",
   BACKUP = "BACKUP_SCREEN",
+  EXPORT = "EXPORT_SCREEN",
 }
 
 export type ParamList = {
@@ -39,6 +40,7 @@ export type ParamList = {
   }
   [Screen.DEBUG]: undefined
   [Screen.BACKUP]: undefined
+  [Screen.EXPORT]: undefined
 }
 
 export type NavigationProp = NativeStackNavigationProp<ParamList>

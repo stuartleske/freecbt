@@ -10,6 +10,7 @@ import { decodeOrThrow } from "../io-utils"
 import * as Archive from "../archive"
 import { KeyValuePair } from "@react-native-async-storage/async-storage/lib/typescript/types"
 import { pipe } from "fp-ts/lib/function"
+import { scryRenderedComponentsWithType } from "react-dom/test-utils"
 
 const EXISTING_USER_KEY = "@Quirk:existing-user"
 
@@ -96,6 +97,11 @@ export async function getExercises(): Promise<
 > {
   const rows = await getRawExercises()
   return rows.map(([key, raw]) => parseResult(raw ?? "", key))
+}
+
+export async function getValidExercises(): Promise<Thought[]> {
+  const ts = await getExercises()
+  return ts.filter(AsyncState.isSuccess).map((t) => t.value)
 }
 
 export const countThoughts = async (): Promise<number> => {

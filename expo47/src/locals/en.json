@@ -136,7 +136,8 @@
     },
     "backup": {
       "header": "*backup",
-      "button": "Backup/export your FreeCBT data"
+      "button": "Backup your FreeCBT data",
+      "export-button": "Export your FreeCBT data"
     },
     "locale": {
       "header": "*language",
@@ -262,9 +263,9 @@
   "self_blaming_one_liner": "Taking all the blame on yourself",
   "other_blaming_one_liner": "Assigning all the blame to someone else",
   "backup_screen": {
-    "header": "FreeCBT->",
+    "header": "FreeCBT<-",
     "export": {
-      "description": "To backup your FreeCBT data, copy and paste the text below to a safe place. Later, you can paste the backup text below to restore your data. Anyone with this text can read your FreeCBT exercises, so be careful where you save this text!",
+      "description": "To backup your FreeCBT data, \"share\" it someplace safe and private, such as emailing it to yourself. Later, you can load that file below to restore your data. Anyone with this file can read your FreeCBT exercises, so be very careful where you send it!",
       "clipboard": {
         "button": "Export your FreeCBT data to the clipboard",
         "success": "Copied to clipboard!"
@@ -274,22 +275,34 @@
         "success": "Copied to file!"
       },
       "share": {
-        "warn": "The \"share\" dialog below lets you email your FreeCBT backup to yourself, or otherwise privately \"share\" it. Be very careful not to accidentally share it too widely!",
         "button": "Export and share your FreeCBT data"
       }
     },
     "import": {
-      "description": "To restore your FreeCBT data from a backup, paste its text below. This will erase any existing FreeCBT data, replacing it with data from the backup, so consider making another backup first.",
+      "description": "Restoring a backup file will erase any existing FreeCBT data, replacing it with data from the backup, so consider making another backup first.",
       "clipboard": {
         "button": "Import your FreeCBT data from the clipboard",
         "failure": "Import failed. Are you sure you pasted the entire FreeCBT backup text?"
       },
       "file": {
-        "button": "Import your FreeCBT data from a file",
+        "button": "Import your FreeCBT data",
         "failure": "Import failed. Are you sure this is a FreeCBT backup file?"
       },
       "noop": "Import succeeded - but nothing changed! You should save your backup text for later, and paste it here if the app ever loses your data.",
       "success": "Import succeeded!"
+    }
+  },
+  "export_screen": {
+    "header": "FreeCBT->",
+    "description": "View your FreeCBT data in other formats. You cannot import these files back into FreeCBT later.",
+    "markdown": {
+      "button": "Export as Markdown/plain text"
+    },
+    "csv": {
+      "button": "Export as CSV"
+    },
+    "json": {
+      "button": "Export as JSON"
     }
   }
 }

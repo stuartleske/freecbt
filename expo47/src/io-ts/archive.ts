@@ -2,6 +2,7 @@ import * as T from "io-ts"
 import * as Thought from "./thought"
 import * as LZ from "lz-string"
 import { JsonFromString } from "io-ts-types"
+import { pipe } from "fp-ts/lib/function"
 
 const VERSION = "Archive-v1"
 
