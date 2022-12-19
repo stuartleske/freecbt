@@ -50,7 +50,7 @@ export default function BackupScreen(props: Props): JSX.Element {
         <Container style={{ paddingBottom: 128 }}>
           <StatusBar barStyle="dark-content" />
           <Row style={{ marginBottom: 18 }}>
-            <Header>{i18n.t("export_screen.header")}</Header>
+            <Header>{i18n.t("backup_screen.header")}</Header>
             <IconButton
               featherIconName={"list"}
               accessibilityLabel={i18n.t("accessibility.list_button")}
@@ -110,7 +110,7 @@ function Export(props: { archive: string }): JSX.Element {
   return (
     <>
       <Row style={{ marginBottom: 9 }}>
-        <Paragraph>{i18n.t("export_screen.export.description")}</Paragraph>
+        <Paragraph>{i18n.t("backup_screen.export.description")}</Paragraph>
       </Row>
       <Row style={{ marginBottom: 9 }}>
         <TextInput
@@ -130,7 +130,7 @@ function Export(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.export.clipboard.button")}
+          title={i18n.t("backup_screen.export.clipboard.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
           onPress={onExportClipboard}
@@ -138,13 +138,13 @@ function Export(props: { archive: string }): JSX.Element {
       </Row>
       {isCopied === "clipboard" ? (
         <Row style={{ marginBottom: 9 }}>
-          <Text>{i18n.t("export_screen.export.clipboard.success")}</Text>
+          <Text>{i18n.t("backup_screen.export.clipboard.success")}</Text>
         </Row>
       ) : null}
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.export.file.button")}
+          title={i18n.t("backup_screen.export.file.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
           onPress={onExportFile}
@@ -153,7 +153,7 @@ function Export(props: { archive: string }): JSX.Element {
       {isCopied === "file" ? (
         <>
           <Row style={{ marginBottom: 9 }}>
-            <Text>{i18n.t("export_screen.export.file.success")}</Text>
+            <Text>{i18n.t("backup_screen.export.file.success")}</Text>
           </Row>
           <Row style={{ marginBottom: 9 }}>
             <Text>{writePath}</Text>
@@ -170,11 +170,11 @@ function Export(props: { archive: string }): JSX.Element {
         (sharable) =>
           sharable ? (
             <>
-              <Paragraph>{i18n.t("export_screen.export.share.warn")}</Paragraph>
+              <Paragraph>{i18n.t("backup_screen.export.share.warn")}</Paragraph>
               <Row style={{ marginBottom: 9 }}>
                 <ActionButton
                   flex={1}
-                  title={i18n.t("export_screen.export.share.button")}
+                  title={i18n.t("backup_screen.export.share.button")}
                   fillColor="#EDF0FC"
                   textColor={theme.darkBlue}
                   onPress={onExportShare}
@@ -234,7 +234,7 @@ function Import(props: { archive: string }): JSX.Element {
   return (
     <>
       <Row style={{ marginBottom: 9 }}>
-        <Paragraph>{i18n.t("export_screen.import.description")}</Paragraph>
+        <Paragraph>{i18n.t("backup_screen.import.description")}</Paragraph>
       </Row>
       <Row style={{ marginBottom: 9 }}>
         <TextInput
@@ -260,7 +260,7 @@ function Import(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.import.clipboard.button")}
+          title={i18n.t("backup_screen.import.clipboard.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
           onPress={onImportClipboard}
@@ -269,7 +269,7 @@ function Import(props: { archive: string }): JSX.Element {
       <Row style={{ marginBottom: 9 }}>
         <ActionButton
           flex={1}
-          title={i18n.t("export_screen.import.file.button")}
+          title={i18n.t("backup_screen.import.file.button")}
           fillColor="#EDF0FC"
           textColor={theme.darkBlue}
           onPress={onImportFile}
@@ -281,17 +281,17 @@ function Import(props: { archive: string }): JSX.Element {
         () => null,
         (err) => (
           <Row style={{ marginBottom: 9 }}>
-            <Text>{i18n.t("export_screen.import.clipboard.failure")}</Text>
+            <Text>{i18n.t("backup_screen.import.clipboard.failure")}</Text>
           </Row>
         ),
         () =>
           importText === props.archive ? (
             <Row style={{ marginBottom: 9 }}>
-              <Text>{i18n.t("export_screen.import.noop")}</Text>
+              <Text>{i18n.t("backup_screen.import.noop")}</Text>
             </Row>
           ) : (
             <Row style={{ marginBottom: 9 }}>
-              <Text>{i18n.t("export_screen.import.success")}</Text>
+              <Text>{i18n.t("backup_screen.import.success")}</Text>
             </Row>
           )
       )}

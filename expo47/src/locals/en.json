@@ -261,7 +261,7 @@
   "labeling_one_liner": "ex: \"He's a jerk\"",
   "self_blaming_one_liner": "Taking all the blame on yourself",
   "other_blaming_one_liner": "Assigning all the blame to someone else",
-  "export_screen": {
+  "backup_screen": {
     "header": "FreeCBT->",
     "export": {
       "description": "To backup your FreeCBT data, copy and paste the text below to a safe place. Later, you can paste the backup text below to restore your data. Anyone with this text can read your FreeCBT exercises, so be careful where you save this text!",
