@@ -27,7 +27,14 @@ After big changes, test these things manually, in both ios and android:
   * [ ] change + verify the language
   * [ ] change + verify the history button labels
   * [ ] open the debug screen
+* from the backup screen:
+  * [ ] save a backup file
+  * [ ] delete a few thoughts, load the above backup file, see its changes
+* from the export screen:
+  * [ ] export a markdown file. paste it into github, it should look sane
+  * [ ] export a csv file. paste it into google sheets, it should look sane
+  * [ ] export a json file. `JSON.parse` it, it shouldn't break
 
-last updated 2022/11/20
+last updated 2022/12/19
 
-last run 2022/11/20
+last run 2022/12/19
