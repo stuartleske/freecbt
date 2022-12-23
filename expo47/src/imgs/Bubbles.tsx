@@ -1,12 +1,13 @@
 import React from "react"
 import { Paragraph, ThoughtDook } from "../ui"
-import { View } from "react-native"
+import { Text, TextStyle, View, ViewStyle } from "react-native"
 import theme from "../theme"
+import { light as style } from "../style"
 
 const PurpleBubble = () => (
   <ThoughtDook
     style={{ marginRight: 8, marginLeft: 4, width: 24, height: 24 }}
-    source={require("../../assets/pink/Dook.png")}
+    source={require("../../assets/purple/Dook.png")}
   />
 )
 
@@ -24,21 +25,23 @@ const PinkBubble = () => (
   />
 )
 
+const bubbles = {
+  yellow: <YellowBubble />,
+  purple: <PurpleBubble />,
+  pink: <PinkBubble />,
+}
+export type Color = keyof typeof bubbles
+export const colors = Object.keys(bubbles) as Color[]
+
 export const BubbleThought = ({
   children,
   color = "yellow",
   style,
 }: {
   children: any
-  color?: "yellow" | "purple" | "pink"
+  color?: Color
   style?: any
 }) => {
-  const bubbles = {
-    purple: <PurpleBubble />,
-    yellow: <YellowBubble />,
-    pink: <PinkBubble />,
-  }
-
   return (
     <View
       style={{
@@ -57,6 +60,40 @@ export const BubbleThought = ({
         }}
       >
         <Paragraph>{children}</Paragraph>
+      </View>
+    </View>
+  )
+}
+
+export const SelectableThought = (props: {
+  children: React.ReactNode
+  color: Color
+  selected?: boolean
+  style?: ViewStyle
+}) => {
+  return (
+    <View
+      style={[
+        {
+          flexDirection: "row",
+          marginTop: 12,
+          paddingRight: 48,
+        },
+        props.style,
+      ]}
+    >
+      {bubbles[props.color]}
+      <View
+        style={[
+          props.selected ? style.selectedCard : style.card,
+          { padding: 8 },
+        ]}
+      >
+        <Text
+          style={props.selected ? style.selectedParagraph : style.paragraph}
+        >
+          {props.children}
+        </Text>
       </View>
     </View>
   )

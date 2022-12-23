@@ -1,7 +1,7 @@
 import * as T from "io-ts"
 import { Platform } from "react-native"
 import i18n from "../../i18n"
-import { snakeCase } from "lodash"
+import _, { snakeCase } from "lodash"
 import * as Ord from "fp-ts/lib/Ord"
 import * as S from "fp-ts/lib/string"
 
@@ -20,6 +20,8 @@ export const Data = T.intersection(
     T.partial({
       labelKey: T.string,
       descriptionKey: T.string,
+      explanationKeys: T.union([T.number, T.array(T.string)]),
+      explanationThoughtKey: T.string,
     }),
   ],
   "Distortion"
@@ -37,6 +39,17 @@ export class Distortion {
   }
   get descriptionKey(): string {
     return this.data.descriptionKey ?? `${snakeCase(this.slug)}_one_liner`
+  }
+  get explanationKeys(): string[] {
+    if (typeof this.data.explanationKeys === "number") {
+      return _.range(this.data.explanationKeys).map(
+        (i) => `${snakeCase(this.slug)}_explanation_${i + 1}`
+      )
+    }
+    return this.data.explanationKeys ?? [`${snakeCase(this.slug)}_explanation`]
+  }
+  get explanationThoughtKey(): string {
+    return this.data.explanationThoughtKey ?? `${snakeCase(this.slug)}_thought`
   }
   label(): string {
     return i18n.t(this.labelKey)
@@ -60,6 +73,12 @@ export class Distortion {
     }
 
     return first
+  }
+  explanation(): string[] {
+    return this.explanationKeys.map((k) => i18n.t(k))
+  }
+  explanationThought(): string {
+    return i18n.t(this.explanationThoughtKey)
   }
 }
 

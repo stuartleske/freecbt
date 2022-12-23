@@ -9,11 +9,15 @@ const list: Distortion[] = [
     emoji: ["🌓"],
     labelKey: "all_or_nothing_thinking",
     descriptionKey: "all_or_nothing_thinking_one_liner",
+    explanationKeys: ["all_or_nothing_thinking_explanation"],
+    explanationThoughtKey: "all_or_nothing_thinking_thought",
   },
   {
     slug: "overgeneralization",
     emoji: ["👯‍"],
     labelKey: "over_generalization",
+    explanationKeys: ["over_generalization_explanation"],
+    explanationThoughtKey: "over_generalization_thought",
   },
   {
     slug: "mind-reading",
@@ -38,10 +42,12 @@ const list: Distortion[] = [
   {
     slug: "emotional-reasoning",
     emoji: ["🎭"],
+    explanationKeys: 2,
   },
   {
     slug: "should-statements",
     emoji: ["✨"],
+    explanationKeys: 2,
   },
   {
     slug: "labeling",
@@ -54,6 +60,7 @@ const list: Distortion[] = [
   {
     slug: "other-blaming",
     emoji: ["🧛‍", "👺"],
+    explanationKeys: 2,
   },
 ].map((d) => new Distortion({ ...d, v: VERSION }))
 export default list

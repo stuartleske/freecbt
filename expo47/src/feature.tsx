@@ -52,6 +52,7 @@ export const defaults: Feature = {
   localeSetting: true,
   testLocalesVisible: false,
   extendedDistortions: false,
+  // extendedDistortions: true,
 }
 
 export type Context = { feature: Feature; updateFeature: (a: object) => void }
