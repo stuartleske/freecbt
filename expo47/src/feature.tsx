@@ -54,7 +54,8 @@ export const defaults: Feature = {
   extendedDistortions: false,
 }
 
-export const Context = React.createContext({
+export type Context = { feature: Feature; updateFeature: (a: object) => void }
+export const Context = React.createContext<Context>({
   feature: defaults,
   updateFeature: (action: object) => {},
 })
@@ -77,3 +78,12 @@ export function withState(Component: React.ComponentType) {
     </State>
   )
 }
+
+export function useFeatureContext(): Context {
+  return React.useContext(Context)
+}
+
+const featureKeys = Object.keys(defaults) as (keyof Feature)[]
+export const useFeature = Object.fromEntries(
+  featureKeys.map((k) => [k, () => useFeatureContext().feature[k]])
+) as { [f in keyof Feature]: () => Feature[f] }

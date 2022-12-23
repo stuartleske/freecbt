@@ -33,8 +33,7 @@ function Distortion(props: {
   selected: boolean
   onPress: () => void
 }): JSX.Element {
-  const { feature } = React.useContext(Feature.Context)
-  if (!feature.extendedDistortions) {
+  if (!Feature.useFeature.extendedDistortions()) {
     return <View style={{ marginBottom: 48 }}>{props.children}</View>
   }
   const style = {
