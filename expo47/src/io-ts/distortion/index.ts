@@ -12,6 +12,7 @@ import { sortBy } from "lodash"
 export function sortedList(): Distortion[] {
   return sortBy(list, (d) => d.label().toUpperCase())
 }
+export const sortedBySlug: Distortion[] = sortBy(list, (d) => d.slug)
 
 export function legacyDistortions(): Legacy[] {
   return sortedList().map(FromLegacy.encode)

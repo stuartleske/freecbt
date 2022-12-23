@@ -3,6 +3,7 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack"
 import { Slides } from "./form/FormView"
+import { ID as DistortionID } from "./io-ts/distortion"
 import { ID as ThoughtID } from "./io-ts/thought"
 
 export const enum Screen {
@@ -25,11 +26,14 @@ export type ParamList = {
         fromOnboarding?: boolean
         thoughtID?: ThoughtID
         slide?: Slides
+        distortions?: DistortionID[]
       }
     | undefined
   [Screen.CBT_LIST]: undefined
   [Screen.ONBOARDING]: undefined
-  [Screen.EXPLANATION]: undefined
+  [Screen.EXPLANATION]: {
+    distortions: DistortionID[]
+  }
   [Screen.SETTING]: undefined
   [Screen.INIT]: undefined
   [Screen.CBT_VIEW]: {

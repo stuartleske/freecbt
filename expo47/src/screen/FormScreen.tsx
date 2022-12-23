@@ -44,6 +44,13 @@ export default function FormScreen(props: Props): JSX.Element {
       }
       return null
     }, [thoughtID])
+  React.useEffect(() => {
+    if (props.route.params?.distortions) {
+      setDistortions(
+        new Set(props.route.params.distortions.map((d) => Distortion.bySlug[d]))
+      )
+    }
+  }, [props.route.params?.distortions])
 
   // `slide` is set from props on init, props on update, or setSlide in this file
   const slideProp = props.route.params?.slide
@@ -122,8 +129,9 @@ export default function FormScreen(props: Props): JSX.Element {
             accessibilityLabel={i18n.t("accessibility.help_button")}
             onPress={async () => {
               await flagstore.setFalse("start-help-badge")
-              // thxis.setState({ shouldShowHelpBadge: false })
-              props.navigation.push(Screen.EXPLANATION)
+              props.navigation.push(Screen.EXPLANATION, {
+                distortions: Array.from(distortions).map((d) => d.slug),
+              })
             }}
             hasBadge={AsyncState.withDefault(showHelpBadge, false)}
           />

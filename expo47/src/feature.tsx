@@ -43,6 +43,7 @@ export interface Feature {
   remindersEachMinute: boolean
   localeSetting: boolean
   testLocalesVisible: boolean
+  extendedDistortions: boolean
 }
 export const defaults: Feature = {
   debugVisible: false,
@@ -50,6 +51,7 @@ export const defaults: Feature = {
   remindersEachMinute: false,
   localeSetting: true,
   testLocalesVisible: false,
+  extendedDistortions: false,
 }
 
 export const Context = React.createContext({
