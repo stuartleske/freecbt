@@ -63,7 +63,10 @@ export const Context = React.createContext<Context>({
 
 export function State({ children }: React.PropsWithChildren<{}>): JSX.Element {
   const [feature, updateFeature] = React.useReducer(
-    (state: any, newState: any) => ({ ...state, ...newState }),
+    (state: Feature, newState: Partial<Feature>): Feature => ({
+      ...state,
+      ...newState,
+    }),
     defaults
   )
   return (

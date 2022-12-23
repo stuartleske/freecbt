@@ -2,7 +2,7 @@ import React from "react"
 import { Paragraph, ThoughtDook } from "../ui"
 import { Text, TextStyle, View, ViewStyle } from "react-native"
 import theme from "../theme"
-import { light as style } from "../style"
+import * as Style from "../style"
 
 const PurpleBubble = () => (
   <ThoughtDook
@@ -71,6 +71,7 @@ export const SelectableThought = (props: {
   selected?: boolean
   style?: ViewStyle
 }) => {
+  const style = Style.useStyle()
   return (
     <View
       style={[

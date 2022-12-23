@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { Screen, ParamList } from "./src/screens"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import * as Feature from "./src/feature"
+import * as Style from "./src/style"
 import CBTListScreen from "./src/screen/CBTListScreen"
 import CBTFormScreen from "./src/screen/FormScreen"
 import ExplanationScreen from "./src/screen/ExplanationScreen"
@@ -50,4 +51,4 @@ export function App() {
   )
 }
 
-export default Feature.withState(App)
+export default Feature.withState(Style.withState(App))

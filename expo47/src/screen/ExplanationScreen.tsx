@@ -1,19 +1,11 @@
-import React, { ReactNode } from "react"
-import {
-  SubHeader,
-  Paragraph,
-  Header,
-  IconButton,
-  ActionButton,
-  GhostButton,
-} from "../ui"
+import React from "react"
+import { Header, IconButton, ActionButton, GhostButton } from "../ui"
 import {
   ScrollView,
   View,
   Linking,
   TouchableOpacity,
   BackHandler,
-  StyleSheet,
   Text,
 } from "react-native"
 import Constants from "expo-constants"
@@ -25,7 +17,7 @@ import * as Bubbles from "../imgs/Bubbles"
 import haptic from "../haptic"
 import * as D from "../io-ts/distortion"
 import * as Feature from "../feature"
-import { light as style } from "../style"
+import * as Style from "../style"
 import { Feather } from "@expo/vector-icons"
 
 type Props = ScreenProps<Screen.EXPLANATION>
@@ -36,17 +28,20 @@ function Distortion(props: {
   selected: boolean
   toggle: (d: D.Distortion) => void
 }): JSX.Element {
+  const style = Style.useStyle()
+  const selectable = Feature.useFeature.extendedDistortions()
+  const selected = selectable && props.selected
   const d = props.distortion
   const bubble = Bubbles.colors[props.index % Bubbles.colors.length]
   const onPress = () => props.toggle(d)
-  const selectable = Feature.useFeature.extendedDistortions()
-  const selected = selectable && props.selected
 
   const body = (
     <>
       <Text style={selected ? [style.selectedSubheader] : [style.subheader]}>
         {d.label()} {d.emoji()}{" "}
-        {selected ? <Feather name="check" size={16} color="white" /> : null}
+        {selected ? (
+          <Feather name="check" size={16} style={style.selectedText} />
+        ) : null}
       </Text>
 
       {d.explanation().map((b, i) => (
@@ -54,6 +49,7 @@ function Distortion(props: {
           key={i}
           style={selected ? [style.selectedParagraph] : [style.paragraph]}
         >
+          {i === 0 ? "" : "\n"}
           {b}
         </Text>
       ))}
@@ -66,7 +62,7 @@ function Distortion(props: {
 
   const styl = { marginBottom: 48 }
   if (!selectable) {
-    return <View style={styl}>{body}</View>
+    return <View style={[style.view, styl]}>{body}</View>
   }
   return (
     <TouchableOpacity
