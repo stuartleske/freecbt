@@ -2,5 +2,8 @@
   "scripts": {
     "build": "bash -c \"cd webapp && yarn install --frozen-lockfile && yarn build && cd - && rm -rf build && cp -rp public build && cp -rp webapp/build build/webapp\"",
     "serve": "serve build"
+  },
+  "devDependencies": {
+    "serve": "^14.1.2"
   }
 }
