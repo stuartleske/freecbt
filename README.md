@@ -12,6 +12,7 @@
 
 [![Publish production Typescript changes (`yarn deploy`/`eas update`)](https://github.com/erosson/freecbt/actions/workflows/publish-ts.yml/badge.svg)](https://github.com/erosson/freecbt/actions/workflows/publish-ts.yml)
 [![Build app, submit to appstores, tag git (`yarn buildsubmit:all`/`eas build --auto-submit`)](https://github.com/erosson/freecbt/actions/workflows/appstore-build.yml/badge.svg)](https://github.com/erosson/freecbt/actions/workflows/appstore-build.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eef93f1b-dc96-423f-ae61-a9f6d5ff0af5/deploy-status)](https://app.netlify.com/sites/gifted-kowalevski-9b804a/deploys)
 
 FreeCBT (a fork of [Quirk](https://github.com/Flaque/quirk)) is a crossplatform, GPL-licensed, [Cognitive Behavioral Therapy (CBT)](https://en.wikipedia.org/wiki/Cognitive_behavioral_therapy)
 app built in React Native / Expo.
@@ -79,11 +80,12 @@ Of course!
 
 FreeCBT is based on [Quirk](https://github.com/Flaque/quirk)'s code. Why did I create a fork?
 
-* **Keep Quirk alive.** Quirk is a well-designed piece of software that is, sadly, [no longer maintained](https://github.com/Flaque/quirk). The single most important reason this fork exists is so a Quirk-like app can continue to exist.
-* **Zero cost, zero ads.** FreeCBT will be *free*. I want FreeCBT to help as many people as possible, the way Quirk helped me. Ads and tracking would risk hurting vulnerable people more than helping; a paywall would sharply reduce the number of people this app helps.
+- **Keep Quirk alive.** Quirk is a well-designed piece of software that is, sadly, [no longer maintained](https://github.com/Flaque/quirk). The single most important reason this fork exists is so a Quirk-like app can continue to exist.
+- **Zero cost, zero ads.** FreeCBT will be _free_. I want FreeCBT to help as many people as possible, the way Quirk helped me. Ads and tracking would risk hurting vulnerable people more than helping; a paywall would sharply reduce the number of people this app helps.
 
-  The obvious trade-off is that FreeCBT makes its maintainer no money. *I think FreeCBT is important enough to work on anyway.* There is a less obvious trade-off that affects you: I can spend less time/energy/money working on FreeCBT than [Quirk's developer](https://github.com/Flaque) spent working on Quirk, which leads to...
-* **No major new features.** Quirk already works very well. I want to keep things working well, avoid bloat, and - as explained above - keep development time/costs low. Every new feature puts those things at risk.
+  The obvious trade-off is that FreeCBT makes its maintainer no money. _I think FreeCBT is important enough to work on anyway._ There is a less obvious trade-off that affects you: I can spend less time/energy/money working on FreeCBT than [Quirk's developer](https://github.com/Flaque) spent working on Quirk, which leads to...
+
+- **No major new features.** Quirk already works very well. I want to keep things working well, avoid bloat, and - as explained above - keep development time/costs low. Every new feature puts those things at risk.
 
 # Design
 
