@@ -1,5 +1,4 @@
 import React from "react"
-import { Header, IconButton, ActionButton, GhostButton } from "../ui"
 import {
   ScrollView,
   View,
@@ -79,6 +78,7 @@ function Distortion(props: {
 }
 
 export default function ExplanationScreen(props: Props): JSX.Element {
+  const style = Style.useStyle()
   const [selected, setSelected] = React.useState<Set<D.Distortion>>(
     new Set(props.route.params.distortions.map((d) => D.bySlug[d]))
   )
@@ -116,13 +116,15 @@ export default function ExplanationScreen(props: Props): JSX.Element {
 
   return (
     <ScrollView
-      style={{
-        marginTop: Constants.statusBarHeight,
-        paddingTop: 24,
-        paddingLeft: 24,
-        paddingRight: 24,
-        backgroundColor: "white",
-      }}
+      style={[
+        style.view,
+        {
+          marginTop: Constants.statusBarHeight,
+          paddingTop: 24,
+          paddingLeft: 24,
+          paddingRight: 24,
+        },
+      ]}
     >
       <View
         style={{
@@ -136,9 +138,13 @@ export default function ExplanationScreen(props: Props): JSX.Element {
             justifyContent: "space-between",
           }}
         >
-          <Header allowFontScaling={false}>
+          <Text
+            style={style.header}
+            textBreakStrategy="simple"
+            allowFontScaling={false}
+          >
             {i18n.t("explanation_screen.header")}
-          </Header>
+          </Text>
           <View
             style={{
               display: "flex",
@@ -151,20 +157,50 @@ export default function ExplanationScreen(props: Props): JSX.Element {
                 marginRight: 8,
               }}
             >
-              <GhostButton
-                title={i18n.t("explanation_screen.intro")}
-                width={80}
-                height={48}
-                borderColor={theme.lightGray}
-                textColor={theme.veryLightText}
+              <TouchableOpacity
+                style={[
+                  style.button,
+                  {
+                    width: 80,
+                    height: 48,
+                    padding: 12,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    maxHeight: 48,
+                  },
+                ]}
                 onPress={navigateToOnboardingScreen}
-              />
+              >
+                <Text
+                  style={[
+                    style.text,
+                    {
+                      textAlign: "center",
+                      fontWeight: "700",
+                    },
+                  ]}
+                >
+                  {i18n.t("explanation_screen.intro")}
+                </Text>
+              </TouchableOpacity>
             </View>
-            <IconButton
-              featherIconName={"x"}
+            <TouchableOpacity
+              style={[
+                style.button,
+                {
+                  height: 48,
+                  width: 48,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignSelf: "center",
+                  position: "relative",
+                },
+              ]}
               accessibilityLabel={i18n.t("accessibility.new_thought_button")}
               onPress={onClose}
-            />
+            >
+              <Feather name="x" size={24} style={style.text} />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -175,16 +211,37 @@ export default function ExplanationScreen(props: Props): JSX.Element {
             justifyContent: "space-between",
           }}
         >
-          <ActionButton
-            flex={1}
-            title={i18n.t("onboarding_screen.header")}
-            fillColor="#EDF0FC"
-            textColor={theme.darkBlue}
+          <TouchableOpacity
+            style={[
+              style.buttonAction,
+              {
+                flex: 1,
+                padding: 12,
+                borderRadius: 10,
+                // @ts-ignore
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                maxHeight: 48,
+              },
+            ]}
             onPress={() => {
               const url = "https://freecbt.erosson.org/explanation?ref=quirk"
               Linking.canOpenURL(url).then(() => Linking.openURL(url))
             }}
-          />
+          >
+            <Text
+              style={[
+                style.textAction,
+                {
+                  fontWeight: "700",
+                  fontSize: 16,
+                },
+              ]}
+            >
+              {i18n.t("onboarding_screen.header")}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {D.sortedBySlug.map((d, i) => (
