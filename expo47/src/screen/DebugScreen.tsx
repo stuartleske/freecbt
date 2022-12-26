@@ -77,13 +77,13 @@ const writeThoughts: { [name: string]: () => Promise<void> } = {
 }
 
 const constItems: [string, string | JSX.Element][] = [
-  ["Release channel", Constants.manifest?.releaseChannel ?? "(dev)"],
-  ["Expo ver", Constants.expoVersion ?? "(???)"],
+  ["Release channel", Constants.manifest?.releaseChannel ?? "(default)"],
+  // ["Expo ver", Constants.expoVersion ?? "(???)"],
   ["App ver", Constants.manifest?.version ?? "(???)"],
   ["Revision", Constants.manifest?.revisionId ?? "(dev)"],
-  ["Native app ver ", Application?.nativeApplicationVersion ?? "(???)"],
-  ["Native build ver (android)", Application?.nativeBuildVersion ?? "(???)"],
-  ["buildNumber (ios)", Constants.manifest?.ios?.buildNumber ?? "(???)"],
+  // ["Native app ver ", Application?.nativeApplicationVersion ?? "(???)"],
+  // ["Native build ver (android)", Application?.nativeBuildVersion ?? "(???)"],
+  ["buildNumber", Constants.manifest?.ios?.buildNumber ?? "(???)"],
   // ["Revision Git", version.hash],
   // ["Revision Date", version.date],
   // ["Revision Timestamp", version.timestamp + ""],
@@ -170,18 +170,23 @@ export default function DebugScreen(props: Props): JSX.Element {
       "Dump AsyncStorage?",
       <Switch value={dump} onValueChange={() => setDump(!dump)} />,
     ],
-    ...(dump ? withDefault(storage, []) : []).map(
-      ([key, val]: KeyValuePair): [string, string] => [
-        key,
-        // `AsyncStorage["${key}"]: \n${val ?? ""}`,
-        `${val ?? ""}`,
-      ]
-    ),
   ]
   return (
     <ScrollView>
       <Text style={{ fontSize: 24, borderBottomWidth: 1 }}>Debug</Text>
       <View>{items.map(renderEntry)}</View>
+      <View>
+        {(dump ? withDefault(storage, []) : []).map(
+          ([key, val]: KeyValuePair) => (
+            <View
+              key={key}
+              style={{ borderBottomWidth: 1, borderColor: "black" }}
+            >
+              <Text>{`AsyncStorage["${key}"]: \n${val ?? ""}`}</Text>
+            </View>
+          )
+        )}
+      </View>
     </ScrollView>
   )
 }
