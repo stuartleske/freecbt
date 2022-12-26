@@ -6,6 +6,7 @@
     "apk": {
       "android": {
         "buildType": "apk"
+
       }
     },
     "development": {
@@ -15,7 +16,9 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "releaseChannel": "production"
+    }
   },
   "submit": {
     "production": {
