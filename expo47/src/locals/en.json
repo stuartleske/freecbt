@@ -177,7 +177,8 @@
     "cog_distortion": "Cognitive Distortion",
     "challenged": "Challenge",
     "changed_placeholder": "It might not be true that...",
-    "alt_thought_placeholder": "What could we think instead?"
+    "alt_thought_placeholder": "What could we think instead?",
+    "show_details": "Show detailed descriptions"
   },
   "explanation_screen": {
     "header": "FreeCBT.",

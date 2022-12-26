@@ -163,15 +163,19 @@ export const SelectorTextItem = ({
           borderRadius: 8,
         }}
       >
-        <Paragraph
-          style={{
-            fontWeight: "400",
-            fontSize: 16,
-            color: selected ? "white" : theme.darkText,
-          }}
-        >
-          {description}
-        </Paragraph>
+        {typeof description === "string" ? (
+          <Paragraph
+            style={{
+              fontWeight: "400",
+              fontSize: 16,
+              color: selected ? "white" : theme.darkText,
+            }}
+          >
+            {description}
+          </Paragraph>
+        ) : (
+          description
+        )}
       </View>
     </View>
   </TouchableOpacity>
