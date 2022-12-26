@@ -1,4 +1,4 @@
-name: Build app, submit to appstores, tag git (`yarn buildsubmit:all`/`eas build --auto-submit`)
+name: Build app, submit to appstores, tag git
 
 on:
   push:

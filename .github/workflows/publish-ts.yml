@@ -1,4 +1,4 @@
-name: Publish production Typescript changes (`yarn deploy`/`eas update`)
+name: Publish production Typescript changes
 
 on:
   push:
