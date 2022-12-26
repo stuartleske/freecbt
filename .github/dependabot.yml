@@ -5,13 +5,3 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 10
-  - package-ecosystem: "bundler"
-    directory: "/expo47/android"
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 10
-  - package-ecosystem: "bundler"
-    directory: "/expo47/ios"
-    schedule:
-      interval: monthly
-    open-pull-requests-limit: 10
