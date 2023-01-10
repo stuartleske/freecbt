@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+message Thought {
+  enum Distortions {
+    // add new thoughts to the end of the list as a single-bit mask. Don't
+    // change existing thoughts!
+    NONE = 0x0000;
+    ALL_OR_NOTHING = 0x0001;
+    OVERGENERALIZATION = 0x0002;
+    MIND_READING = 0x0004;
+    FORTUNE_TELLING = 0x0008;
+    MAGNIFICATION_OF_THE_NEGATIVE = 0x0010;
+    MINIMIZATION_OF_THE_POSITIVE = 0x0020;
+    CATASTROPHIZING = 0x0040;
+    EMOTIONAL_REASONING = 0x0080;
+    SHOULD_STATEMENTS = 0x0100;
+    LABELING = 0x0200;
+    SELF_BLAMING = 0x0400;
+    OTHER_BLAMING = 0x0800;
+  }
+  uint32 version = 1;
+  string uuid = 2;
+  google.protobuf.Timestamp createdAt = 3;
+  google.protobuf.Timestamp updatedAt = 4;
+  string automaticThought = 5;
+  uint32 distortions_bitmask = 6;
+  string challenge = 7;
+  string alternativeThought = 8;
+}

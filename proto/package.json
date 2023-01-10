@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "mkdir -p dist && protoc --ts_out dist --proto_path . ./freecbt.proto"
+  },
+  "devDependencies": {
+    "@protobuf-ts/plugin": "^2.8.2"
+  }
+}
