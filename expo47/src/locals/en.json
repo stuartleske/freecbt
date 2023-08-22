@@ -13,7 +13,10 @@
     "auto_thought_ex": "I missed George's party, he must hate me.",
     "challenge_ex": "George knows I couldn't make it every time, I wouldn't hate him if he missed something of mine.\n\nI should treat myself at least as well as I treat others.",
     "alt_thought_ex": "It's true I missed George's party, I can apologize, and he'll probably forgive me.",
-    "cog_distortion": { "label": "Mind Reading", "slug": "mind-reading" },
+    "cog_distortion": {
+      "label": "Mind Reading",
+      "slug": "mind-reading"
+    },
     "intro": {
       "line1": "Welcome to",
       "emphasis1": "FreeCBT",
@@ -161,6 +164,7 @@
         "ru": "русский",
         "sv": "Svenska",
         "zh-Hans": "中文",
+        "fa": "فارسی",
         "_test": ")tset( hsilgnE-esreveR"
       }
     },
