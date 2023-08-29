@@ -8,7 +8,7 @@
       "android",
       "ios"
     ],
-    "version": "2.3.1",
+    "version": "2.3.2",
     "orientation": "portrait",
     "githubUrl": "https://github.com/erosson/freecbt",
     "primaryColor": "#F8A5C2",
@@ -27,7 +27,7 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "buildNumber": "32"
+      "buildNumber": "33"
     },
     "android": {
       "package": "org.erosson.freecbt",
@@ -41,7 +41,7 @@
         "foregroundImage": "./assets/android-adaptive.png",
         "backgroundColor": "#FFFFFF"
       },
-      "versionCode": 32
+      "versionCode": 33
     },
     "notification": {
       "icon": "./assets/quirk-bw.png"
