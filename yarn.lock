@@ -2,3 +2,27 @@
 # yarn lockfile v1
 
 
+nan@^2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.17.0.tgz#c0150a2368a182f033e9aa5195ec76ea41a199cb"
+  integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
+
+node-pty@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-1.0.0.tgz#7daafc0aca1c4ca3de15c61330373af4af5861fd"
+  integrity sha512-wtBMWWS7dFZm/VgqElrTvtfMq4GzJ6+edFI0Y0zyzygUSZMgZdraDUMUhCIvkjhJjme15qWmbyJbtAx4ot4uZA==
+  dependencies:
+    nan "^2.17.0"
+
+run-pty@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/run-pty/-/run-pty-4.0.4.tgz#9bf6aab5daab46065ae0283aefa4e9c6ea70e586"
+  integrity sha512-VLykjALcr5PyCPqVWZEqyqyGiHBnLaZmfelCvMfcFNOiKSif1bt0e4XoJSQtoX+ilKP80DWVNLfeDUnk9SWArA==
+  dependencies:
+    node-pty "^1.0.0"
+    tiny-decoders "^7.0.1"
+
+tiny-decoders@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/tiny-decoders/-/tiny-decoders-7.0.1.tgz#ce80d377a214a5c46ffdd37b3b14f64e91215210"
+  integrity sha512-P1LaHTLASl/lCrdtwgAAVwxt4bEAPmxpf9HMQrlCkAseaT8oH8oxm8ndy4nx5rLTcL5U/Qxp1a+FDoQfS/ZgQQ==

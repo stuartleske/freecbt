@@ -1,0 +1,18 @@
+[
+  {
+    "command": ["yarn", "--cwd", "expo47", "start"],
+    "title": "http://localhost:19000 - expo dev server",
+    "status": {
+      "Metro waiting on": null
+    },
+    "defaultStatus": ["⏳", "S"]
+  },
+  {
+    "command": ["yarn", "--cwd", "www", "start"],
+    "title": "http://localhost:3000  - web server, https://freecbt.erosson.org",
+    "status": {
+      "Serving!": null
+    },
+    "defaultStatus": ["⏳", "S"]
+  }
+]
