@@ -14,5 +14,16 @@
       "Serving!": null
     },
     "defaultStatus": ["⏳", "S"]
+  },
+  {
+    "command": ["yarn", "--cwd", "expo47", "test", "--watch"],
+    "title": "tests",
+    "status": {
+      " RUNS  src/": ["⏳", "S"],
+      "No tests found related to files changed since last commit.": null,
+      "Tests: +\\d failed,": ["🚨", "E"],
+      "Tests: +\\d passed,": null
+    },
+    "defaultStatus": ["⏳", "S"]
   }
 ]
