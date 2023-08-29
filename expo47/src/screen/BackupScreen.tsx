@@ -214,7 +214,10 @@ function Import(props: { archive: string }): JSX.Element {
           : { status: "failure", error: result }
       )
     } else {
-      setArchiveWrite({ status: "failure", error: [{value: res, context: [], message: 'no document selected'}]})
+      setArchiveWrite({
+        status: "failure",
+        error: [{ value: res, context: [], message: "no document selected" }],
+      })
     }
   }
 
