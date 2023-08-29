@@ -84,8 +84,8 @@ const constItems: [string, string | JSX.Element][] = [
   ],
   ["Update.runtimeVersion", ExpoUpdates.runtimeVersion ?? "-"],
   ["Update.updateId", ExpoUpdates.updateId ?? "-"],
-  ["App ver", Constants.manifest?.version ?? "(???)"],
-  ["buildNumber", Constants.manifest?.ios?.buildNumber ?? "(???)"],
+  ["App ver", Constants.expoConfig?.version ?? "(???)"],
+  ["buildNumber", Constants.expoConfig?.ios?.buildNumber ?? "(???)"],
   [
     "Test exception reporting",
     <Button

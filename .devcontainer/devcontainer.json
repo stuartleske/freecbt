@@ -16,7 +16,7 @@
     // https://github.com/orgs/community/discussions/13473
     "runArgs": [
         "-p=3000:3000",
-        "-p=19000:19000"
+        "-p=8081:8081"
     ],
     "customizations": {
         "vscode": {

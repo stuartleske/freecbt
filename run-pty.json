@@ -1,7 +1,7 @@
 [
   {
     "command": ["yarn", "--cwd", "expo47", "start"],
-    "title": "http://localhost:19000 - expo dev server",
+    "title": "http://localhost:8081 - expo dev server",
     "status": {
       "Metro waiting on": null
     },

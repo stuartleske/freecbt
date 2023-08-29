@@ -199,8 +199,8 @@ function Import(props: { archive: string }): JSX.Element {
       // type: "application/freecbt-backup",
       type: "text/*",
     })
-    if (res.type === "success") {
-      const s = await FS.readAsStringAsync(res.uri)
+    if (!res.canceled && res.assets) {
+      const s = await FS.readAsStringAsync(res.assets[0].uri)
       if (s !== importText) setImportText(s)
       const promise = TS.writeArchiveString(s)
       setArchiveWrite({
@@ -213,6 +213,8 @@ function Import(props: { archive: string }): JSX.Element {
           ? { status: "success", value: null }
           : { status: "failure", error: result }
       )
+    } else {
+      setArchiveWrite({ status: "failure", error: [{value: res, context: [], message: 'no document selected'}]})
     }
   }
 
