@@ -2,7 +2,7 @@
 
 Notes on how to release changes.
 
-Last updated 2022/11/29
+Last updated 2023/08/29
 
 ## Typescript changes/`expo publish`able:
 
