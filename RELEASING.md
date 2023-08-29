@@ -14,6 +14,16 @@ Last updated 2022/11/29
 
 Releasing a new build with big updates/that requires a new appstore deployment
 
+* In `app.json`, increment `expo.android.versionCode`, `expo.ios.buildNumber`, and `expo.version` as needed.
+* Push your changes to the `appstore-build` git branch. The CI robot will build and publish everything there to the app stores.
+* Visit the app store websites, test manually, and launch.
+  * https://play.google.com/console/
+  * https://appstoreconnect.apple.com/apps/1516063390/testflight/ios
+* Follow the `apk` steps below; the automation there is broken
+
+### Manually publishing
+
+
 relevant documentation: https://docs.expo.dev/submit/introduction/
 
 - android
