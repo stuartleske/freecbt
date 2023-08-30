@@ -27,6 +27,12 @@ setting.
 
 Some amazing folks have helped build the FreeCBT you see today.
 
+- [@miguelmf](https://github.com/miguelmf) for the updated [European Portuguese translation](https://github.com/erosson/freecbt/pull/683) 🇵🇹
+- [@ali73](https://github.com/ali73) for the [Farsi translation](https://github.com/erosson/freecbt/pull/686) 🇮🇷
+- [@marcomuccio](https://github.com/marcomuccio) for the [Italian translation](https://github.com/erosson/freecbt/pull/283) 🇮🇹
+
+And others helped build Quirk, the original app FreeCBT is built on.
+
 - [@Flaque](https://github.com/Flaque) for creating Quirk 🔥🔥
 - [@devinroche](https://github.com/devinroche) for setting up translation and stepping up as a core maintainer 🔥
 - [@devilcius](https://github.com/devilcius) for the amazing Spanish translation 🇪🇸
@@ -37,7 +43,7 @@ Some amazing folks have helped build the FreeCBT you see today.
 - [@jinto](https://github.com/jinto) for the amazing Korean translation 🇰🇷
 - [@briankung](https://github.com/briankung) for the Chinese 🇨🇳 localization, internationalization support and helping guide the entire translation effort. 🎉
 - [@akinariobi](https://github.com/akinariobi) for the Russian translation 🇷🇺
-- [@miguelmf](https://github.com/miguelmf) for the Portugese translation 🇵🇹
+- [@miguelmf](https://github.com/miguelmf) for the European Portuguese translation 🇵🇹
 - [@comradekingu](https://github.com/comradekingu) for the Norweigan Bokmål translation 🇳🇴
 - [@micheleriva](https://github.com/micheleriva) for the Italian translation 🇮🇹
 - [@Jolg42](https://github.com/jolg42) for the French translation 🇫🇷
