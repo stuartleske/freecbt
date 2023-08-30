@@ -38,6 +38,7 @@ import * as Localization from "expo-localization"
 import { Picker } from "@react-native-picker/picker"
 import * as TS from "../io-ts/thought/store"
 import * as T from "io-ts"
+import { langProgress } from "../i18n-progress"
 
 export { HistoryButtonLabelSetting }
 
@@ -154,6 +155,12 @@ export default function SettingScreen(props: Props): JSX.Element {
     [refresh]
   )
   const [debugClicks, setDebugClicks] = React.useState(0)
+
+  const percentFormat = new Intl.NumberFormat(i18n.locale, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    style: "percent",
+  })
 
   async function toggleHistoryButtonLabels() {
     if (AsyncState.isSuccess(historyButtonLabel)) {
@@ -415,19 +422,33 @@ export default function SettingScreen(props: Props): JSX.Element {
                           label={i18n.t("settings.locale.default")}
                           value={null}
                         />
-                        {Object.keys(i18n.translations)
+                        {Object.entries(i18n.translations)
+                          .map(([locale, translation]) => ({
+                            locale,
+                            translation,
+                            progress: langProgress(locale, translation),
+                          }))
                           .filter(
-                            (locale) =>
+                            ({ locale }) =>
                               !locale.startsWith("_") ||
                               feature.testLocalesVisible
                           )
-                          .map((locale) => (
-                            <Picker.Item
-                              key={locale}
-                              label={i18n.t("settings.locale.list." + locale)}
-                              value={locale}
-                            />
-                          ))}
+                          .map(({ locale, progress }) => {
+                            const suffix =
+                              progress.percent >= 1
+                                ? ""
+                                : ` (${percentFormat.format(progress.percent)})`
+                            return (
+                              <Picker.Item
+                                key={locale}
+                                label={
+                                  i18n.t("settings.locale.list." + locale) +
+                                  suffix
+                                }
+                                value={locale}
+                              />
+                            )
+                          })}
                       </Picker>
                     </Row>
                   )
