@@ -21,8 +21,7 @@ jobs:
       - uses: expo/expo-github-action@8.2.1
         with:
           expo-version: 6.x
-          expo-username: erosson
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          token: ${{ secrets.EXPO_TOKEN }}
       - run: npm install -g eas-cli # this one doesn't like local installs for some reason
       - run: yarn publish-ts # `expo publish` plus some prepublish chores, using eas-cli
         working-directory: expo47
