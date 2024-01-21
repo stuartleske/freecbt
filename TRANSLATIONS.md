@@ -32,18 +32,6 @@ And then add it to the translations object:
 i18n.translations = { fr, en };
 ```
 
-## Translate the Play Store/App Store descriptions
-
-You've translated the app, but we'll also need translated app store descriptions.
-
-Please also translate the `.txt` files in these directories:
-
-`android/fastlane/metadata/android/en-US/full_description.txt`
-`android/fastlane/metadata/android/en-US/short_description.txt`
-`ios/fastlane/metadata/en-US/description.txt`
-`ios/fastlane/metadata/en-US/keywords.txt`
-`ios/fastlane/metadata/en-US/subtitle.txt`
-
 ## Save your code and open up a new PR
 
 ```
@@ -65,9 +53,9 @@ Then go on github, click "New Pull Request", and then fill in your branch and ma
 
 If you can, in your PR, please include a translation of the description of the app for stores:
 
-> Quirk is a tool for Cognitive Behavioral Therapy (CBT). CBT is one of the most effective and widely prescribed treatments for depression, anxiety, panic disorder, and multiple other mental health problems.  
-> Quirk helps you record "automatic thoughts," challenge them, and then train your brain with an alternative thought.
-> The app is open source under the GPL. You can find the code on Github at: https://github.com/Flaque/quirk
+> FreeCBT is a tool for Cognitive Behavioral Therapy (CBT). CBT is one of the most effective and widely prescribed treatments for depression, anxiety, panic disorder, and multiple other mental health problems.  
+> FreeCBT helps you record "automatic thoughts," challenge them, and then train your brain with an alternative thought.
+> The app is open source under the GPL. You can find the code on Github at: https://github.com/erosson/freecbt
 
 If possible, please translate the following keywords too (required by iOS localization):
 
