@@ -18,9 +18,9 @@ jobs:
         working-directory: expo47
       # https://github.com/expo/expo-github-action
       # login to expo. using their action avoids ENOSPC: https://github.com/expo/expo-github-action/issues/20
-      - uses: expo/expo-github-action@v5
+      - uses: expo/expo-github-action@v8.2.1
         with:
-          expo-version: 3.x
+          expo-version: 6.x
           expo-username: erosson
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
       - run: npm install -g eas-cli # this one doesn't like local installs for some reason
