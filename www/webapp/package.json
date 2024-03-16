@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "repository": "https://github.com/erosson/elm-application-template",
+  "packageManager": "yarn@1.22.19",
   "private": true,
   "scripts": {
     "start": "elm-app start",
