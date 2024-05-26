@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   #IMAGE_NAME: ${{ github.repository }}
-  IMAGE_NAME: freecbt.erosson.org
+  IMAGE_NAME: erosson/freecbt.erosson.org
 
 jobs:
   build-and-push-image:
