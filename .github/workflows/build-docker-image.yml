@@ -1,6 +1,6 @@
 # https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
-# This docker image is for the website, nothing to do with the app build
-name: Build freecbt.erosson.org Docker image (experimental, unused)
+# This docker image is for the website, https://freecbt.erosson.org - nothing to do with the app build
+name: Build website Docker image (experimental, unused)
 on:
   push:
     branches: ["master"]
