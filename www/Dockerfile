@@ -2,7 +2,7 @@
 # TODO: more recent versions of node break the build :( figure out why!
 FROM node:16 AS build
 WORKDIR /app/webapp
-COPY www/webapp/package.json /app/webapp/
+COPY www/webapp/package.json www/webapp/yarn.lock /app/webapp/
 RUN yarn --frozen-lockfile
 WORKDIR /app
 COPY www/package.json /app/
