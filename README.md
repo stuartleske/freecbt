@@ -27,7 +27,7 @@ setting.
 
 Some amazing folks have helped build the FreeCBT you see today.
 
-- [@1K2S](https://github.com/1Git2Clone) for the updated [Bulgarian translation](https://github.com/erosson/freecbt/pull/691) 🇧🇬
+- [@1K2S](https://github.com/1Git2Clone) for the [Bulgarian translation](https://github.com/erosson/freecbt/pull/691) 🇧🇬
 - [@cacado0](https://github.com/cacado0) for the updated [Russian translation](https://github.com/erosson/freecbt/pull/690) 🇷🇺
 - [@xRahul](https://github.com/xRahul) for the [Hindi translation](https://github.com/erosson/freecbt/pull/688) 🇮🇳
 - [@miguelmf](https://github.com/miguelmf) for the updated [European Portuguese translation](https://github.com/erosson/freecbt/pull/683) 🇵🇹
